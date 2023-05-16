@@ -1,11 +1,10 @@
-# Title
+# Examples
 
-## Overview
+This directory contains some configuration or chart examples to deploy ebx with different databases type or for different
+kubernetes distro.
 
-This directory contains ...
+If a chart is present in one of the above example, that means it's a modification of the ebx-generic chart and you 
+will have to use it.
 
-## Prerequisites
+Otherwise you can use the ebx-generic chart and just follow the proposed configuration.
 
-- You have built the EBX Container Edition image and have configured a container repository to hosting this container image.
-- Kubernetes 1.23+, a working kubernetes cluster from a (certified k8s distro).
-- Helm 3+, for building and deploying the charts.
