@@ -1,0 +1,33 @@
+{{/*
+  * Copyright Cloud Software Group, Inc. 2000-2023. All rights reserved.
+  */}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "{{ .Values.instance.ebxPrefix}}-pv-local-claim-data"
+  namespace: "{{ .Values.global.namespace}}"
+  labels:
+    app: "{{ .Values.instance.ebxPrefix}}-app"
+spec:
+  storageClassName: "{{ .Values.instance.storageClass}}"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: "{{ .Values.instance.dataVolumeStorageClaim}}"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "{{ .Values.instance.ebxPrefix}}-pv-local-claim-logs"
+  namespace: "{{ .Values.global.namespace}}"
+  labels:
+    app: "{{ .Values.instance.ebxPrefix}}-app"
+spec:
+  storageClassName: "{{ .Values.instance.storageClass}}"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: "{{ .Values.instance.logsVolumeStorageClaim}}"
+

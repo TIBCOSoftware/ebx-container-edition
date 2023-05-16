@@ -1,0 +1,118 @@
+{{/*
+  * Copyright Cloud Software Group, Inc. 2000-2023. All rights reserved.
+  */}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.instance.ebxPrefix}}"
+  namespace: "{{ .Values.global.namespace}}"
+  labels:
+    app: "{{ .Values.instance.ebxPrefix}}-app"
+spec:
+  selector:
+    matchLabels:
+      app: "{{ .Values.instance.ebxPrefix}}-app"
+  replicas: 1
+  strategy:
+    type: "Recreate"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.instance.ebxPrefix}}-app"
+    spec:
+      nodeSelector:
+        kubernetes.io/os: "linux"
+      containers:
+        - name: "{{ .Values.instance.ebxPrefix}}-instance-pod"
+          image: "{{ .Values.global.ebxImageRegistry}}/{{ .Values.global.ebxImageRepository}}:{{ .Values.global.ebxImageTag}}"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: EBX_DB_FACTORY
+              value: "{{ .Values.instance.ebxDatabaseType}}"
+            - name: EBX_DB_URL
+              value: "jdbc:{{ .Values.instance.ebxDatabaseType}}://{{ .Values.postgresServer.host}}:{{ .Values.postgresServer.port}}/{{ .Values.instance.ebxDatabase}}"
+            - name: EBX_ROOT_PATH
+              value: "/{{ .Values.instance.ebxPrefix}}"
+            - name: EBX_IS_SECURED
+              value: "true"
+            - name: EBX_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.instance.ebxPrefix}}-database-secret"
+                  key: "USER"
+            - name: EBX_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.instance.ebxPrefix}}-database-secret"
+                  key: "PASSWORD"
+            - name: EBX_FLA_DISABLED
+              value: "true"
+            - name: EBX_REST_AUTHENTICATION_BASIC
+              value: "true"
+            - name: EBX_INSTALL_ADMIN_LOGIN
+              value: "{{ .Values.instance.ebxUser}}"
+            - name: EBX_INSTALL_ADMIN_PASSWORD
+              value: "{{ .Values.instance.ebxPassword}}"
+          resources:
+            limits:
+              memory: "{{ .Values.instance.memory}}"
+              cpu: {{ .Values.instance.cpu}}
+            requests:
+              memory: "{{ .Values.instance.memory}}"
+              cpu: {{ .Values.instance.cpu}}
+          volumeMounts:
+            - mountPath: "/usr/share/ebx/data"
+              name: "{{ .Values.instance.ebxPrefix}}-persistent-storage-data"
+            - mountPath: "/usr/share/ebx/logs"
+              name: "{{ .Values.instance.ebxPrefix}}-persistent-storage-logs"
+      {{- if .Values.global.imageRepositorySecret }}
+      imagePullSecrets:
+        - name: "{{ .Values.global.imageRepositorySecret}}"
+      {{- end }}
+      initContainers:
+        - name: "{{ .Values.instance.ebxPrefix}}-instance-init-pod"
+          image: "{{ .Values.global.ebxInitImageRegistry}}/{{ .Values.global.ebxInitImageRepository}}:{{ .Values.global.ebxInitImageTag}}"
+          resources:
+            limits:
+              memory: "100Mi"
+              cpu: 1
+          env:
+            - name: EBX_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.instance.ebxPrefix}}-database-secret"
+                  key: "USER"
+            - name: EBX_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.instance.ebxPrefix}}-database-secret"
+                  key: "PASSWORD"
+            - name: EBX_DB_DATABASE
+              value: "{{ .Values.instance.ebxDatabase}}"
+            - name: PGPORT
+              value: "{{ .Values.postgresServer.port}}"
+            - name : PGHOST
+              value: "{{ .Values.postgresServer.host}}"
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Release.Name }}-postgres-server-secret"
+                  key: "DATABASE"
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Release.Name }}-postgres-server-secret"
+                  key: "USER"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Release.Name }}-postgres-server-secret"
+                  key: "PASSWORD"
+      volumes:
+        - name: "{{ .Values.instance.ebxPrefix}}-persistent-storage-data"
+          persistentVolumeClaim:
+            claimName: "{{ .Values.instance.ebxPrefix}}-pv-local-claim-data"
+        - name: "{{ .Values.instance.ebxPrefix}}-persistent-storage-logs"
+          persistentVolumeClaim:
+            claimName: "{{ .Values.instance.ebxPrefix}}-pv-local-claim-logs"

@@ -1,0 +1,35 @@
+{{/*
+  * Copyright Cloud Software Group, Inc. 2000-2023. All rights reserved.
+  */}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: "{{ .Values.global.namespace}}"
+  name: "{{ .Values.instance.ebxPrefix}}-ingress"
+  annotations:
+  {{- if .Values.ingress.annotations }}
+  {{- toYaml .Values.ingress.annotations | nindent 4 }}
+  {{- end }}
+spec:
+  ingressClassName: "{{ .Values.ingress.className}}"
+  {{- if .Values.ingress.tlsSecret }}
+  tls:
+    - hosts:
+        - "{{ .Values.global.hostname}}"
+      secretName: "{{ .Values.ingress.tlsSecret}}"
+  {{- end }}
+  rules:
+    {{ if eq .Values.ingress.hostRuleDefined "true" }}
+      - host: "{{ .Values.global.hostname}}"
+        http:
+    {{ else }}
+      - http:
+    {{ end }}
+          paths:
+            - path: "/{{ .Values.instance.ebxPrefix}}/ebx.*"
+              pathType: Prefix
+              backend:
+                service:
+                  name: "{{ .Values.instance.ebxPrefix}}-service"
+                  port:
+                    number: 8080
