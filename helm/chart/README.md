@@ -3,15 +3,18 @@
 
 ## Introduction
 
-This chart bootstraps an EBX deployment configured with a database on a Kubernetes cluster using the Helm package manager.
+This chart bootstraps an EBX deployment on a Kubernetes cluster using the Helm package 
+manager.
 
-This chart assumes you have an ingress controller already install on your cluster.
-If not you can check the following documentation to install it :
-- [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) (maintained by the Kubernetes community)
+This chart was tested with the [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) 
+maintained by the Kubernetes community. 
+This chart assumes it is already installed or you have a similar solution on your cluster.
+
+**Note**: 
 
 ## Prerequisites
 
-* Kubernetes 1.23+
+* Kubernetes 1.23+, a working kubernetes cluster from a [certified K8s distro](https://www.cncf.io/certification/software-conformance/).
 * Helm 3+
 * EBX (Container Edition) image pushed on your docker registry
 * PV provisioner support in the underlying infrastructure (StorageClass config)
@@ -89,26 +92,32 @@ helm delete production
 | `ingress.hostRuleDefined` | hostRuleDefined modify the syntax of the ingress according to this value. If set to true, an host must be defined | `"true"`  |
 | `ingress.annotations`     | annotations to configure the ingress resource                                                                     | `""`      |
 
-Annotations are provided as comments in the ```ingress.annotations``` section of the values.yaml file.
+**Note**: Annotations are provided as comments in the ```ingress.annotations``` section of the [values.yaml file](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ebx-generic-chart/values.yaml).
 These are only examples of structure-based configurations, which means your structure may need other 
 annotations.
 
-Please refer to the [following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) to best meet your needs.
+Please refer to the 
+[following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
+to best meet your needs.
 
 ----------
 
 ### Database server parameters
 
-| Name             | Description                           | Value         |
-|------------------|---------------------------------------|---------------|
-| `database.name`  | The database server name              | `""`          |
-| `database.user`  | The database server user              | `"postgres"`  |
-| `database.pwd`   | The database server database password | `""`          |
-| `database.host`  | The database server host              | `""`          |
-| `database.port`  | The database server port              | `"5432"`      |
-| `database.type`  | The database server type              | `""`          |
+| Name             | Description                           | Value   |
+|------------------|---------------------------------------|---------|
+| `database.name`  | The database server name              | `""`    |
+| `database.user`  | The database server user              | `""`    |
+| `database.pwd`   | The database server database password | `""`    |
+| `database.host`  | The database server host              | `""`    |
+| `database.port`  | The database server port              | `""`    |
+| `database.type`  | The database server type              | `""`    |
 
-#### only for Microsoft Azure SQL database
+**Note**: Refer to 
+[this documentation](https://github.com/tibco/ebx-container-edition/blob/main/docs/databases-connectivity.md) 
+to see the compatible databases and their associated values types for the chart.
+
+#### Microsoft Azure SQL database
 
 | Name                              | Description | Value                      |
 |-----------------------------------|-------------|----------------------------|
@@ -116,7 +125,17 @@ Please refer to the [following documentation](https://kubernetes.github.io/ingre
 | `database.trustServerCertificate` | TODO        | `"false"`                  |
 | `database.hostNameInCertificate`  | TODO        | `"*.database.windows.net"` |
 
+**Note**: these values will only be used if ```database.type``` value equals ```azure.sql```.
+
 ----------
+
+## Customize and extend the chart
+These recipes provide a standard, canonical, typical, or vanilla deployment for the TIBCO EBX® Software. 
+They are suitable for most of the use case scenarios.
+
+You are welcome to use and modify the recipes and adapt them to your specific use case, 
+in compliance with the Apache License 2.0. However, we recommend that you extend these charts, rather than modify them. 
+
 
 
 

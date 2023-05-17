@@ -13,7 +13,7 @@ global:
   # registrySecret that contains the credentials used to connect to the Docker registry.
   imageRegistrySecret: ""
   # namespace where the EBX instance will be deployed
-  namespace: "default"
+  namespace: "ebx"
   # hostname of the kubernetes server host
   hostname: ""
   # scheme define the protocol of the kubernetes server (default value is https)
@@ -28,12 +28,10 @@ instance:
   ebxUser: "admin"
   # ebxPassword is the password used to connect to the ebx instance
   ebxPassword: ""
-
   # cpu number allocate to the container (default value is 2)
   cpu: 2
   # memory is the container memory limit allocate to the container (default value is 2Gi)
   memory: "2Gi"
-
   # storageClass used to claim volumes
   storageClass : "microk8s-hostpath"
   # dataVolumeStorageClaim is the amount of disk space of the PersistentVolume requested by the ebx
@@ -43,7 +41,7 @@ instance:
   # the data of the ebx instance
   logsVolumeStorageClaim: "2Gi"
 
-# ingress section defines specifics values for traffic routing rules of the Ingress resource
+# Ingress section defines specifics values for traffic routing rules of the Ingress resource
 ingress:
   # className is the name of the chosen ingress-controller
   className: "nginx"
@@ -59,10 +57,8 @@ ingress:
   # cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/ssl-redirect: "false" # TODO comment
 
-# database section defines specifics values for the database connectivity
+# Database section defines specifics values for the database connectivity
 database:
-  # common part TODO
-  #
   # name is the database name
   name:
   # user is the database user
@@ -76,10 +72,10 @@ database:
   # type is the database type (postgresql, sqlserver, oracle etc...  check the ... doc) TODO
   type:
 
-  # only for Microsoft Azure SQL database (uncomment and set values as needed only if database.type is eq to azure.sql)
-  #encrypt: "true"
-  #trustServerCertificate: "false"
-  #hostNameInCertificate: "*.database.windows.net"
+  # Microsoft Azure SQL database (the following values will be use only if database.type is eq to azure.sql)
+  encrypt: "true"
+  trustServerCertificate: "false"
+  hostNameInCertificate: "*.database.windows.net"
 
 
 
