@@ -37,6 +37,8 @@ To install the chart with the release name ```production``` in the namespace ```
  --set-string global.namespace=ebx \
  --set-string global.ebxImageRegistry=<your.docker-registry.com> \
  --set-string global.ebxImageTag=<the EBX image tag> \
+ --set-string global.ebxInitImageRegistry=<your.docker-registry.com> \
+ --set-string global.ebxInitImageTag=<EBX Init Version> \
  --set-string global.hostname=<your.hostname.com> \
  --set-string instance.ebxPrefix=production \
  --set-string instance.ebxPassword=<'?Y0urP4ssWord!'> \
@@ -60,15 +62,18 @@ helm delete production
 
 ### Global parameters
 
-| Name                         | Description                                                                     | Value        |
-|------------------------------|---------------------------------------------------------------------------------|--------------|
-| `global.ebxImagesRegistry`   | The Docker registry where we pull the EBX and the EBX-INIT images from.         | `""`         |
-| `global.ebxImageRepository`  | The EBX image repository                                                        | `"ebx"`      |
-| `global.ebxImageTag`         | The EBX image tag                                                               | `""`         |
-| `global.imageRegistrySecret` | The secret that contains the credentials used to connect to the Docker registry | `""`         |
-| `global.namespace`           | The namespace where EBX will be deployed                                        | `"ebx"`      |
-| `global.hostname`            | The hostname of the kubernetes server host                                      | `""`         |
-| `global.scheme`              | The scheme that define the protocol of the kubernetes server                    | `"https"`    |
+| Name                             | Description                                                                     | Value        |
+|----------------------------------|---------------------------------------------------------------------------------|--------------|
+| `global.ebxImagesRegistry`       | The Docker registry where we pull the EBX and the EBX-INIT images from.         | `""`         |
+| `global.ebxImageRepository`      | The EBX image repository                                                        | `"ebx"`      |
+| `global.ebxImageTag`             | The EBX image tag                                                               | `""`         |
+| `global.ebxImageTag`             | The EBX image tag                                                               | `""`         |
+| `global.ebxInitImageRepository`  | The EBX-INIT image repository                                                   | `"ebx-init"` |
+| `global.ebxInitImageTag`         | The EBX-INIT image tag                                                          | `""`         |
+| `global.imageRegistrySecret`     | The secret that contains the credentials used to connect to the Docker registry | `""`         |
+| `global.namespace`               | The namespace where EBX will be deployed                                        | `"ebx"`      |
+| `global.hostname`                | The hostname of the kubernetes server host                                      | `""`         |
+| `global.scheme`                  | The scheme that define the protocol of the kubernetes server                    | `"https"`    |
 
 ----------
 

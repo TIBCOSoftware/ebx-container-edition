@@ -2,14 +2,16 @@
 
 ## Overview
 
-This repository provides a reference and starting point for deploying [TIBCO EBX® Software](https://www.tibco.com/products/tibco-ebx-software) on a [Kubernetes cluster](http://kubernetes.io/) using its [container form](https://www.docker.com/resources/what-container) (TIBCO EBX® Container Edition) and [Helm charts](https://helm.sh/) .
+This repository provides a reference and starting point for deploying [TIBCO EBX® Software](https://www.tibco.com/products/tibco-ebx-software) 
+on a [Kubernetes cluster](http://kubernetes.io/) using its [container form](https://www.docker.com/resources/what-container) 
+(TIBCO EBX® Container Edition) and the [Helm package manager](https://helm.sh/) .
 
 This repository include quick guides, templates, configuration examples, and scripts that you can extend or customize.
 
 This repository does not include TIBCO EBX® software, TIBCO EBX® Container Edition or any other third party software.
 
 **Note**: TIBCO EBX Software is a commercially licensed product and is subject to the payment of license fees.
-You must have a valid license to use EBX container edition.
+You must have a valid license to use TIBCO EBX® Container Edition.
 
 
 ## Prerequisites

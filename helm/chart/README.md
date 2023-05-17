@@ -39,7 +39,7 @@ To install the chart with the release name ```production``` in the namespace ```
  --set-string database.host=<ebx db host> \
  --set-string database.port=<ebx db port> \
  --set-string database.type=<ebx db type> \
- ./ebx-chart
+ ./ebx-generic-chart
 ```
 
 ## Uninstalling the Chart

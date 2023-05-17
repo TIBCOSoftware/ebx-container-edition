@@ -1,0 +1,15 @@
+{{/*
+  * Copyright Cloud Software Group, Inc. 2000-2023. All rights reserved.
+  */}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Values.instance.ebxPrefix}}-databases-drivers-url-configmap"
+  namespace: "{{ .Values.global.namespace}}"
+data:
+  postgresql: "jdbc:postgresql://{{ .Values.database.host}}:{{ .Values.database.port}}/{{ .Values.database.name}}"
+  oracle: "jdbc:oracle:thin:@//{{ .Values.database.host}}:{{ .Values.database.port}}/{{ .Values.database.name}}"
+  sqlserver: "jdbc:sqlserver://;serverName={{ .Values.database.host}};port={{ .Values.database.port}};databaseName={{ .Values.database.name}}"
+  azure.sql: "jdbc:sqlserver://;serverName={{ .Values.database.host}};port={{ .Values.database.port}};databaseName={{ .Values.database.name}}{{- if .Values.database.encrypt }};encrypt={{ .Values.database.encrypt}}{{- end }}{{- if .Values.database.trustServerCertificate }};trustServerCertificate={{ .Values.database.trustServerCertificate}}{{- end }}{{- if .Values.database.hostNameInCertificate }};hostNameInCertificate={{ .Values.database.hostNameInCertificate}}{{- end }}" # TODO TEST
+  hana: "jdbc:sap://{{ .Values.database.host}}:{{ .Values.database.port}}/{{ .Values.database.name}}" # TODO jdbc:sap://127.0.0.1:39041 TODO TEST
+  # TODO H2 ?
