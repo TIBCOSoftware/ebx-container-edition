@@ -31,23 +31,24 @@ Before you begin be careful to these points:
 To install the chart with the release name ```production``` in the namespace ```ebx``` (default value):
 
 ```
- 
  helm upgrade --debug production \
  --install \
- --set-string global.namespace=ebx \
  --set-string global.ebxImageRegistry=<your.docker-registry.com> \
  --set-string global.ebxImageTag=<the EBX image tag> \
- --set-string global.ebxInitImageRegistry=<your.docker-registry.com> \
- --set-string global.ebxInitImageTag=<EBX Init Version> \
+ --set-string global.ebxInitImageRegistry=<your.docker-registry.com>l \
+ --set-string global.ebxInitImageTag=<the EBX-INIT image tag> \
  --set-string global.hostname=<your.hostname.com> \
  --set-string instance.ebxPrefix=production \
  --set-string instance.ebxPassword=<'?Y0urP4ssWord!'> \
  --set-string database.name=<ebx db name> \
- --set-string database.user=postgres \
+ --set-string database.user=<ebx db user> \
  --set-string database.pwd=<ebx db password> \
  --set-string database.host=<ebx db host> \
  --set-string database.port=5432 \
  --set-string database.type=postgresql \
+ --set-string postgresServer.name=<postgresql server master db name> \
+ --set-string postgresServer.user=<postgresql server master db user> \
+ --set-string postgresServer.pwd=<postgresql server master db password> \
  ./ebx-chart
  
 ```
@@ -119,6 +120,15 @@ Please refer to the [following documentation](https://kubernetes.github.io/ingre
 | `database.host`  | The database server host              | `""`           |
 | `database.port`  | The database server port              | `"5432"`       |
 | `database.type`  | The database server type              | `"postgresql"` |
+
+
+### Postgresql server parameters
+
+| Name                    | Description                                  | Value        |
+|-------------------------|----------------------------------------------|--------------|
+| `postgresServer.name`   | The master database server name              | `""`         |
+| `postgresServer.user`   | The master database server user              | `"postgres"` |
+| `postgresServer.pwd`    | The master database server database password | `""`         |
 
 ## EBX-INIT
 
