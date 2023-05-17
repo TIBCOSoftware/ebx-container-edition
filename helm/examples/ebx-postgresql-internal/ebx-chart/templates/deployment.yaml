@@ -29,9 +29,12 @@ spec:
             - containerPort: 8080
           env:
             - name: EBX_DB_FACTORY
-              value: "{{ .Values.instance.ebxDatabaseType}}"
+              value: "{{ .Values.database.type}}"
             - name: EBX_DB_URL
-              value: "jdbc:{{ .Values.instance.ebxDatabaseType}}://{{ .Values.postgresServer.host}}:{{ .Values.postgresServer.port}}/{{ .Values.instance.ebxDatabase}}"
+              valueFrom:
+                configMapKeyRef:
+                  name: "{{ .Values.instance.ebxPrefix}}-databases-drivers-url-configmap"
+                  key: "{{ .Values.database.type}}"
             - name: EBX_ROOT_PATH
               value: "/{{ .Values.instance.ebxPrefix}}"
             - name: EBX_IS_SECURED
@@ -89,11 +92,11 @@ spec:
                   name: "{{ .Values.instance.ebxPrefix}}-database-secret"
                   key: "PASSWORD"
             - name: EBX_DB_DATABASE
-              value: "{{ .Values.instance.ebxDatabase}}"
+              value: "{{ .Values.database.name}}"
             - name: PGPORT
-              value: "{{ .Values.postgresServer.port}}"
+              value: "{{ .Values.database.port}}"
             - name : PGHOST
-              value: "{{ .Values.postgresServer.host}}"
+              value: "{{ .Values.database.host}}"
             - name: PGDATABASE
               valueFrom:
                 secretKeyRef:

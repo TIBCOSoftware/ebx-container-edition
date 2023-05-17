@@ -17,7 +17,7 @@ global:
   # ebxImageTag is The EBX image tag
   ebxInitImageTag: ""
   # registrySecret that contains the credentials used to connect to the Docker registry.
-  imageRegistrySecret: "" 
+  imageRegistrySecret: ""
   # namespace where the EBX instance will be deployed
   namespace: "default"
   # hostname of the kubernetes server host
@@ -67,12 +67,10 @@ ingress:
 
 # database section defines specifics values for the database connectivity
 database:
-  # common part TODO
-  #
   # name is the database name
   name: ""
   # user is the database user
-  user: "postgres"
+  user: ""
   # pwd is the database password
   pwd: ""
   # host is the database host
@@ -81,5 +79,14 @@ database:
   port: 5432
   # type is the database type (postgresql, sqlserver, oracle etc...  check the ... doc) TODO
   type: "postgresql"
+
+# postgresServer section defines specifics values for the postgresServer connectivity
+postgresServer:
+  # name is the postgres server master database name
+  name: ""
+  # user is the postgres server master database name
+  user: "postgres"
+  #  pwd is the postgres server master database name
+  pwd: ""
 
 
