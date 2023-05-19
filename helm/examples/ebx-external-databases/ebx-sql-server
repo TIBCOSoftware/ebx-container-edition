@@ -1,0 +1,23 @@
+
+Example of configuration to deploy EBX with an sql database.
+
+helm upgrade --debug production \
+ --install \
+ --set-string global.ebxImageRegistry=your.ebx.docker.registry \
+ --set-string global.ebxImageTag=6.1.0 \
+ --set-string global.hostname=k8s.example.com \
+ --set-string instance.ebxPrefix=production \
+ --set-string instance.ebxPassword='ebxPwD23!' \
+ --set-string database.name=ebxDB \
+ --set-string database.user=ebxUsr \
+ --set-string database.pwd=ebxPwd \
+ --set-string database.host=ebx-mssql.example.com \
+ --set-string database.port=4875 \
+ --set-string database.type=sqlserver \
+ ./ebx-chart
+
+NOTE:
+encryption is enable by default, you can disable it by adding this line to the above helm command:
+--set-string database.encrypt=false \
+
+check the database section in the values.yaml file of the ebx-generic-chart.

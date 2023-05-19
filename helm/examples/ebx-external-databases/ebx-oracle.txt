@@ -1,9 +1,11 @@
 
 
+Example of configuration to deploy EBX with an oracle database.
+
 
 helm upgrade --debug production \
  --install \
- --set-string global.ebxImageRegistry=ebx.docker.registry \
+ --set-string global.ebxImageRegistry=your.ebx.docker.registry \
  --set-string global.ebxImageTag=6.1.0 \
  --set-string global.hostname=k8s.host.example.com \
  --set-string instance.ebxPrefix=production \

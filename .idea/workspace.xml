@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e6124385-668e-41ff-948f-833958e4e0bc" name="Changes" comment="">
+    <list default="true" id="e6124385-668e-41ff-948f-833958e4e0bc" name="Changes" comment="update internal postgresql chart example with database connectivity feature and modify the README and other docs files according to this update.">
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-external-databases/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/databases-connectivity.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/databases-connectivity.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-chart/.helmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-chart/Chart.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-chart/templates/NOTES.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-chart/templates/databases-drivers-url-configmap.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-chart/templates/deployment.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-chart/templates/ebx-database-secret.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-chart/templates/ingress.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-chart/templates/service.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-chart/templates/volumes.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-chart/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/databases-drivers-url-configmap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/databases-drivers-url-configmap.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/values.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/values.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-h2" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-h2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-hana" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-hana" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-oracle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-oracle.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-sql-server" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-sql-server" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,22 +28,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/cjannes/Documents/GitHub/ebx-container-edition/helm/examples/ebx-external-databases",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/cjannes/Documents/GitHub/ebx-container-edition/helm/examples/ebx-postgresql-internal/ebx-chart/templates&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-chart/templates" />
       <recent name="$PROJECT_DIR$/helm/examples/ebx-external-databases" />
       <recent name="$PROJECT_DIR$/helm/chart/ebx-generic" />
       <recent name="$PROJECT_DIR$/helm/examples/external-databases" />
       <recent name="$PROJECT_DIR$/helm/examples" />
-      <recent name="$PROJECT_DIR$/helm/chart" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal" />
@@ -68,7 +61,8 @@
       <option name="presentableId" value="Default" />
       <updated>1684166330262</updated>
       <workItem from="1684166331556" duration="17692000" />
-      <workItem from="1684254741155" duration="14589000" />
+      <workItem from="1684254741155" duration="26013000" />
+      <workItem from="1684505854179" duration="2787000" />
     </task>
     <task id="LOCAL-00001" summary="add third-party-software-licenses.md document and docs repository.">
       <created>1684251239536</created>
@@ -98,7 +92,28 @@
       <option name="project" value="LOCAL" />
       <updated>1684310748175</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add docs for databases-connectivity.md and links in README files. modifications README files.">
+      <created>1684316086462</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1684316086462</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update internal postgresql chart example with database connectivity feature and modify the README and other docs files according to this update.">
+      <created>1684328976735</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1684328976735</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update internal postgresql chart example with database connectivity feature and modify the README and other docs files according to this update.">
+      <created>1684330212211</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1684330212211</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,6 +135,8 @@
     <MESSAGE value="modify the directory to fit with last modifications from the generic chart." />
     <MESSAGE value="add new doc file for database connectivity and modify the README.md files." />
     <MESSAGE value="modification of README files, add config examples for different databases types connection. Also add directory ece on aks and a doc for the databases connectivity." />
-    <option name="LAST_COMMIT_MESSAGE" value="modification of README files, add config examples for different databases types connection. Also add directory ece on aks and a doc for the databases connectivity." />
+    <MESSAGE value="add docs for databases-connectivity.md and links in README files. modifications README files." />
+    <MESSAGE value="update internal postgresql chart example with database connectivity feature and modify the README and other docs files according to this update." />
+    <option name="LAST_COMMIT_MESSAGE" value="update internal postgresql chart example with database connectivity feature and modify the README and other docs files according to this update." />
   </component>
 </project>

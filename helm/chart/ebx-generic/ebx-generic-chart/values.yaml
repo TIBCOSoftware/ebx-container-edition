@@ -72,8 +72,8 @@ database:
   # type is the database type (postgresql, sqlserver, oracle etc...  check the ... doc) TODO
   type:
 
-  # Microsoft Azure SQL database (the following values will be use only if database.type is eq to azure.sql)
-  encrypt: "true"
+  # Microsoft Azure SQL database (the following values will be use only if database.type is eq to azure.sql) 
+  encrypt: "true" # TODO it's also for SQL 
   trustServerCertificate: "false"
   hostNameInCertificate: "*.database.windows.net"
 

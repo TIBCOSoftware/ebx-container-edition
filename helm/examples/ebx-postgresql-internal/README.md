@@ -6,7 +6,7 @@
 This chart bootstraps an EBX deployment configured with an internal Postgresql database on a Kubernetes 
 cluster using the Helm package manager.
 
-This file assumes you have an ingress controller and postgresql server already install on your cluster.
+This file assumes you have an ingress controller and a Postgresql server already install on your cluster.
 If not you can check the following documentation to see how to install them :
 - [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) (maintained by the Kubernetes community) 
 - [PostgreSQL v10 to 14](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) (maintained by Bitnami) 
