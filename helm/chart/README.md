@@ -70,16 +70,19 @@ helm delete production
 
 ### Instance parameters
 
-| Name                              | Description                                                                                                                                                                              | Value       |
-|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| `instance.ebxPrefix`              | The prefix name used for every kubernetes object deployed by the helm release (Pod, Service, Ingress...)                                                                                 | `""`        |
-| `instance.ebxUser`                | The username used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_LOGIN`)                                                                        | `"admin"`   |
-| `instance.ebxPassword`            | The password used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_PASSWORD`) <b><u>must be enclosed in single quotes<u><b>                       | `''`        |
-| `instance.cpu`                    | The cpu number allocate to the ebx container                                                                                                                                             | `"2"`       |
-| `instance.memory`                 | The ebx container memory limit                                                                                                                                                           | `"2Gi"`     |
-| `instance.storageClass`           | storageClass used to claim volumes                                                                                                                                                       | `"default"` |
-| `instance.dataVolumeStorageClaim` | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data (this value must be greater than or equal to the dataVolumeStorage value)              | `"10Gi"`    |
-| `instance.logsVolumeStorageClaim` | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                                         | `"2Gi"`     |
+| Name                              | Description                                                                                                                                                                              | Value     |
+|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| `instance.ebxPrefix`              | The prefix name used for every kubernetes object deployed by the helm release (Pod, Service, Ingress...)                                                                                 | `""`      |
+| `instance.ebxUser`                | The username used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_LOGIN`)                                                                        | `"admin"` |
+| `instance.ebxPassword`            | The password used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_PASSWORD`) <b><u>must be enclosed in single quotes<u><b>                       | `''`      |
+| `instance.cpu`                    | The cpu number allocate to the ebx container                                                                                                                                             | `"2"`     |
+| `instance.memory`                 | The ebx container memory limit                                                                                                                                                           | `"2Gi"`   |
+| `instance.storageClass`           | storageClass used to claim volumes                                                                                                                                                       | `""`      |
+| `instance.dataVolumeStorageClaim` | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data (this value must be greater than or equal to the dataVolumeStorage value)              | `"10Gi"`  |
+| `instance.logsVolumeStorageClaim` | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                                         | `"2Gi"`   |
+
+**Note**: If storageClass is not specified, the default storage class will be used for provisioning.
+Check the [storageClass documentation](https://kubernetes.io/blog/2017/03/dynamic-provisioning-and-storage-classes-kubernetes/) for further informations
 
 ----------
 

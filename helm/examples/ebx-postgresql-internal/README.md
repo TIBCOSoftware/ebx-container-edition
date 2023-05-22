@@ -11,7 +11,8 @@ If not you can check the following documentation to see how to install them :
 - [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) (maintained by the Kubernetes community) 
 - [PostgreSQL v10 to 14](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) (maintained by Bitnami) 
 
-**Note**: Using the PostgreSQL database like this is not recommended for production use. Make sure you know how to back up and restore your data when using this chart for other than testing purposes.
+**Note**: Using the PostgreSQL database like this is not recommended for production use. Make sure you know how to back 
+up and restore your data when using this chart for other than testing purposes.
 
 ## Prerequisites
 
@@ -80,16 +81,19 @@ helm delete production
 
 ### Instance parameters
 
-| Name                              | Description                                                                                                                                                                              | Value       |
-|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| `instance.ebxPrefix`              | The prefix name used for every kubernetes object deployed by the helm release (Pod, Service, Ingress...)                                                                                 | `""`        |
-| `instance.ebxUser`                | The username used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_LOGIN`)                                                                        | `"admin"`   |
-| `instance.ebxPassword`            | The password used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_PASSWORD`) <b><u>must be enclosed in single quotes<u><b>                       | `''`        |
-| `instance.cpu`                    | The cpu number allocate to the ebx container                                                                                                                                             | `"2"`       |
-| `instance.memory`                 | The ebx container memory limit                                                                                                                                                           | `"2Gi"`     |
-| `instance.storageClass`           | storageClass used to claim volumes                                                                                                                                                       | `"default"` |
-| `instance.dataVolumeStorageClaim` | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data (this value must be greater than or equal to the dataVolumeStorage value)              | `"10Gi"`    |
-| `instance.logsVolumeStorageClaim` | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                                         | `"2Gi"`     |
+| Name                              | Description                                                                                                                                                                              | Value     |
+|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| `instance.ebxPrefix`              | The prefix name used for every kubernetes object deployed by the helm release (Pod, Service, Ingress...)                                                                                 | `""`      |
+| `instance.ebxUser`                | The username used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_LOGIN`)                                                                        | `"admin"` |
+| `instance.ebxPassword`            | The password used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_PASSWORD`) <b><u>must be enclosed in single quotes<u><b>                       | `''`      |
+| `instance.cpu`                    | The cpu number allocate to the ebx container                                                                                                                                             | `"2"`     |
+| `instance.memory`                 | The ebx container memory limit                                                                                                                                                           | `"2Gi"`   |
+| `instance.storageClass`           | storageClass used to claim volumes                                                                                                                                                       | `""`      |
+| `instance.dataVolumeStorageClaim` | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data (this value must be greater than or equal to the dataVolumeStorage value)              | `"10Gi"`  |
+| `instance.logsVolumeStorageClaim` | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                                         | `"2Gi"`   |
+
+**Note**: If storageClass is not specified, the default storage class will be used for provisioning.
+Check the [storageClass documentation](https://kubernetes.io/blog/2017/03/dynamic-provisioning-and-storage-classes-kubernetes/) for further informations
 
 ----------
 
@@ -106,7 +110,9 @@ Annotations are provided as comments in the ```ingress.annotations``` section of
 These are only examples of structure-based configurations, which means your structure may need other
 annotations.
 
-Please refer to the [following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) to best meet your needs.
+Please refer to the 
+[following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) to 
+best meet your needs.
 
 ----------
 

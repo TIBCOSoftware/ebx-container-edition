@@ -41,7 +41,7 @@ instance:
   memory: "2Gi"
 
   # storageClass used to claim volumes
-  storageClass : "microk8s-hostpath"
+  storageClass : ""
   # dataVolumeStorageClaim is the amount of disk space of the PersistentVolume requested by the ebx
   # instance to store it's data
   dataVolumeStorageClaim: "20Gi"
