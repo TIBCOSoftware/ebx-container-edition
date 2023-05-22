@@ -92,8 +92,8 @@ helm delete production
 | `instance.dataVolumeStorageClaim` | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data (this value must be greater than or equal to the dataVolumeStorage value)              | `"10Gi"`  |
 | `instance.logsVolumeStorageClaim` | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                                         | `"2Gi"`   |
 
-**Note**: If storageClass is not specified, the default storage class will be used for provisioning.
-Check the [storageClass documentation](https://kubernetes.io/blog/2017/03/dynamic-provisioning-and-storage-classes-kubernetes/) for further informations
+**Note**: If ```instance.storageClass``` is not specified, the default storage class will be used for provisioning.
+Check the [storageClass documentation](https://kubernetes.io/blog/2017/03/dynamic-provisioning-and-storage-classes-kubernetes/) for further informations.
 
 ----------
 
@@ -110,7 +110,7 @@ Annotations are provided as comments in the ```ingress.annotations``` section of
 These are only examples of structure-based configurations, which means your structure may need other
 annotations.
 
-Please refer to the 
+**Note**: Please refer to the 
 [following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) to 
 best meet your needs.
 
@@ -148,7 +148,7 @@ This image is based on an ```alpine:3.14.3``` and contains:
 
 An example is provided in this bundle at [this location](https://github.com/tibco/ebx-container-edition/tree/main/helm/examples/ebx-postgresql-internal/ebx-init)
 
-This example was tested with postgresl server version 10 to 14. 
+**Note**: This example was tested with postgresl server version 10 to 14. 
 The script set-up-database.sh need to be updated to be compatible with postgresql 15.
 
 

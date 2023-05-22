@@ -81,8 +81,8 @@ helm delete production
 | `instance.dataVolumeStorageClaim` | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data (this value must be greater than or equal to the dataVolumeStorage value)              | `"10Gi"`  |
 | `instance.logsVolumeStorageClaim` | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                                         | `"2Gi"`   |
 
-**Note**: If storageClass is not specified, the default storage class will be used for provisioning.
-Check the [storageClass documentation](https://kubernetes.io/blog/2017/03/dynamic-provisioning-and-storage-classes-kubernetes/) for further informations
+**Note**: If ```instance.storageClass``` is not specified, the default storage class will be used for provisioning.
+Check the [storageClass documentation](https://kubernetes.io/blog/2017/03/dynamic-provisioning-and-storage-classes-kubernetes/) for further informations.
 
 ----------
 
