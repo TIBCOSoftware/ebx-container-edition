@@ -1,23 +1,26 @@
 
 
+# EBX generic chart
 
-## Introduction
+## Overview
 
 This chart bootstraps an EBX deployment on a Kubernetes cluster using the Helm package 
 manager.
+
+This chart is a generic example, which means that it was made to work in most case.
 
 This chart was tested with the [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) 
 maintained by the Kubernetes community. 
 This chart assumes it is already installed or you have a similar solution on your cluster.
 
 **Note**: 
+  TODO
 
 ## Prerequisites
 
 * Kubernetes 1.23+, a working kubernetes cluster from a [certified K8s distro](https://www.cncf.io/certification/software-conformance/).
 * Helm 3+
 * EBX (Container Edition) image pushed on your docker registry
-* PV provisioner support in the underlying infrastructure (StorageClass config)
 
 ## Installing the Chart
 

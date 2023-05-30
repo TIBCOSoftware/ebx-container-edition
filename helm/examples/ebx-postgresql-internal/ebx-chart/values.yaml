@@ -53,7 +53,8 @@ instance:
 ingress:
   # className is the name of the chosen ingress-controller
   className: "nginx"
-  # tlsSecret that contains the self-signed certificate and private key
+  # tlsSecret that contains the self-signed certificate public and private key
+  # (tlsSecret must be different than the instance.emailClusterIssuer value)
   tlsSecret: ""
   # hostRuleDefied modify the syntax of the ingress according to this value. (default value is true)
   # If set to true, an host must be defined.

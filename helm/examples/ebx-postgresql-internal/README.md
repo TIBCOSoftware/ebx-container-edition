@@ -19,7 +19,6 @@ up and restore your data when using this chart for other than testing purposes.
 * Kubernetes 1.23+
 * Helm 3+
 * Both EBX (Container Edition) and [EBX-INIT](#EBX-INIT) images pushed on your docker registry
-* PV provisioner support in the underlying infrastructure (StorageClass config)
 
 ## Installing the Chart
 
@@ -146,7 +145,8 @@ This image is based on an ```alpine:3.14.3``` and contains:
 - bash
 - the set-up-database.sh script
 
-An example is provided in this bundle at [this location](https://github.com/tibco/ebx-container-edition/tree/main/helm/examples/ebx-postgresql-internal/ebx-init)
+A [bundle](https://github.com/tibco/ebx-container-edition/tree/main/helm/examples/ebx-postgresql-internal/ebx-init) 
+is provided to allow you to build and push the ebx-init image.
 
 **Note**: This example was tested with postgresl server version 10 to 14. 
 The script set-up-database.sh need to be updated to be compatible with postgresql 15.

@@ -2,16 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6124385-668e-41ff-948f-833958e4e0bc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/build_and_push_image.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/scripts/push-image.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/.helmignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/Chart.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/NOTES.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/cluster-issuer.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/databases-drivers-url-configmap.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/ebx-database-secret.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/ingress.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/postgres-server-secret.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/service.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/volumes.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/values.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/build_and_push_image.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/scripts/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/scripts/build-image.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/scripts/push-image.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/scripts/set-up-database.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/temp/cluster-issuer.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helm/chart/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/values.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/values.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/scripts/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/build-image.sh" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/scripts/build-image.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/push-image.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/set-up-database.sh" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/scripts/set-up-database.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-chart/values.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-chart/values.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,18 +48,18 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/cjannes/Documents/GitHub/ebx-container-edition/helm/examples/ebx-postgresql-internal/ebx-init/scripts",
+    "last_opened_file_path": "/Users/cjannes/Documents/GitHub/ebx-container-edition/helm/examples/ebx-on-aks/ebx-chart/templates",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/scripts" />
-      <recent name="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-chart/templates" />
-      <recent name="$PROJECT_DIR$/helm/examples/ebx-external-databases" />
-      <recent name="$PROJECT_DIR$/helm/chart/ebx-generic" />
-      <recent name="$PROJECT_DIR$/helm/examples/external-databases" />
+      <recent name="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates" />
+      <recent name="$PROJECT_DIR$/helm/examples/ebx-on-aks/temp" />
+      <recent name="$PROJECT_DIR$/helm/examples/ebx-on-aks-external/ebx-chart/templates" />
+      <recent name="$PROJECT_DIR$/helm/examples/ebx-on-aks-external/ebx-chart" />
+      <recent name="$PROJECT_DIR$/helm/examples/ebx-on-aks-external" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal" />
@@ -63,7 +78,8 @@
       <updated>1684166330262</updated>
       <workItem from="1684166331556" duration="17692000" />
       <workItem from="1684254741155" duration="26013000" />
-      <workItem from="1684505854179" duration="15735000" />
+      <workItem from="1684505854179" duration="23489000" />
+      <workItem from="1685440461143" duration="8319000" />
     </task>
     <task id="LOCAL-00001" summary="add third-party-software-licenses.md document and docs repository.">
       <created>1684251239536</created>
@@ -128,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684753156796</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add documentation and scripts for the ebx-init image.">
+      <created>1684768761230</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1684768761230</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +177,7 @@
     <MESSAGE value="update internal postgresql chart example with database connectivity feature and modify the README and other docs files according to this update." />
     <MESSAGE value="add external databases connectivity examples, sqlServer, H2 standalone, oracle (hana is to complete)" />
     <MESSAGE value="modify the charts to set up the default StorageClass dynamically. Readme files are also being modified accordingly." />
-    <option name="LAST_COMMIT_MESSAGE" value="modify the charts to set up the default StorageClass dynamically. Readme files are also being modified accordingly." />
+    <MESSAGE value="Add documentation and scripts for the ebx-init image." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add documentation and scripts for the ebx-init image." />
   </component>
 </project>

@@ -10,10 +10,16 @@ global:
   ebxImageRepository: "ebx"
   # ebxImageTag is The EBX image tag
   ebxImageTag: ""
+  # ebxImageRegistry is the Docker registry where we pull the EBX-INIT image from.
+  ebxInitImageRegistry: ""
+  # ebxInitImageRepository is the EBX-INIT image repository
+  ebxInitImageRepository: "ebx-init"
+  # ebxImageTag is The EBX image tag
+  ebxInitImageTag: ""
   # registrySecret that contains the credentials used to connect to the Docker registry.
   imageRegistrySecret: ""
   # namespace where the EBX instance will be deployed
-  namespace: "ebx"
+  namespace: "default"
   # hostname of the kubernetes server host
   hostname: ""
   # scheme define the protocol of the kubernetes server (default value is https)
@@ -28,10 +34,12 @@ instance:
   ebxUser: "admin"
   # ebxPassword is the password used to connect to the ebx instance
   ebxPassword: ""
+
   # cpu number allocate to the container (default value is 2)
   cpu: 2
   # memory is the container memory limit allocate to the container (default value is 2Gi)
   memory: "2Gi"
+
   # storageClass used to claim volumes
   storageClass : ""
   # dataVolumeStorageClaim is the amount of disk space of the PersistentVolume requested by the ebx
@@ -41,7 +49,10 @@ instance:
   # the data of the ebx instance
   logsVolumeStorageClaim: "2Gi"
 
-# Ingress section defines specifics values for traffic routing rules of the Ingress resource
+  # emailClusterIssuer is the email of the ClusterIssuer ()# TODO Check
+  emailClusterIssuer: ""
+
+# ingress section defines specifics values for traffic routing rules of the Ingress resource
 ingress:
   # className is the name of the chosen ingress-controller
   className: "nginx"
@@ -53,31 +64,36 @@ ingress:
   hostRuleDefined: "true"
   # annotations to configure the ingress resource
   annotations:
-  # Annotations for AZURE (AKS Cluster using TLS) https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
-  # nginx.ingress.kubernetes.io/use-regex: "true"
-  # cert-manager.io/cluster-issuer: letsencrypt
-    nginx.ingress.kubernetes.io/ssl-redirect: "false" # TODO comment
+    # Annotations example
+    # nginx.ingress.kubernetes.io/ssl-redirect: "false" # TODO comment for AKS
 
-# Database section defines specifics values for the database connectivity
+    # Annotations for AZURE (AKS Cluster using TLS) https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
+
+
+# database section defines specifics values for the database connectivity
 database:
   # name is the database name
-  name:
+  name: ""
   # user is the database user
-  user:
+  user: ""
   # pwd is the database password
-  pwd:
+  pwd: ""
   # host is the database host
   host:
   # port is the database port
-  port:
+  port: 5432
   # type is the database type (postgresql, sqlserver, oracle etc...  check the ... doc) TODO
-  type:
+  type: "postgresql"
 
-  # Microsoft Azure SQL database (the following values will be use only if database.type is eq to azure.sql)
-  encrypt: "true" # TODO it's also for SQL
-  trustServerCertificate: "false"
-  hostNameInCertificate: "*.database.windows.net"
-
-
+# postgresServer section defines specifics values for the postgresServer connectivity
+postgresServer:
+  # name is the postgres server master database name
+  name: ""
+  # user is the postgres server master database name
+  user: "postgres"
+  #  pwd is the postgres server master database name
+  pwd: ""
 
 
