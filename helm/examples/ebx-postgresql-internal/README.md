@@ -1,15 +1,13 @@
 
+## Overview
 
+This chart bootstraps an EBX deployment configured with a Postgresql server already install on the Kubernetes 
+cluster.
 
-## Introduction
+This chart allows to create a database dynamically when an EBX instance is created and to allocate it to the instance. 
 
-This chart bootstraps an EBX deployment configured with an internal Postgresql database on a Kubernetes 
-cluster using the Helm package manager.
-
-This file assumes you have an ingress controller and a Postgresql server already install on your cluster.
-If not you can check the following documentation to see how to install them :
-- [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) (maintained by the Kubernetes community) 
-- [PostgreSQL v10 to 14](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) (maintained by Bitnami) 
+This file assumes you have an [Ingress controller](https://github.com/kubernetes/ingress-nginx) and a Postgresql 
+server (11 to 14.x) already install on your cluster.
 
 **Note**: Using the PostgreSQL database like this is not recommended for production use. Make sure you know how to back 
 up and restore your data when using this chart for other than testing purposes.
@@ -35,7 +33,7 @@ To install the chart with the release name ```production``` in the namespace ```
  --install \
  --set-string global.ebxImageRegistry=<your.docker-registry.com> \
  --set-string global.ebxImageTag=<the EBX image tag> \
- --set-string global.ebxInitImageRegistry=<your.docker-registry.com>l \
+ --set-string global.ebxInitImageRegistry=<your.docker-registry.com> \
  --set-string global.ebxInitImageTag=<the EBX-INIT image tag> \
  --set-string global.hostname=<your.hostname.com> \
  --set-string instance.ebxPrefix=production \
@@ -61,35 +59,36 @@ helm delete production
 
 ## Parameters
 
-### Global parameters
+### Global parameters 
 
-| Name                             | Description                                                                     | Value        |
-|----------------------------------|---------------------------------------------------------------------------------|--------------|
-| `global.ebxImagesRegistry`       | The Docker registry where we pull the EBX and the EBX-INIT images from.         | `""`         |
-| `global.ebxImageRepository`      | The EBX image repository                                                        | `"ebx"`      |
-| `global.ebxImageTag`             | The EBX image tag                                                               | `""`         |
-| `global.ebxImageTag`             | The EBX image tag                                                               | `""`         |
-| `global.ebxInitImageRepository`  | The EBX-INIT image repository                                                   | `"ebx-init"` |
-| `global.ebxInitImageTag`         | The EBX-INIT image tag                                                          | `""`         |
-| `global.imageRegistrySecret`     | The secret that contains the credentials used to connect to the Docker registry | `""`         |
-| `global.namespace`               | The namespace where EBX will be deployed                                        | `"ebx"`      |
-| `global.hostname`                | The hostname of the kubernetes server host                                      | `""`         |
-| `global.scheme`                  | The scheme that define the protocol of the kubernetes server                    | `"https"`    |
+TODO REVIEW DOCKER PART 
+
+| Name                            | Description                                                                     | Value        |
+|---------------------------------|---------------------------------------------------------------------------------|--------------|
+| `global.ebxImagesRegistry`      | The Docker registry where we pull the EBX and the EBX-INIT images from.         | `""`         |
+| `global.ebxImageRepository`     | The EBX image repository                                                        | `"ebx"`      |
+| `global.ebxImageTag`            | The EBX image tag                                                               | `""`         |
+| `global.ebxInitImageRepository` | The EBX-INIT image repository                                                   | `"ebx-init"` |
+| `global.ebxInitImageTag`        | The EBX-INIT image tag                                                          | `""`         |
+| `global.imageRegistrySecret`    | The secret that contains the credentials used to connect to the Docker registry | `""`         |
+| `global.namespace`              | The namespace where EBX will be deployed                                        | `"ebx"`      |
+| `global.hostname`               | The hostname of the kubernetes server host                                      | `""`         |
+| `global.scheme`                 | The scheme that define the protocol of the kubernetes server                    | `"https"`    |
 
 ----------
 
 ### Instance parameters
 
-| Name                              | Description                                                                                                                                                                              | Value     |
-|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| `instance.ebxPrefix`              | The prefix name used for every kubernetes object deployed by the helm release (Pod, Service, Ingress...)                                                                                 | `""`      |
-| `instance.ebxUser`                | The username used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_LOGIN`)                                                                        | `"admin"` |
-| `instance.ebxPassword`            | The password used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_PASSWORD`) <b><u>must be enclosed in single quotes<u><b>                       | `''`      |
-| `instance.cpu`                    | The cpu number allocate to the ebx container                                                                                                                                             | `"2"`     |
-| `instance.memory`                 | The ebx container memory limit                                                                                                                                                           | `"2Gi"`   |
-| `instance.storageClass`           | storageClass used to claim volumes                                                                                                                                                       | `""`      |
-| `instance.dataVolumeStorageClaim` | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data (this value must be greater than or equal to the dataVolumeStorage value)              | `"10Gi"`  |
-| `instance.logsVolumeStorageClaim` | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                                         | `"2Gi"`   |
+| Name                              | Description                                                                                                                                                                                                      | Value     |
+|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| `instance.ebxPrefix`              | The prefix name used for every kubernetes object deployed by the helm release (Pod, Service, Ingress...)                                                                                                         | `""`      |
+| `instance.ebxUser`                | The username used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_LOGIN`)                                                                                                | `"admin"` |
+| `instance.ebxPassword`            | The password used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_PASSWORD`) <b><u>must be enclosed in single quotes<u><b>    (TODO à mettre pour tous ou pour personne) | `''`      |
+| `instance.cpu`                    | The cpu number allocate to the ebx container                                                                                                                                                                     | `"2"`     |
+| `instance.memory`                 | The ebx container memory limit                                                                                                                                                                                   | `"2Gi"`   |
+| `instance.storageClass`           | storageClass used to claim volumes                                                                                                                                                                               | `""`      |
+| `instance.dataVolumeStorageClaim` | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data (this value must be greater than or equal to the dataVolumeStorage value)                                      | `"10Gi"`  |
+| `instance.logsVolumeStorageClaim` | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                                                                 | `"2Gi"`   |
 
 **Note**: If ```instance.storageClass``` is not specified, the default storage class will be used for provisioning.
 Check the [storageClass documentation](https://kubernetes.io/blog/2017/03/dynamic-provisioning-and-storage-classes-kubernetes/) for further informations.
@@ -148,8 +147,8 @@ This image is based on an ```alpine:3.14.3``` and contains:
 A [bundle](https://github.com/tibco/ebx-container-edition/tree/main/helm/examples/ebx-postgresql-internal/ebx-init) 
 is provided to allow you to build and push the ebx-init image.
 
-**Note**: This example was tested with postgresl server version 10 to 14. 
-The script set-up-database.sh need to be updated to be compatible with postgresql 15.
+**Note**: The script 
+[set-up-database.sh](https://github.com/tibco/ebx-container-edition/blob/main/helm/examples/ebx-postgresql-internal/ebx-init/scripts/set-up-database.sh) need to be updated to be compatible with postgresql 15.
 
 
 

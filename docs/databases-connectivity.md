@@ -4,11 +4,11 @@ This table display all the ebx compatible database types.
 
 | Compatible database | Driver include  | Chart value type          |
 |:--------------------|-----------------|---------------------------|
-| Postgresql          | yes             | postgresql                |  
-| Sql Server          | yes             | sqlserver                 |  
+| PostgreSQL          | yes             | postgresql                |  
+| SQL Server          | yes             | sqlserver                 |  
 | H2                  | yes             | h2.standalone / h2.server |  
 | Oracle              | no              | oracle                    |
-| Azure Sql           | no              | azure.sql                 |
+| Azure SQL           | no              | azure.sql                 |
 | Hana                | no              | hana                      |
 
 

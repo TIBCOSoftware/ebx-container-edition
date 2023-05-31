@@ -21,20 +21,28 @@ You must have a valid license to use it.
 - Helm 3+, for building and deploying the charts.
 - An [OCI-compliant](https://opencontainers.org/) container image building tool (for example, `docker`, `podman`, or alternative), for building the container images. TODO to moove into postrges internal example for EBX-INIT
 
-**Note**: For more information on TIBCO EBX® Software and its components, see the [TIBCO EBX® Documentation](https://docs.tibco.com/products/tibco-ebx), .
+**Note**: For more information on TIBCO EBX® Software and its components, see the [TIBCO EBX® Documentation](https://docs.tibco.com/products/tibco-ebx).
 
+## Deploy EBX
 
-# Issues
+To deploy ebx, check the section relative to the 
+[generic chart](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/README.md).
+
+## Example 
+
+The [example section](https://github.com/tibco/ebx-container-edition/blob/main/helm/examples/README.md) contains some configuration or chart examples to deploy ebx.
+
+They refer to particular cases, or to configurations proposed by official distro.
+
+These examples are only propositions, therefore they are not imperative and can be  extend or customize.
+
+## Issues
 
 You are welcome to raise issues and improvements related to this project in the [GitHub Issues tab](https://github.com/tibco/ebx-container-edition/issues).
 
-For issues related to the TIBCO EBX® products, use the...TODO
-
-For improvements related to the TIBCO EBX® products, use the ... TODO
-
 For issues related to third party products, see their respective documentation.
 
-# License
+## License
 
 TODO
 

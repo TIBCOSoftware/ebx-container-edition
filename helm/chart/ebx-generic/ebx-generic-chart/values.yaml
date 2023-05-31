@@ -46,17 +46,18 @@ ingress:
   # className is the name of the chosen ingress-controller
   className: "nginx"
   # tlsSecret that contains the self-signed certificate public and private key
-  # (tlsSecret must be different than the instance.emailClusterIssuer value)
   tlsSecret: ""
   # hostRuleDefied modify the syntax of the ingress according to this value. (default value is true)
   # If set to true, an host must be defined.
   hostRuleDefined: "true"
-  # annotations to configure the ingress resource
+  # annotations to configure the ingress resource (https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)
   annotations:
+  # Common annotations
+    # nginx.ingress.kubernetes.io/ssl-redirect: "false"
   # Annotations for AZURE (AKS Cluster using TLS) https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
-  # nginx.ingress.kubernetes.io/use-regex: "true"
-  # cert-manager.io/cluster-issuer: letsencrypt
-    nginx.ingress.kubernetes.io/ssl-redirect: "false" # TODO comment
+    # nginx.ingress.kubernetes.io/use-regex: "true"
+    # cert-manager.io/cluster-issuer: letsencrypt
+
 
 # Database section defines specifics values for the database connectivity
 database:
@@ -73,10 +74,17 @@ database:
   # type is the database type (postgresql, sqlserver, oracle etc...  check the ... doc) TODO
   type:
 
-  # Microsoft Azure SQL database (the following values will be use only if database.type is eq to azure.sql)
-  encrypt: "true" # TODO it's also for SQL
-  trustServerCertificate: "false"
-  hostNameInCertificate: "*.database.windows.net"
+  # SQL databases (the following values will be use only if database.type is eq to sqlserver or azure.sql)
+  # encrypt is a property for jdbc sql connection (set to true that specify that the SQL Server uses TLS encryption)
+  encrypt: "true"
+  # trustServerCertificate is a property for jdbc sql connection (set to true that specify that the driver doesn't
+  # validate the server TLS/SSL certificate.)
+  #trustServerCertificate: "false"
+  # hostNameInCertificate is the host name to be used to validate the SQL Server TLS/SSL certificate.
+  #hostNameInCertificate: "*.database.windows.net"
+  # loginTimeout is the number of seconds the driver should wait before timing out a failed connection
+  #loginTimeout: 30
+
 
 
 

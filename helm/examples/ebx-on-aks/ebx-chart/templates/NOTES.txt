@@ -1,9 +1,0 @@
-** Please be patient while EBX is being deployed **
-
-The release is named "{{ .Release.Name }}".
-
-EBX login credentials :
-- User: {{ .Values.instance.ebxUser }}
-- Password: {{ .Values.instance.ebxPassword }}
-
-EBX is running at the following url : {{ .Values.global.scheme }}://{{ .Values.global.hostname }}/{{ .Values.instance.ebxPrefix }}/ebx

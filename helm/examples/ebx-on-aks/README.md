@@ -11,11 +11,12 @@ deployment configured with an internal Postgresql using the Helm package manager
 This chart shows an example of configuration using an ingress controller and TLS certificates installed on the cluster.
 
 This file assumes you have already configured your cluster according to the following requirements :
-- Create an ingress controller in AKS (TODO Link : https://learn.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli)
-- TLS with an ingress controller (TODO link : https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli)
-- PostgreSQL v10 to 14 (maintained by Bitnami)
+- [Create an ingress controller in AKS](https://learn.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli)
+- [TLS with an ingress controller](https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli)
+- [PostgreSQL 12 to 14.x](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) (maintained by Bitnami)
 
-Note: Using the PostgreSQL database like this is not recommended for production use. Make sure you know how to back up and restore your data when using this chart for other than testing purposes.
+Note: Using the PostgreSQL database like this is not recommended for production use. Make sure you know how to back up 
+and restore your data when using this chart for other than testing purposes.
 
 ## Prerequisites
 
@@ -28,11 +29,11 @@ cette partie montre les modifications apportée au chart ...
 
 Le ClusterIssuer
 
-L'email (instance.emailClusterIssuer) 
+L'email (instance.emailClusterIssuer)  TODO Add parameter
 
 ## Installing the Chart
 
-```
+``` TODO change with default values
 helm upgrade --debug production --namespace ingress-ece \
  --install \
  --set-string global.namespace=ingress-ece \
@@ -56,3 +57,6 @@ helm upgrade --debug production --namespace ingress-ece \
  --set-string postgresServer.pwd=ftefg32 \
  ./ebx-chart
 ```
+
+
+
