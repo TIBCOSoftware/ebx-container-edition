@@ -13,9 +13,6 @@ This chart was tested with the [Nginx Ingress Controller](https://github.com/kub
 maintained by the Kubernetes community. 
 This chart assumes it is already installed or you have a similar solution on your cluster.
 
-**Note**: 
-  TODO
-
 ## Prerequisites
 
 * Kubernetes 1.23+, a working kubernetes cluster from a [certified K8s distro](https://www.cncf.io/certification/software-conformance/).
@@ -204,7 +201,7 @@ helm upgrade --debug production \
 ./ebx-chart
 ```
 
-NOTE:
+**Note**:
 encryption is enable by default, you can disable it by adding this line to the above helm command:
 --set-string database.encrypt=false \
 
@@ -241,6 +238,24 @@ helm upgrade --debug production \
 ```
 
 ```
+
+
+## Init container
+
+
+The init container is designed to leave enough space for the OS running the application server by defining the value 
+``vm.max_map_count``.
+
+TODO question : est ce qu'il faut set-up ègalement la valeur suivante "ulimit -n 512000"
+
+This specificity is 
+[documented in the core product documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/references/performance.html#memory) 
+(Check the ``Memory allocated to the operating system`` part)
+and its [application for kubernetes is documented here](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/running_the_image.html#_host_configuration).
+
+**Note**: If more than one EBX container may run on the same host at the same time, one needs to increase
+these values accordingly.
+
 
 ## Customize and extend the chart
 This chart provide a standard, canonical, typical, or vanilla deployment for the TIBCO EBX® Software on kubernetes. 

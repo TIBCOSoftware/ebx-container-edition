@@ -2,39 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6124385-668e-41ff-948f-833958e4e0bc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/README-new.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/databases-connectivity.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/databases-connectivity.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helm/chart/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/databases-drivers-url-configmap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/databases-drivers-url-configmap.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/values.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/values.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-azure-sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-h2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-hana" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-oracle.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-postgresql.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-external-databases/ebx-sql-server" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/.helmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/Chart.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/NOTES.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/cluster-issuer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-on-aks/cluster-issuer.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/databases-drivers-url-configmap.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/deployment.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/ebx-database-secret.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/ingress.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/postgres-server-secret.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/service.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates/volumes.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/values.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/build_and_push_image.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/scripts/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/scripts/build-image.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/scripts/push-image.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-init/scripts/set-up-database.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +60,7 @@
       <workItem from="1684166331556" duration="17692000" />
       <workItem from="1684254741155" duration="26013000" />
       <workItem from="1684505854179" duration="23489000" />
-      <workItem from="1685440461143" duration="27902000" />
+      <workItem from="1685440461143" duration="38486000" />
     </task>
     <task id="LOCAL-00001" summary="add third-party-software-licenses.md document and docs repository.">
       <created>1684251239536</created>
@@ -167,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685460340692</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Moved external databases connectivity examples into prime README.md. Review all README.md. add comments and values in values.yaml file for ebx-generic chart. Removed duplicate code in ebx-on-aks directory.">
+      <created>1685556823382</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1685556823382</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,6 +174,7 @@
     <MESSAGE value="modify the charts to set up the default StorageClass dynamically. Readme files are also being modified accordingly." />
     <MESSAGE value="Add documentation and scripts for the ebx-init image." />
     <MESSAGE value="Add ECE on Aks chart + modifs and doc sample. Also modify Readme and values files of other charts." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add ECE on Aks chart + modifs and doc sample. Also modify Readme and values files of other charts." />
+    <MESSAGE value="Moved external databases connectivity examples into prime README.md. Review all README.md. add comments and values in values.yaml file for ebx-generic chart. Removed duplicate code in ebx-on-aks directory." />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved external databases connectivity examples into prime README.md. Review all README.md. add comments and values in values.yaml file for ebx-generic chart. Removed duplicate code in ebx-on-aks directory." />
   </component>
 </project>

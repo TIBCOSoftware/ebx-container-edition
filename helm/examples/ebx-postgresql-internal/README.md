@@ -6,25 +6,37 @@ cluster.
 
 This chart allows to create a database dynamically when an EBX instance is created and to allocate it to the instance. 
 
-This file assumes you have an [Ingress controller](https://github.com/kubernetes/ingress-nginx) and a Postgresql 
-server (11 to 14.x) already install on your cluster.
+This file assumes you have an [Ingress controller](https://github.com/kubernetes/ingress-nginx) already install on your 
+cluster and a Postgresql server (11 to 14.x) configured.
+
+--- 
+TODO choose NOTE
 
 **Note**: Using the PostgreSQL database like this is not recommended for production use. Make sure you know how to back 
 up and restore your data when using this chart for other than testing purposes.
 
+**Note**: If you decided to install your PostgreSQL server on the same cluster, make sure you know how to back
+up and restore your data when using this chart for other than testing purposes.
+
+is not recommended for production use? TODO
+
+--- 
+
 ## Prerequisites
 
-* Kubernetes 1.23+
-* Helm 3+
+* [Kubernetes](https://kubernetes.io/) 1.23+
+* [Helm](https://helm.sh/) 3+
 * Both EBX (Container Edition) and [EBX-INIT](#EBX-INIT) images pushed on your docker registry
+* [Docker](https://www.docker.com/) 20.x for building the EBX-INIT container images.
 
 ## Installing the Chart
 
-Before you begin be careful to these points:
-- Be sure to configure the postgresql server to accept access from the namespace where you want to deploy ebx. Otherwise 
- you can install ebx in the same namespace as your postgresql server by default.  
-- Set the ingress annotations according to the architecture of your cluster 
+Before you begin be careful to set the ingress annotations according to the architecture of your cluster 
   (see annotations parameter in the [Ingress parameters](#Ingress-parameters) section).
+
+**Note**: If the PostgreSql server is installed on the same cluster, be careful to configure the server so that it can 
+access the namespace in which you want to install the Release EBX.
+Otherwise, you can install ebx in the same namespace as your default postgresql server to avoid this problem.
 
 To install the chart with the release name ```production``` in the namespace ```ebx``` (default value):
 

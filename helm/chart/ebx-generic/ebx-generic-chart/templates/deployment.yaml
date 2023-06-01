@@ -73,6 +73,13 @@ spec:
       imagePullSecrets:
         - name: "{{ .Values.global.imageRepositorySecret}}"
       {{- end }}
+      initContainers:
+        - name: sysctl
+          image: busybox
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
       volumes:
         - name: "{{ .Values.instance.ebxPrefix}}-persistent-storage-data"
           persistentVolumeClaim:
