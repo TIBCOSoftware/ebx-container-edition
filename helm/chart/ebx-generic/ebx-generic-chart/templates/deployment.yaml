@@ -4,74 +4,74 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{ .Values.instance.ebxPrefix}}"
+  name: "{{ .Values.ebx.prefix}}"
   namespace: "{{ .Values.global.namespace}}"
   labels:
-    app: "{{ .Values.instance.ebxPrefix}}-app"
+    app: "{{ .Values.ebx.prefix}}-app"
 spec:
   selector:
     matchLabels:
-      app: "{{ .Values.instance.ebxPrefix}}-app"
+      app: "{{ .Values.ebx.prefix}}-app"
   replicas: 1
   strategy:
     type: "Recreate"
   template:
     metadata:
       labels:
-        app: "{{ .Values.instance.ebxPrefix}}-app"
+        app: "{{ .Values.ebx.prefix}}-app"
     spec:
       nodeSelector:
         kubernetes.io/os: "linux"
       containers:
-        - name: "{{ .Values.instance.ebxPrefix}}-instance-pod"
-          image: "{{ .Values.global.ebxImageRegistry}}/{{ .Values.global.ebxImageRepository}}:{{ .Values.global.ebxImageTag}}"
+        - name: "{{ .Values.ebx.prefix}}-instance-pod"
+          image: "{{ .Values.global.ebxImage}}"
           ports:
             - containerPort: 8080
           env:
             - name: EBX_DB_FACTORY
-              value: "{{ .Values.database.type}}"
+              value: "{{ .Values.ebx.databaseType}}"
             - name: EBX_DB_URL
               valueFrom:
                 configMapKeyRef:
-                  name: "{{ .Values.instance.ebxPrefix}}-databases-drivers-url-configmap"
-                  key: "{{ .Values.database.type}}"
+                  name: "{{ .Values.ebx.prefix}}-databases-drivers-url-configmap"
+                  key: "{{ .Values.ebx.databaseType}}"
             - name: EBX_ROOT_PATH
-              value: "/{{ .Values.instance.ebxPrefix}}"
+              value: "/{{ .Values.ebx.prefix}}"
             - name: EBX_IS_SECURED
               value: "true"
             - name: EBX_DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.instance.ebxPrefix}}-database-secret"
+                  name: "{{ .Values.ebx.prefix}}-database-secret"
                   key: "USER"
             - name: EBX_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.instance.ebxPrefix}}-database-secret"
+                  name: "{{ .Values.ebx.prefix}}-database-secret"
                   key: "PASSWORD"
-            - name: EBX_FLA_DISABLED
+            - name: EBX_FLA_DISABLED # TODO add in Readme, mandatory si pas de repo init
               value: "true"
             - name: EBX_REST_AUTHENTICATION_BASIC
               value: "true"
             - name: EBX_INSTALL_ADMIN_LOGIN
-              value: "{{ .Values.instance.ebxUser}}"
+              value: "{{ .Values.ebx.adminLogin}}"
             - name: EBX_INSTALL_ADMIN_PASSWORD
-              value: "{{ .Values.instance.ebxPassword}}"
+              value: "{{ .Values.ebx.adminPassword}}"
           resources:
             limits:
-              memory: "{{ .Values.instance.memory}}"
-              cpu: {{ .Values.instance.cpu}}
+              memory: "{{ .Values.ebx.memory}}"
+              cpu: {{ .Values.ebx.cpu}}
             requests:
-              memory: "{{ .Values.instance.memory}}"
-              cpu: {{ .Values.instance.cpu}}
+              memory: "{{ .Values.ebx.memory}}"
+              cpu: {{ .Values.ebx.cpu}}
           volumeMounts:
             - mountPath: "/usr/share/ebx/data"
-              name: "{{ .Values.instance.ebxPrefix}}-persistent-storage-data"
+              name: "{{ .Values.ebx.prefix}}-persistent-storage-data"
             - mountPath: "/usr/share/ebx/logs"
-              name: "{{ .Values.instance.ebxPrefix}}-persistent-storage-logs"
-      {{- if .Values.global.imageRepositorySecret }}
+              name: "{{ .Values.ebx.prefix}}-persistent-storage-logs"
+      {{- if .Values.global.ebxImageRegistrySecret }}
       imagePullSecrets:
-        - name: "{{ .Values.global.imageRepositorySecret}}"
+        - name: "{{ .Values.global.ebxImageRegistrySecret}}"
       {{- end }}
       initContainers:
         - name: sysctl
@@ -79,11 +79,11 @@ spec:
           securityContext:
             privileged: true
             runAsUser: 0
-          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144 && ulimit -n 512000']
       volumes:
-        - name: "{{ .Values.instance.ebxPrefix}}-persistent-storage-data"
+        - name: "{{ .Values.ebx.prefix}}-persistent-storage-data"
           persistentVolumeClaim:
-            claimName: "{{ .Values.instance.ebxPrefix}}-pv-local-claim-data"
-        - name: "{{ .Values.instance.ebxPrefix}}-persistent-storage-logs"
+            claimName: "{{ .Values.ebx.prefix}}-pv-local-claim-data"
+        - name: "{{ .Values.ebx.prefix}}-persistent-storage-logs"
           persistentVolumeClaim:
-            claimName: "{{ .Values.instance.ebxPrefix}}-pv-local-claim-logs"
+            claimName: "{{ .Values.ebx.prefix}}-pv-local-claim-logs"

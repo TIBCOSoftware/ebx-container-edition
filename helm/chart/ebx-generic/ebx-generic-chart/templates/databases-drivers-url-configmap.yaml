@@ -4,12 +4,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "{{ .Values.instance.ebxPrefix}}-databases-drivers-url-configmap"
+  name: "{{ .Values.ebx.prefix}}-databases-drivers-url-configmap"
   namespace: "{{ .Values.global.namespace}}"
 data:
-  postgresql: "jdbc:postgresql://{{ .Values.database.host}}:{{ .Values.database.port}}/{{ .Values.database.name}}"
-  oracle: "jdbc:oracle:thin:@//{{ .Values.database.host}}:{{ .Values.database.port}}/{{ .Values.database.name}}"
-  sqlserver: "jdbc:sqlserver://;serverName={{ .Values.database.host}};port={{ .Values.database.port}};databaseName={{ .Values.database.name}}{{- if .Values.database.encrypt }};encrypt={{ .Values.database.encrypt}}{{- end }}"
-  azure.sql: "jdbc:sqlserver://;serverName={{ .Values.database.host}};port={{ .Values.database.port}};databaseName={{ .Values.database.name}}{{- if .Values.database.encrypt }};encrypt={{ .Values.database.encrypt}}{{- end }}{{- if .Values.database.trustServerCertificate }};trustServerCertificate={{ .Values.database.trustServerCertificate}}{{- end }}{{- if .Values.database.hostNameInCertificate }};hostNameInCertificate={{ .Values.database.hostNameInCertificate}}{{- end }}{{- if .Values.database.hostNameInCertificate }};loginTimeout={{ .Values.database.hostNameInCertificate}}{{- end }}" # TODO TEST
-  hana: "jdbc:sap://{{ .Values.database.host}}:{{ .Values.database.port}}/{{ .Values.database.name}}" # TODO jdbc:sap://127.0.0.1:39041 TODO TEST
+  postgresql: "jdbc:postgresql://{{ .Values.ebx.databaseHost}}:{{ .Values.ebx.databasePort}}/{{ .Values.ebx.databaseName}}"
+  oracle: "jdbc:oracle:thin:@//{{ .Values.ebx.databaseHost}}:{{ .Values.ebx.databasePort}}/{{ .Values.ebx.databaseName}}"
+  sqlserver: "jdbc:sqlserver://;serverName={{ .Values.ebx.databaseHost}};port={{ .Values.ebx.databasePort}};databaseName={{ .Values.ebx.databaseName}}{{- if .Values.ebx.databaseEncrypt}};encrypt={{ .Values.ebx.databaseEncrypt}}{{- end }}"
+  azure.sql: "jdbc:sqlserver://;serverName={{ .Values.ebx.databaseHost}};port={{ .Values.ebx.databasePort}};databaseName={{ .Values.ebx.databaseName}}{{- if .Values.ebx.databaseEncrypt}};encrypt={{ .Values.ebx.databaseEncrypt}}{{- end }}{{- if .Values.ebx.databaseTrustServerCertificate }};trustServerCertificate={{ .Values.ebx.databaseTrustServerCertificate}}{{- end }}{{- if .Values.ebx.databaseHostNameInCertificate }};hostNameInCertificate={{ .Values.ebx.databaseHostNameInCertificate}}{{- end }}{{- if .Values.ebx.databaseLoginTimeout }};loginTimeout={{ .Values.database.databaseLoginTimeout}}{{- end }}" # TODO TEST
+  hana: "jdbc:sap://{{ .Values.ebx.databaseHost}}:{{ .Values.ebx.databasePort}}/{{ .Values.ebx.databaseName}}" # TODO jdbc:sap://127.0.0.1:39041 TODO TEST
   h2.standalone: ""
