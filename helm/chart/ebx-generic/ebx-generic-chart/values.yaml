@@ -29,7 +29,7 @@ ebx:
   cpu: 2
   # memory is the container memory limit allocate to the container (default value is 2Gi)
   memory: "2Gi"
-  # storageClass used to claim volumes
+  # storageClass used to claim volumes (will take default storageClass if no value is specified)
   storageClass : ""
   # dataVolumeStorageClaim is the amount of disk space of the PersistentVolume requested by the ebx
   # instance to store it's data
@@ -71,13 +71,8 @@ ingress:
   # hostRuleDefied modify the syntax of the ingress according to this value. (default value is true)
   # If set to true, an host must be defined.
   hostRuleDefined: "true"
-  # annotations to configure the ingress resource (https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)
-  annotations: # TODO Remove and change comments like -> see ingress section...
-  # Common annotations
-    # nginx.ingress.kubernetes.io/ssl-redirect: "false"
-  # Annotations for AZURE (AKS Cluster using TLS) https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
-    # nginx.ingress.kubernetes.io/use-regex: "true"
-    # cert-manager.io/cluster-issuer: letsencrypt
+  # annotations to configure the ingress resource
+  annotations:
 
 
 
