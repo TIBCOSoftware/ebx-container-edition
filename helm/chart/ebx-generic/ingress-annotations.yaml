@@ -1,8 +1,0 @@
-
-
-ingress:
-  annotations:
-    # nginx.ingress.kubernetes.io/ssl-redirect: "false"
-  # Annotations for AZURE (AKS Cluster using TLS) https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    cert-manager.io/cluster-issuer: letsencrypt
