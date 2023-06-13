@@ -4,7 +4,7 @@ This table display all the ebx supported database types.
 
 TODO : mettre seulement ce qu'on supporte
 
-| Chart value type | compatible databases | Driver included by default |
+| Chart value type | Compatible databases | Driver included by default |
 |:-----------------|----------------------|----------------------------|
 | postgresql       | PostgreSQL           | yes                        |  
 | sqlserver        | SQL Server           | yes                        |  

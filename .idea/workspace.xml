@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e6124385-668e-41ff-948f-833958e4e0bc" name="Changes" comment="Adapt generic chart + Readme principal according to the review done with pch. (ebx-init added)">
-      <change afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ingress-annotations-values.yaml" afterDir="false" />
+    <list default="true" id="e6124385-668e-41ff-948f-833958e4e0bc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/ebx-admin-logon-secret.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/databases-connectivity.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/databases-connectivity.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helm/chart/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/NOTES.txt" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/NOTES.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/databases-drivers-url-configmap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/databases-drivers-url-configmap.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/templates/ingress.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/values.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/values.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/chart/ebx-generic/ingress-annotations-values.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm/chart/ebx-generic/ingress-annotations-values.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/build_and_push_image.sh" beforeDir="false" afterPath="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal/ebx-init/build_and_push_image.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,22 +31,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/cjannes/Documents/GitHub/ebx-container-edition/helm/chart/ebx-generic&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/cjannes/Documents/GitHub/ebx-container-edition/helm/chart/ebx-generic/ebx-generic-chart/Temp_2",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/Temp_2" />
+      <recent name="$PROJECT_DIR$/helm/chart/ebx-generic/ebx-generic-chart/temp_to_delete" />
       <recent name="$PROJECT_DIR$/helm/chart/ebx-generic" />
       <recent name="$PROJECT_DIR$/helm/examples/ebx-on-aks" />
       <recent name="$PROJECT_DIR$/helm/examples/ebx-on-aks/ebx-chart/templates" />
-      <recent name="$PROJECT_DIR$/helm/examples/ebx-on-aks/temp" />
-      <recent name="$PROJECT_DIR$/helm/examples/ebx-on-aks-external/ebx-chart/templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/helm/examples/ebx-postgresql-internal" />
@@ -60,7 +67,7 @@
       <workItem from="1684254741155" duration="26013000" />
       <workItem from="1684505854179" duration="23489000" />
       <workItem from="1685440461143" duration="42824000" />
-      <workItem from="1685699145365" duration="25082000" />
+      <workItem from="1685699145365" duration="68592000" />
     </task>
     <task id="LOCAL-00001" summary="add third-party-software-licenses.md document and docs repository.">
       <created>1684251239536</created>
@@ -160,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685720237258</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Add change from review.">
+      <created>1685890061530</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1685890061530</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,6 +205,7 @@
     <MESSAGE value="Moved external databases connectivity examples into prime README.md. Review all README.md. add comments and values in values.yaml file for ebx-generic chart. Removed duplicate code in ebx-on-aks directory." />
     <MESSAGE value="Review charts and files." />
     <MESSAGE value="Adapt generic chart + Readme principal according to the review done with pch. (ebx-init added)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adapt generic chart + Readme principal according to the review done with pch. (ebx-init added)" />
+    <MESSAGE value="Add change from review." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add change from review." />
   </component>
 </project>

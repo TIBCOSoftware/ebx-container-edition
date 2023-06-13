@@ -11,5 +11,5 @@ data:
   oracle: "jdbc:oracle:thin:@//{{ .Values.ebx.databaseHost}}:{{ .Values.ebx.databasePort}}/{{ .Values.ebx.databaseName}}"
   sqlserver: "jdbc:sqlserver://;serverName={{ .Values.ebx.databaseHost}};port={{ .Values.ebx.databasePort}};databaseName={{ .Values.ebx.databaseName}}{{- if .Values.ebx.databaseEncrypt}};encrypt={{ .Values.ebx.databaseEncrypt}}{{- end }}"
   azure.sql: "jdbc:sqlserver://;serverName={{ .Values.ebx.databaseHost}};port={{ .Values.ebx.databasePort}};databaseName={{ .Values.ebx.databaseName}}{{- if .Values.ebx.databaseEncrypt}};encrypt={{ .Values.ebx.databaseEncrypt}}{{- end }}{{- if .Values.ebx.databaseTrustServerCertificate }};trustServerCertificate={{ .Values.ebx.databaseTrustServerCertificate}}{{- end }}{{- if .Values.ebx.databaseHostNameInCertificate }};hostNameInCertificate={{ .Values.ebx.databaseHostNameInCertificate}}{{- end }}{{- if .Values.ebx.databaseLoginTimeout }};loginTimeout={{ .Values.database.databaseLoginTimeout}}{{- end }}" # TODO TEST
-  hana: "jdbc:sap://{{ .Values.ebx.databaseHost}}:{{ .Values.ebx.databasePort}}/{{ .Values.ebx.databaseName}}" # TODO jdbc:sap://127.0.0.1:39041 TODO TEST
+  hana: "jdbc:sap://{{ .Values.ebx.databaseHost}}:{{ .Values.ebx.databasePort}}/{{ .Values.ebx.databaseName}}"
   h2.standalone: ""

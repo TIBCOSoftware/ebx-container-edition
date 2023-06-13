@@ -14,7 +14,7 @@ global:
   # hostname of the kubernetes server host
   hostname: ""
   # scheme defines the http protocol of the kubernetes server (default value is https, valid values are http and https)
-  scheme: "https"
+  scheme: "https" # TODO Review this, is it useful ? only seen in NOTES.txt
 
 # EBX section defines specifics values for the ebx instance
 ebx:
@@ -22,9 +22,15 @@ ebx:
   # Ingress...) (Mandatory) TODO
   prefix: ""
   # adminLogin is the username used to connect to the ebx instance (default value is admin)
-  adminLogin: "admin" # TODO change to admin in files + # (Optional -> reco de les mettre, mais seront ignoré si le repo est déjà init -> évite de rendre accessible un ebx sans login/mdp)
+  adminLogin: "admin" # TODO change to admin in files + # (Optional -> TODO reco de les mettre, mais seront ignoré si le repo est déjà init -> évite de rendre accessible un ebx sans login/mdp)
   # adminPassword is the password used to connect to the ebx instance
-  adminPassword: "" # (Optional -> reco de les mettre, mais seront ignoré si le repo est déjà init -> évite de rendre accessible un ebx sans login/mdp)
+  adminPassword: "" # (Optional TODO -> reco de les mettre, mais seront ignoré si le repo est déjà init -> évite de rendre accessible un ebx sans login/mdp)
+  # isSecured ... TODO + add in README
+  isSecured: "true"
+  # flaDisabled... TODO add in Readme, mandatory si pas de repo init
+  flaDisabled: "true"
+  # restAuthenticationBasic... TODO + add in README
+  restAuthenticationBasic: "true"
   # cpu number allocate to the container (default value is 2)
   cpu: 2
   # memory is the container memory limit allocate to the container (default value is 2Gi)
@@ -61,18 +67,26 @@ ebx:
   #databaseHostNameInCertificate: "*.database.windows.net"
   # databaseLoginTimeout is the number of seconds the driver should wait before timing out a failed connection
   #databaseLoginTimeout: 30
+  #TODO above
 
 # Ingress section defines specifics values for traffic routing rules of the Ingress resource
 ingress:
   # className is the name of the chosen ingress-controller
   className: "nginx"
   # tlsSecret that contains the self-signed certificate public and private key
-  tlsSecret: ""
+  tlsSecret: "" # (Optional)
   # hostRuleDefied modify the syntax of the ingress according to this value. (default value is true)
   # If set to true, an host must be defined.
   hostRuleDefined: "true"
   # annotations to configure the ingress resource
   annotations:
+  # pathRegex will complete the path ingress path field. For example with the default value, the final path will be of
+  # the form "/{{ .Values.ebx.prefix}}/ebx.*" .
+  # This value may change depending on the type of the ingress controller.
+  pathRegex: ".*"
+  # pathType is pathType of the ingress.
+  pathType:  "Prefix"
+
 
 
 

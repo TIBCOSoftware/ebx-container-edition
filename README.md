@@ -49,11 +49,7 @@ They refer to particular cases, or to configurations proposed for specific Kuber
 
 These examples are only propositions, therefore they are not imperative and can be extended or customized.
 
-## Issues (A faire valider par cln)
-
-You are welcome to raise issues and improvements related to this project in the [GitHub Issues tab](https://github.com/tibco/ebx-container-edition/issues).
-
-For issues related to third party products, see their respective documentation.
+TODO disable Issue Tab
 
 ## License
 

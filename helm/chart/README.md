@@ -37,7 +37,6 @@ ingress:
   annotations. Please check the [Ingress-Nginx Controller annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
 section to best meet your needs.
 
-
 Then to apply this file you just need to add the following parameter in the helm install command:
 
 ```
@@ -49,6 +48,13 @@ Then to apply this file you just need to add the following parameter in the helm
 - Please check the [ingress configuration section](#Ingress-configuration) for more informations about how to configure 
 the ingress resource.
 
+TODO:
+add info on StorageClass (specificity on aws and azure) -> ne pas oublier d'ajouter l'addon Amazon EBS CSI Driver
+also on ingressClass
+- revoir expliquation pour le point de terminaison pour hostname (comme quoi c'est le point d'accès à l'instance)
+  
+- https://aws.amazon.com/fr/blogs/opensource/network-load-balancer-nginx-ingress-controller-eks/ 
+- 
 ### Install command
 
 To install the chart with the release name ```production``` in the namespace ```ebx```:
@@ -129,12 +135,15 @@ TODO pch review above
 
 ### Ingress configuration
 
-| Name                      | Description                                                                                                                | Value     |
-|---------------------------|----------------------------------------------------------------------------------------------------------------------------|-----------|
-| `ingress.className`       | className is the name of the chosen ingress-controller                                                                     | `"nginx"` |
-| `ingress.tlsSecret`       | tlsSecret that contains the self-signed certificate and private key (Optional)                                             | `""`      | 
-| `ingress.hostRuleDefined` | hostRuleDefined modify the syntax of the ingress resource according to this value. If set to true, an host must be defined | `"true"`  |
-| `ingress.annotations`     | annotations to configure the ingress resource                                                                              | `""`      |
+| Name                      | Description                                                                                                                                                                                                                               | Value      |
+|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| `ingress.className`       | className is the name of the chosen ingress-controller                                                                                                                                                                                    | `"nginx"`  |
+| `ingress.tlsSecret`       | tlsSecret that contains the self-signed certificate and private key (Optional)                                                                                                                                                            | `""`       | 
+| `ingress.hostRuleDefined` | hostRuleDefined modify the syntax of the ingress resource according to this value. If set to true, an host must be defined                                                                                                                | `"true"`   |
+| `ingress.annotations`     | annotations to configure the ingress resource                                                                                                                                                                                             | `""`       |
+| `ingress.pathRegex`       | pathRegex will complete the path ingress path field. For example with the default value, the final path will be of the form ```/{{ .Values.ebx.prefix}}/ebx.*``` (This value may change depending on the type of the ingress controller.) | `".*"`     |
+| `ingress.pathType`        | pathType is pathType of the ingress                                                                                                                                                                                                       | `"Prefix"` |
+
 
 **Note**:
 - Use the [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/ingress-annotations-values.yaml) 

@@ -38,7 +38,7 @@ spec:
             - name: EBX_ROOT_PATH
               value: "/{{ .Values.ebx.prefix}}"
             - name: EBX_IS_SECURED
-              value: "true"
+              value: "{{ .Values.ebx.isSecured}}"
             - name: EBX_DB_USER
               valueFrom:
                 secretKeyRef:
@@ -50,13 +50,19 @@ spec:
                   name: "{{ .Values.ebx.prefix}}-database-secret"
                   key: "PASSWORD"
             - name: EBX_FLA_DISABLED # TODO add in Readme, mandatory si pas de repo init
-              value: "true"
+              value: "{{ .Values.ebx.flaDisabled}}"
             - name: EBX_REST_AUTHENTICATION_BASIC
-              value: "true"
+              value: "{{ .Values.ebx.restAuthenticationBasic}}"
             - name: EBX_INSTALL_ADMIN_LOGIN
-              value: "{{ .Values.ebx.adminLogin}}"
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.ebx.prefix}}-admin-logon-secret"
+                  key: "LOGIN"
             - name: EBX_INSTALL_ADMIN_PASSWORD
-              value: "{{ .Values.ebx.adminPassword}}"
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.ebx.prefix}}-admin-logon-secret"
+                  key: "PASSWORD"
           resources:
             limits:
               memory: "{{ .Values.ebx.memory}}"
@@ -79,7 +85,7 @@ spec:
           securityContext:
             privileged: true
             runAsUser: 0
-          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144 && ulimit -n 512000']
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144 && ulimit -n 512000'] # TODO review
       volumes:
         - name: "{{ .Values.ebx.prefix}}-persistent-storage-data"
           persistentVolumeClaim:
