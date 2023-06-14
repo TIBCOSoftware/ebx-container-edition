@@ -27,6 +27,3 @@ chmod +x push-image.sh
 
 ./build-image.sh $1
 ./push-image.sh $1 $2
-
-
-# TODO test again
