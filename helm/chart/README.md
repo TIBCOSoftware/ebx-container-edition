@@ -100,23 +100,26 @@ helm delete production
 
 ### EBX configuration
 
-| Name                         | Description                                                                                                                                                        | Value     |
-|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| `ebx.prefix`                 | The prefix name used for every kubernetes object of the instance (Pod, Service, Ingress...)                                                                        | `""`      |
-| `ebx.adminLogin`             | The username used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_LOGIN`)                                                  | `"admin"` |
-| `ebx.adminPassword`          | The password used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_PASSWORD`) <b><u>must be enclosed in single quotes<u><b> | `''`      |
-| `ebx.cpu`                    | The cpu number allocate to the ebx container                                                                                                                       | `"2"`     |
-| `ebx.memory`                 | The ebx container memory limit                                                                                                                                     | `"2Gi"`   |
-| `ebx.storageClass`           | storageClass used to claim volumes (will take default storageClass if no value is specified)                                                                       | `""`      |
-| `ebx.dataVolumeStorageClaim` | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data                                                                  | `"10Gi"`  |
-| `ebx.logsVolumeStorageClaim` | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                   | `"2Gi"`   |
-| `ebx.databaseName`           | The ebx database server name                                                                                                                                       | `""`      |
-| `ebx.databaseUser`           | The ebx database server user                                                                                                                                       | `""`      |
-| `ebx.databasePwd`            | The ebx database server password                                                                                                                                   | `""`      |
-| `ebx.databaseHost`           | The ebx database server host                                                                                                                                       | `""`      |
-| `ebx.databasePort`           | The ebx database server port                                                                                                                                       | `""`      |
-| `ebx.databaseType`           | The ebx database server type                                                                                                                                       | `""`      |
-| `ebx.databaseEncrypt`        | A property for jdbc sql connection (Optional)                                                                                                                      | `""`      |
+| Name                                   | Description                                                                                                                                                        | Value                      |
+|----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| `ebx.prefix`                           | The prefix name used for every kubernetes object of the instance (Pod, Service, Ingress...)                                                                        | `""`                       |
+| `ebx.adminLogin`                       | The username used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_LOGIN`)                                                  | `"admin"`                  |
+| `ebx.adminPassword`                    | The password used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_PASSWORD`) <b><u>must be enclosed in single quotes<u><b> | `''`                       |
+| `ebx.cpu`                              | The cpu number allocate to the ebx container                                                                                                                       | `"2"`                      |
+| `ebx.memory`                           | The ebx container memory limit                                                                                                                                     | `"2Gi"`                    |
+| `ebx.storageClass`                     | storageClass used to claim volumes (will take default storageClass if no value is specified)                                                                       | `""`                       |
+| `ebx.dataVolumeStorageClaim`           | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data                                                                  | `"10Gi"`                   |
+| `ebx.logsVolumeStorageClaim`           | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                   | `"2Gi"`                    |
+| `ebx.databaseName`                     | The ebx database server name                                                                                                                                       | `""`                       |
+| `ebx.databaseUser`                     | The ebx database server user                                                                                                                                       | `""`                       |
+| `ebx.databasePwd`                      | The ebx database server password                                                                                                                                   | `""`                       |
+| `ebx.databaseHost`                     | The ebx database server host                                                                                                                                       | `""`                       |
+| `ebx.databasePort`                     | The ebx database server port                                                                                                                                       | `""`                       |
+| `ebx.databaseType`                     | The ebx database server type                                                                                                                                       | `""`                       |
+| `ebx.databaseEncrypt`                  | A property for jdbc sql connection (Optional)                                                                                                                      | `"true"`                   |
+| `ebx.databaseTrustServerCertificate`   | A property for jdbc sql connection (Optional)                                                                                                                      | `"false"`                  |
+| `ebx.databaseHostNameInCertificate`    | A property for jdbc sql connection (Optional) - The host name to be used to validate the SQL Server TLS/SSL certificate                                            | `"*.database.windows.net"` |
+| `ebx.databaseLoginTimeout`             | A property for jdbc sql connection (Optional) - The number of seconds the driver should wait before timing out a failed connection                                 | `"30"`                     |
 
 **Notes**: 
 - If ```ebx.storageClass``` is not specified, the default storage class will be used for provisioning.
@@ -128,8 +131,11 @@ to see the compatible databases and their associated values types for the chart.
 file. The reason for this is that if the repo has not yet been initialised, you must set its value to true in order to 
 initialise variables ```ebx.adminLogin``` and ```ebx.adminPassword```. If the repo is already initialised, these  values 
 defined via the Helm command will be ignored and will retain the values set when the repo was initialised.
+- Every jdbc sql property will only be used if ```ebx.databaseType``` value equals to ```sqlserver``` or ```azure.sql```.
+  check the [official documentation](https://learn.microsoft.com/en-us/sql/connect/jdbc/setting-the-connection-properties?view=sql-server-ver16)
+  for information about to setting the sql connection properties.
 
-TODO pch review above
+TODO pch review 
 
 ----------
 
@@ -150,21 +156,6 @@ TODO pch review above
 file to add annotations for the ```ingress.annotations``` section. Please refer to the 
 [following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
 to best meet your needs.
-
-----------
-
-#### SQL databases (Include Azure SQL Database)
-
-| Name                              | Description                                                                        | Value                      |
-|-----------------------------------|------------------------------------------------------------------------------------|----------------------------|
-| `database.encrypt`                | A property for jdbc sql connection                                                 | `"true"`                   |
-| `database.trustServerCertificate` | A property for jdbc sql connection                                                 | `"false"`                  |
-| `database.hostNameInCertificate`  | The host name to be used to validate the SQL Server TLS/SSL certificate            | `"*.database.windows.net"` |
-| `database.loginTimeout`           | The number of seconds the driver should wait before timing out a failed connection | `30`                       |
-
-check the [official documentation](https://learn.microsoft.com/en-us/sql/connect/jdbc/setting-the-connection-properties?view=sql-server-ver16) 
-
-**Note**: these values will only be used if ```database.type``` value equals to ```sqlserver``` or ```azure.sql```.
 
 ----------
 
@@ -243,11 +234,11 @@ helm upgrade production \
 ```
 
 **Note**:
-encryption is enable by default, you can disable it by adding this line to the above helm command:
-```--set-string database.encrypt=false```
+You can configure the connection settings by overwriting the jdbc sql properties present at the end of the 
+[EBX configuration](#EBX configuration) section.
 
 
-### Deploy EBX on AKS (Azure Kubernetes Service).
+### Deploy EBX on AKS (Azure Kubernetes Service)
 
 This is an example of EBX deployment on AKS with TLS configured.
 It's using TLS with [Let's Encrypt](https://letsencrypt.org/) certificates provide by [cert-manager](https://github.com/cert-manager/cert-manager).
@@ -282,7 +273,8 @@ helm upgrade production \
  ./ebx-generic-chart
 ```
 
-### Deploy EBX on EKS (AWS).
+### Deploy EBX on EKS (Amazon Elastic Kubernetes Service)
+
 This is an example of EBX deployment on EKS (Elastic Kubernetes Service).
 It's using the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.5/)
 
