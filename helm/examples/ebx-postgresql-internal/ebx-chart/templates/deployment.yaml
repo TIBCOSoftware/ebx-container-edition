@@ -53,10 +53,16 @@ spec:
               value: "{{ .Values.ebx.flaDisabled}}"
             - name: EBX_REST_AUTHENTICATION_BASIC
               value: "{{ .Values.ebx.restAuthenticationBasic}}"
-            - name: EBX_INSTALL_ADMIN_LOGIN # TODO secret
-              value: "{{ .Values.ebx.adminLogin}}"
-            - name: EBX_INSTALL_ADMIN_PASSWORD # TODO secret
-              value: "{{ .Values.ebx.adminPassword}}"
+            - name: EBX_INSTALL_ADMIN_LOGIN
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.ebx.prefix}}-admin-logon-secret"
+                  key: "LOGIN"
+            - name: EBX_INSTALL_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.ebx.prefix}}-admin-logon-secret"
+                  key: "PASSWORD"
           resources:
             limits:
               memory: "{{ .Values.ebx.memory}}"
