@@ -16,14 +16,15 @@ You must have a valid license to use it.
 ## Prerequisites
 
 - TIBCO EBX® Container Edition 6.0.15+ (Reference TODO)
-- [Kubernetes](https://kubernetes.io/) 1.23+, a working Kubernetes cluster from a [certified K8s distro](https://www.cncf.io/certification/software-conformance/).
-- [Helm](https://helm.sh/) 3+, for building and deploying the charts.
+- [Kubernetes](https://kubernetes.io/) v1.23+, a working Kubernetes cluster from a [certified K8s distro](https://www.cncf.io/certification/software-conformance/).
+- [Helm](https://helm.sh/) v3+, for building and deploying the charts.
 
 **Note** 
 
 You need to generate the image containing all the addons you need. 
-For generating ... (Building the image)
-For details please see ref... todo 
+For generating the image please refer to the [Building the image](https://docs.tibco.com/pub/ebx/6.1.0/doc/html/fr/ece/building_the_image.html#_building_the_image) 
+documentation.
+For details about TIBCO EBX® Software please see the [TIBCO EBX Documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/fr/index.html).
 
 For more information on TIBCO EBX® Software and its components, see the [TIBCO EBX® Documentation](https://docs.tibco.com/products/tibco-ebx).
 
@@ -31,9 +32,9 @@ For more information on TIBCO EBX® Software and its components, see the [TIBCO 
 
 The charts contained in this file have been tested on the following kubernetes cluster:
 
-* [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/) (AKS) TODO version
-* [Amazon Elastic Kubernetes Service](https://aws.amazon.com/fr/eks/) (EKS) TODO TODO version
-* [MicroK8s](https://microk8s.io/) TODO version
+* [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/) (AKS) v1.25+ 
+* [Amazon Elastic Kubernetes Service](https://aws.amazon.com/fr/eks/) (EKS) v1.27+ 
+* [MicroK8s](https://microk8s.io/) vv1.23+
 
 ## Deploying EBX image
 
