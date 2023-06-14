@@ -249,13 +249,14 @@ encryption is enable by default, you can disable it by adding this line to the a
 
 ### Deploy EBX on AKS (Azure Kubernetes Service).
 
-The chart below provides an example of EBX deployment on AKS with TLS configured.
-This chart is using TLS with [Let's Encrypt](https://letsencrypt.org/) certificates provide by [cert-manager](https://github.com/cert-manager/cert-manager).
+This is an example of EBX deployment on AKS with TLS configured.
+It's using TLS with [Let's Encrypt](https://letsencrypt.org/) certificates provide by [cert-manager](https://github.com/cert-manager/cert-manager).
 
 Please see the following Azure documentation to see [how to use TLS with an ingress controller on Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli)
 
 **Note**:
 You must add the following annotations in [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ingress-annotations-values.yaml)
+
 ```
 nginx.ingress.kubernetes.io/use-regex: "true"
 cert-manager.io/cluster-issuer: letsencrypt
@@ -282,8 +283,38 @@ helm upgrade production \
 ```
 
 ### Deploy EBX on EKS (AWS).
+This is an example of EBX deployment on EKS (Elastic Kubernetes Service).
+It's using the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.5/)
 
-TODO
+Please check see the following AWS documentation to see [how to Install the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
+
+**Note**:
+You must add the following annotations in [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ingress-annotations-values.yaml)
+```
+alb.ingress.kubernetes.io/scheme: internet-facing
+alb.ingress.kubernetes.io/target-type: ip
+```
+helm install command:
+```
+helm upgrade production \
+ --install \
+ -f ingress-annotations-values.yaml \
+ --set-string global.namespace=ebx \
+ --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
+ --set-string global.hostname=ebx.hostname-example.com \
+ --set-string ebx.prefix=production \
+ --set-string ebx.adminPassword='?Y0urP4ssWord!' \
+ --set-string ebx.databaseName=ebxDb \
+ --set-string ebx.databaseUser=abxDbUser \
+ --set-string ebx.databasePwd='+Jjf6frs7?' \
+ --set-string ebx.databaseHost=sqlserver.db-host.com \
+ --set-string ebx.databasePort=1245 \
+ --set-string ebx.databaseType=sqlserver \
+ --set-string ingress.className=alb \
+ --set-string ingress.pathRegex='*' \
+ --set-string ingress.pathType=ImplementationSpecific \
+ ./ebx-generic-chart
+```
 
 ## Init container
 
