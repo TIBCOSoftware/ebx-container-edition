@@ -4,7 +4,6 @@
 
 # Global section defines specifics values for an environment (development, qa, production...).
 global:
-
   # ebxImage is the ebx container edition image URL
   ebxImage:
   # ebxImageRegistrySecret that contains the credentials used to connect to the registry that host the ebx image.
