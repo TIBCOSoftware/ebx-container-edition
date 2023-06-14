@@ -10,17 +10,16 @@ This repository include quick guides, templates, configuration examples, and scr
 
 This repository does not include TIBCO EBX® software, TIBCO EBX® Container Edition or any other third party software.
 
-**Note**: TIBCO EBX Software is a commercially licensed product and is subject to the payment of license fees.
-You must have a valid license to use it.
+**Note**: TIBCO EBX Software and TIBCO EBX® Container Edition are a commercially licensed product and are subject to the payment of license fees.
+You must have a valid license to use them.
 
 ## Prerequisites
 
-- TIBCO EBX® Container Edition 6.0.15+ (Reference TODO)
+- [TIBCO EBX® Container Edition](https://docs.tibco.com/pub/ebx/6.1.0/doc/pdf/TIB_ebx_6.1.0_container_edition.pdf?id=0) 6.0.15+
 - [Kubernetes](https://kubernetes.io/) v1.23+, a working Kubernetes cluster from a [certified K8s distro](https://www.cncf.io/certification/software-conformance/).
 - [Helm](https://helm.sh/) v3+, for building and deploying the charts.
 
-**Note** 
-
+**Note**:
 You need to generate the image containing all the addons you need. 
 For generating the image please refer to the [Building the image](https://docs.tibco.com/pub/ebx/6.1.0/doc/html/fr/ece/building_the_image.html#_building_the_image) 
 documentation.
