@@ -5,7 +5,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: "{{ .Values.global.namespace}}"
-  name: "{{ .Values.instance.ebxPrefix}}-ingress"
+  name: "{{ .Values.ebx.prefix}}-ingress"
   annotations:
   {{- if .Values.ingress.annotations }}
   {{- toYaml .Values.ingress.annotations | nindent 4 }}
@@ -26,10 +26,10 @@ spec:
       - http:
     {{ end }}
           paths:
-            - path: "/{{ .Values.instance.ebxPrefix}}/ebx.*"
+            - path: "/{{ .Values.ebx.prefix}}/ebx.*"
               pathType: Prefix
               backend:
                 service:
-                  name: "{{ .Values.instance.ebxPrefix}}-service"
+                  name: "{{ .Values.ebx.prefix}}-service"
                   port:
                     number: 8080

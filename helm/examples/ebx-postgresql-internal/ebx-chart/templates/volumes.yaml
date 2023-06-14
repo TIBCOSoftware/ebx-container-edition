@@ -4,34 +4,34 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: "{{ .Values.instance.ebxPrefix}}-pv-local-claim-data"
+  name: "{{ .Values.ebx.prefix}}-pv-local-claim-data"
   namespace: "{{ .Values.global.namespace}}"
   labels:
-    app: "{{ .Values.instance.ebxPrefix}}-app"
+    app: "{{ .Values.ebx.prefix}}-app"
 spec:
-  {{- if .Values.instance.storageClass }}
-  storageClassName: "{{ .Values.instance.storageClass}}"
+  {{- if .Values.ebx.storageClass }}
+  storageClassName: "{{ .Values.ebx.storageClass}}"
   {{- end }}
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: "{{ .Values.instance.dataVolumeStorageClaim}}"
+      storage: "{{ .Values.ebx.dataVolumeStorageClaim}}"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: "{{ .Values.instance.ebxPrefix}}-pv-local-claim-logs"
+  name: "{{ .Values.ebx.prefix}}-pv-local-claim-logs"
   namespace: "{{ .Values.global.namespace}}"
   labels:
-    app: "{{ .Values.instance.ebxPrefix}}-app"
+    app: "{{ .Values.ebx.prefix}}-app"
 spec:
-  {{- if .Values.instance.storageClass }}
-  storageClassName: "{{ .Values.instance.storageClass}}"
+  {{- if .Values.ebx.storageClass }}
+  storageClassName: "{{ .Values.ebx.storageClass}}"
   {{- end }}
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: "{{ .Values.instance.logsVolumeStorageClaim}}"
+      storage: "{{ .Values.ebx.logsVolumeStorageClaim}}"
 

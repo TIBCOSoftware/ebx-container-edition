@@ -3,7 +3,11 @@
 The release is named "{{ .Release.Name }}".
 
 EBX login credentials :
-- User: {{ .Values.instance.ebxUser }}
-- Password: {{ .Values.instance.ebxPassword }}
+- User: "{{ .Values.ebx.adminLogin }}"
+- Password: {{ .Values.ebx.adminPassword }}
 
-EBX is running at the following url : {{ .Values.global.scheme }}://{{ .Values.global.hostname }}/{{ .Values.instance.ebxPrefix }}/ebx
+{{ if .Values.global.hostname }}
+EBX is running at the following url : {{ .Values.global.scheme }}://{{ .Values.global.hostname }}/{{ .Values.ebx.prefix }}/ebx
+{{ else }}
+EBX is running at the following url : <your dns >/{{ .Values.ebx.prefix }}/ebx
+{{ end }}

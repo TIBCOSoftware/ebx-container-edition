@@ -5,7 +5,7 @@ This chart bootstraps an EBX deployment configured with a Postgresql server alre
 cluster.
 
 This chart allows to create a database dynamically when an EBX instance is created and to allocate it to the instance. 
-
+TODO review explanation above -> permet de creer des database dynamiquement sur un server postgresql
 This file assumes you have an [Ingress controller](https://github.com/kubernetes/ingress-nginx) already install on your 
 cluster and a Postgresql server (11 to 14.x) configured.
 

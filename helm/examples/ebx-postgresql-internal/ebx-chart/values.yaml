@@ -4,43 +4,39 @@
 
 # Global section defines specifics values for an environment (development, qa, production...).
 global:
-  # ebxImageRegistry is the Docker registry where we pull the EBX image from.
-  ebxImageRegistry: ""
-  # ebxImageRepository is the EBX image repository
-  ebxImageRepository: "ebx"
-  # ebxImageTag is The EBX image tag
-  ebxImageTag: ""
-  # ebxImageRegistry is the Docker registry where we pull the EBX-INIT image from.
-  ebxInitImageRegistry: ""
-  # ebxInitImageRepository is the EBX-INIT image repository
-  ebxInitImageRepository: "ebx-init"
-  # ebxImageTag is The EBX image tag
-  ebxInitImageTag: ""
-  # registrySecret that contains the credentials used to connect to the Docker registry.
-  imageRegistrySecret: ""
-  # namespace where the EBX instance will be deployed
-  namespace: "default"
+  # ebxImage is the ebx container edition image URL
+  ebxImage:
+  # ebxInitImage is the ebx-init image URL # TODO add in Readme
+  ebxInitImage:
+  # ebxImageRegistrySecret that contains the credentials used to connect to the registry that host the ebx image.
+  ebxImageRegistrySecret: "" # (Optional)
+  # namespace where the EBX pod will be deployed
+  namespace: "ebx"
   # hostname of the kubernetes server host
-  hostname: ""
-  # scheme define the protocol of the kubernetes server (default value is https)
-  scheme: "https"
+  hostname: "" # (Optional)
+  # scheme defines the http protocol of the kubernetes server (default value is https, valid values are http and https)
+  scheme: "https" # TODO Review this, is it useful ? only seen in NOTES.txt
 
-# Instance section defines specifics values for the ebx instance
-instance:
-  # ebxPrefix is the prefix name used for every kubernetes object of the instance (Pod, Service,
-  # Ingress...)
-  ebxPrefix: ""
-  # ebxUser is the username used to connect to the ebx instance (default value is admin)
-  ebxUser: "admin"
-  # ebxPassword is the password used to connect to the ebx instance
-  ebxPassword: ""
-
+# EBX section defines specifics values for the ebx instance
+ebx:
+  # prefix is the prefix name used for every kubernetes object of the instance (Pod, Service,
+  # Ingress...) (Mandatory) TODO
+  prefix: ""
+  # adminLogin is the username used to connect to the ebx instance (default value is admin)
+  adminLogin: "admin" # TODO change to admin in files + # (Optional -> TODO reco de les mettre, mais seront ignoré si le repo est déjà init -> évite de rendre accessible un ebx sans login/mdp)
+  # adminPassword is the password used to connect to the ebx instance
+  adminPassword: "" # (Optional TODO -> reco de les mettre, mais seront ignoré si le repo est déjà init -> évite de rendre accessible un ebx sans login/mdp)
+  # isSecured ... TODO + add in README
+  isSecured: "true"
+  # flaDisabled... TODO add in Readme, mandatory si pas de repo init
+  flaDisabled: "true"
+  # restAuthenticationBasic... TODO + add in README
+  restAuthenticationBasic: "true"
   # cpu number allocate to the container (default value is 2)
   cpu: 2
   # memory is the container memory limit allocate to the container (default value is 2Gi)
   memory: "2Gi"
-
-  # storageClass used to claim volumes
+  # storageClass used to claim volumes (will take default storageClass if no value is specified)
   storageClass : ""
   # dataVolumeStorageClaim is the amount of disk space of the PersistentVolume requested by the ebx
   # instance to store it's data
@@ -49,42 +45,53 @@ instance:
   # the data of the ebx instance
   logsVolumeStorageClaim: "2Gi"
 
-# ingress section defines specifics values for traffic routing rules of the Ingress resource
+  # databaseName is the database name
+  databaseName:
+  # databaseUser is the database user
+  databaseUser:
+  # databasePwd is the database password
+  databasePwd:
+  # databaseHost is the database host
+  databaseHost:
+  # databasePort is the database port
+  databasePort:
+  # databaseType is the database type (postgresql, sqlserver, oracle etc...  check the ... doc) TODO
+  databaseType:
+
+  # SQL databases (the following values will be use only if database.type is eq to sqlserver or azure.sql)
+  # databaseEncrypt is a property for jdbc sql connection (set to true that specify that the SQL Server uses TLS encryption)
+  databaseEncrypt: "true" # (Optional)
+  #  databaseTrustServerCertificate is a property for jdbc sql connection (set to true that specify that the driver doesn't
+  # validate the server TLS/SSL certificate.)
+  #databaseTrustServerCertificate: "false"
+  # databaseHostNameInCertificate is the host name to be used to validate the SQL Server TLS/SSL certificate.
+  #databaseHostNameInCertificate: "*.database.windows.net"
+  # databaseLoginTimeout is the number of seconds the driver should wait before timing out a failed connection
+  #databaseLoginTimeout: 30
+  #TODO above
+
+# Ingress section defines specifics values for traffic routing rules of the Ingress resource
 ingress:
   # className is the name of the chosen ingress-controller
   className: "nginx"
   # tlsSecret that contains the self-signed certificate public and private key
-  # (tlsSecret must be different than the instance.emailClusterIssuer value)
-  tlsSecret: ""
+  tlsSecret: "" # (Optional)
   # hostRuleDefied modify the syntax of the ingress according to this value. (default value is true)
   # If set to true, an host must be defined.
   hostRuleDefined: "true"
   # annotations to configure the ingress resource
   annotations:
-    # Annotations for AZURE (AKS Cluster using TLS) https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
-    # nginx.ingress.kubernetes.io/use-regex: "true"
-    # cert-manager.io/cluster-issuer: letsencrypt
-    nginx.ingress.kubernetes.io/ssl-redirect: "false" # TODO comment
-
-# database section defines specifics values for the database connectivity
-database:
-  # name is the database name
-  name: ""
-  # user is the database user
-  user: ""
-  # pwd is the database password
-  pwd: ""
-  # host is the database host
-  host:
-  # port is the database port
-  port: 5432
-  # type is the database type (postgresql, sqlserver, oracle etc...  check the ... doc) TODO
-  type: "postgresql"
+  # pathRegex will complete the path ingress path field. For example with the default value, the final path will be of
+  # the form "/{{ .Values.ebx.prefix}}/ebx.*" .
+  # This value may change depending on the type of the ingress controller.
+  pathRegex: ".*"
+  # pathType is pathType of the ingress.
+  pathType:  "Prefix"
 
 # postgresServer section defines specifics values for the postgresServer connectivity
 postgresServer:
-  # name is the postgres server master database name
-  name: ""
+  #  database is the postgres server master database name
+  database: ""
   # user is the postgres server master database name
   user: "postgres"
   #  pwd is the postgres server master database name
