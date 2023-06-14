@@ -246,6 +246,45 @@ helm upgrade production \
 encryption is enable by default, you can disable it by adding this line to the above helm command:
 ```--set-string database.encrypt=false```
 
+
+### Deploy EBX on AKS (Azure Kubernetes Service).
+
+The chart below provides an example of EBX deployment on AKS with TLS configured.
+This chart is using TLS with [Let's Encrypt](https://letsencrypt.org/) certificates provide by [cert-manager](https://github.com/cert-manager/cert-manager).
+
+Please see the following Azure documentation to see [how to use TLS with an ingress controller on Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli)
+
+**Note**:
+You must add the following annotations in [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ingress-annotations-values.yaml)
+```
+nginx.ingress.kubernetes.io/use-regex: "true"
+cert-manager.io/cluster-issuer: letsencrypt
+```
+helm install command: 
+
+```
+helm upgrade production \
+ --install \
+ -f ingress-annotations-values.yaml \
+ --set-string global.namespace=ebx \
+ --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
+ --set-string global.hostname=ebx.hostname-example.com \
+ --set-string ebx.prefix=production \
+ --set-string ebx.adminPassword='?Y0urP4ssWord!' \
+ --set-string ebx.databaseName=ebxDb \
+ --set-string ebx.databaseUser=abxDbUser \
+ --set-string ebx.databasePwd='+Jjf6frs7?' \
+ --set-string ebx.databaseHost=sqlserver.db-host.com \
+ --set-string ebx.databasePort=1245 \
+ --set-string ebx.databaseType=sqlserver \
+ --set-string ingress.tlsSecret=letsencrypt-tls-secret \
+ ./ebx-generic-chart
+```
+
+### Deploy EBX on EKS (AWS).
+
+TODO
+
 ## Init container
 
 The init container is designed to leave enough space for the OS running the application server by defining the values 
