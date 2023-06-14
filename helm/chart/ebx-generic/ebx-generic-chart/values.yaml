@@ -13,22 +13,23 @@ global:
   # hostname of the kubernetes server host
   hostname: ""
   # scheme defines the http protocol of the kubernetes server (default value is https, valid values are http and https)
-  scheme: "https" # TODO Review this, is it useful ? only seen in NOTES.txt
+  scheme: "https" # (Optional) TODO Review this, is it useful ? only seen in NOTES.txt
 
 # EBX section defines specifics values for the ebx instance
 ebx:
   # prefix is the prefix name used for every kubernetes object of the instance (Pod, Service,
-  # Ingress...) (Mandatory) TODO
+  # Ingress...)
   prefix: ""
   # adminLogin is the username used to connect to the ebx instance (default value is admin)
-  adminLogin: "admin" # TODO change to admin in files + # (Optional -> TODO reco de les mettre, mais seront ignoré si le repo est déjà init -> évite de rendre accessible un ebx sans login/mdp)
+  adminLogin: "admin" # (Optional if the repository is already initialized) TODO pch review
   # adminPassword is the password used to connect to the ebx instance
-  adminPassword: "" # (Optional TODO -> reco de les mettre, mais seront ignoré si le repo est déjà init -> évite de rendre accessible un ebx sans login/mdp)
-  # isSecured ... TODO + add in README
-  isSecured: "true"
-  # flaDisabled... TODO add in Readme, mandatory si pas de repo init
-  flaDisabled: "true"
-  # restAuthenticationBasic... TODO + add in README
+  adminPassword: "" # (Optional if the repository is already initialized) TODO pch review
+  # isSecured if set to "true", the protocol "HTTPS" is assumed. If "false", the protocol "HTTP" is assumed.
+  isSecured: "true" # TODO pch review
+  # flaDisabled is made to activate or not the first-launch assistant (For security reasons, one might want to disable
+  # the first-launch assistant in all circumstances.)
+  flaDisabled: "true" # (Mandatory on first execution) # TODO pch review
+  # restAuthenticationBasic if set to true enable Basic authentication for REST services.
   restAuthenticationBasic: "true"
   # cpu number allocate to the container (default value is 2)
   cpu: 2
@@ -61,11 +62,11 @@ ebx:
   databaseEncrypt: "true" # (Optional)
   #  databaseTrustServerCertificate is a property for jdbc sql connection (set to true that specify that the driver doesn't
   # validate the server TLS/SSL certificate.)
-  databaseTrustServerCertificate: "false"
+  databaseTrustServerCertificate: "false" # (Optional)
   # databaseHostNameInCertificate is the host name to be used to validate the SQL Server TLS/SSL certificate.
-  databaseHostNameInCertificate: "*.database.windows.net"
+  databaseHostNameInCertificate: "*.database.windows.net" # (Optional)
   # databaseLoginTimeout is the number of seconds the driver should wait before timing out a failed connection
-  databaseLoginTimeout: 30
+  databaseLoginTimeout: 30 # (Optional)
 
 # Ingress section defines specifics values for traffic routing rules of the Ingress resource
 ingress:
