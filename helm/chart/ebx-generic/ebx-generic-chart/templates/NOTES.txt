@@ -6,15 +6,8 @@ EBX login credentials :
 - User: "{{ .Values.ebx.adminLogin }}"
 - Password: {{ .Values.ebx.adminPassword }}
 
-
-EBX is running at the following url : {{ .Values.global.scheme }}://{{ .Values.global.hostname }}/{{ .Values.ebx.prefix }}/ebx
-
-
-{{ if eq .Values.ingress.hostRuleDefined "true" }}
+{{ if .Values.global.hostname }}
 EBX is running at the following url : {{ .Values.global.scheme }}://{{ .Values.global.hostname }}/{{ .Values.ebx.prefix }}/ebx
 {{ else }}
 EBX is running at the following url : <your dns >/{{ .Values.ebx.prefix }}/ebx
 {{ end }}
-
-TODO review {{ .Values.global.scheme }}
-TODO review for alb ingress aws OR if ebxIsSecured do ... or not

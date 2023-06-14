@@ -1,19 +1,10 @@
 ingress:
   annotations:
+  # MicroK8s (TODO Remove after tests)
     # nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    # Annotations for AZURE (AKS Cluster using TLS) https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
-    # nginx.ingress.kubernetes.io/use-regex: "true"
-    # nginx.ingress.kubernetes.io/use-regex: nginx
-    # cert-manager.io/cluster-issuer: letsencrypt
+  # Annotations for AZURE (AKS Cluster using TLS) https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
+    #  nginx.ingress.kubernetes.io/use-regex: "true"
+    #  cert-manager.io/cluster-issuer: letsencrypt
   # AWS
-     kubernetes.io/ingress.class: alb
-     # alb.ingress.kubernetes.io/aws-load-balancer-type: external
-     alb.ingress.kubernetes.io/scheme: internet-facing
-     alb.ingress.kubernetes.io/target-type: ip
-     #alb.ingress.kubernetes.io/load-balancer-name: "ebx-custom"
-     #alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
-     #alb.ingress.kubernetes.io/security-groups: sg-031e96a671a870219
-     #alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
-     #external-dns.alpha.kubernetes.io/hostname: ebx-test-on-eks.com # maybe
-     #cert-manager.io/cluster-issuer: letsencrypt-prod
-     #alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-2021-06
+    # alb.ingress.kubernetes.io/scheme: internet-facing
+    # alb.ingress.kubernetes.io/target-type: ip
