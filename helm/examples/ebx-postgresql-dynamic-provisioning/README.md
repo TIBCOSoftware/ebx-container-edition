@@ -1,72 +1,67 @@
-# EBX generic
+# EBX Postgres Dynamic Provisioning
 
 ## Overview
 
-This sample is a Helm chart for EBX.
+This sample is a Helm chart for EBX with dynamic provisioning of postgresql databases.
 
-This chart is a generic example, that should work on most kubernetes cluster. 
+This chart is used to dynamically create a postgres database when an EBX instance is created.
 
-This chart was tested with the [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) 
-maintained by the Kubernetes community. 
-This chart assumes it is already installed on your cluster.
+Each time an EBX instance is created, the init container ([EBX-INIT](#EBX-INIT)) will create a database dedicated to 
+this instance on a PostgreSQL server.
+
+This file assumes you have an [Ingress controller](https://github.com/kubernetes/ingress-nginx) already install on your 
+cluster and a Postgresql server (11 to 14.x) configured.
+
+--- 
 
 ## Prerequisites
 
-* Kubernetes 1.23+, a working kubernetes cluster from a [certified K8s distro](https://www.cncf.io/certification/software-conformance/) 
-except some particular version such as [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift).
-* Helm 3+
-* EBX (Container Edition) image pushed on your docker registry
+* [Kubernetes](https://kubernetes.io/) 1.23+
+* [Helm](https://helm.sh/) 3+
+* Both EBX (Container Edition) and [EBX-INIT](#EBX-INIT) images pushed on your docker registry
+* [Docker](https://www.docker.com/) 20.x for building the EBX-INIT container images.
 
 ## Installing the Chart
 
-Before installing the chart you may need to adjust your ingress annotations according to your needs.
-To do so, you first have to add the annotations you wanted in the 
-[ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/ingress-annotations-values.yaml) 
-file as explain here:
+Before you begin be careful to set the ingress annotations according to the architecture of your cluster 
+  (see annotations parameter in the [Ingress parameters](#Ingress-parameters) section).
+
+**Note**: If the PostgreSql server is installed on the same cluster, be careful to configure the server so that it can 
+access the namespace in which you want to install the Release EBX.
+Also make sure you know how to back up and restore your data when using this method for other than testing purposes.
+
+To install the chart with the release name ```production-postgres``` in the namespace ```ebx``` (default value):
 
 ```
-ingress:
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/service-upstream: "true"
-    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "ssl-server-name-test"
-    
-```
-**Note**:
-- These annotations are only examples of structure-based configurations, which means your structure may need other
-  annotations. Please check the [Ingress-Nginx Controller annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
-section to best meet your needs.
-- Please check the [ingress configuration section](#Ingress-configuration) for more informations about how to configure
-    the ingress resource.
-
-### Install command
-
-To install the chart with the release name ```production``` in the namespace ```ebx```:
-
-```
-helm upgrade production \
+ helm upgrade production-postgres \
  --install \
  -f ingress-annotations-values.yaml \
  --set-string global.namespace=ebx \
- --set-string global.ebxImage=<your.image.location> \
+ --set-string global.ebxImage=<your.ebx.image.location> \
+ --set-string global.ebxInitImage=<your.ebx.init.image.location> \
  --set-string global.hostname=<your.hostname.com> \
- --set-string ebx.prefix=production \
+ --set-string ebx.prefix=production-postgres \
  --set-string ebx.adminPassword=<'?Y0urP4ssWord!'> \
  --set-string ebx.databaseName=<ebx db name> \
  --set-string ebx.databaseUser=<ebx db user> \
- --set-string ebx.databasePwd=<'ebx db password'> \
+ --set-string ebx.databasePwd=<ebx db password> \
  --set-string ebx.databaseHost=<ebx db host> \
  --set-string ebx.databasePort=<ebx db port> \
- --set-string ebx.databaseType=<ebx db type> \
- ./ebx-generic-chart
+ --set-string ebx.databaseType=postgresql \
+ --set-string postgresServer.database=<master db name> \
+ --set-string postgresServer.user=<maste db user> \
+ --set-string postgresServer.pwd=<maste db password> \
+ ./ebx-chart
 ```
 
+**Note**: PostgreSQL is a case-sensitive database by default.
+Be careful when choosing a database name. TODO test and review
+
 ## Uninstalling the Chart
-To uninstall the chart with the release name ```production```:
+To uninstall the chart with the release name ```production-postgres```:
 ```
-helm delete production
+helm delete production-postgres
 ```
-----------
 
 ## Configuration
 
@@ -108,24 +103,24 @@ helm delete production
 | `ebx.databaseHostNameInCertificate`  | A property for jdbc sql connection (Optional) - The host name to be used to validate the SQL Server TLS/SSL certificate                                                                                                                                             | `"*.database.windows.net"` |
 | `ebx.databaseLoginTimeout`           | A property for jdbc sql connection (Optional) - The number of seconds the driver should wait before timing out a failed connection                                                                                                                                  | `"30"`                     |
 
-**Notes**: 
+**Notes**:
 - If ```ebx.storageClass``` is not specified, the default storage class will be used for provisioning.
-Please see the [storageClass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/) 
-and the [dynamic volume provisioning concept](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) for 
-further informations.
+  Please see the [storageClass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/)
+  and the [dynamic volume provisioning concept](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) for
+  further informations.
 - For ```ebx.databaseType``` refer to
-[this documentation](https://github.com/tibco/ebx-container-edition/blob/main/docs/databases-connectivity.md)
-to see the compatible databases and their associated values types for the chart.
-- The ```EBX_FLA_DISABLED``` ebx image variable (set from the [deployment](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ebx-generic-chart/templates/deployment.yaml)) 
-is by default set to ```true``` and is not configurable from the values.yaml 
-file. The reason for this is that if the repo has not yet been initialised, you must set its value to true in order to 
-initialise variables ```ebx.adminLogin``` and ```ebx.adminPassword```. If the repo is already initialised, these  values 
-defined via the Helm command will be ignored and will retain the values set when the repo was initialised.
+  [this documentation](https://github.com/tibco/ebx-container-edition/blob/main/docs/databases-connectivity.md)
+  to see the compatible databases and their associated values types for the chart.
+- The ```EBX_FLA_DISABLED``` ebx image variable (set from the [deployment](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ebx-generic-chart/templates/deployment.yaml))
+  is by default set to ```true``` and is not configurable from the values.yaml
+  file. The reason for this is that if the repo has not yet been initialised, you must set its value to true in order to
+  initialise variables ```ebx.adminLogin``` and ```ebx.adminPassword```. If the repo is already initialised, these  values
+  defined via the Helm command will be ignored and will retain the values set when the repo was initialised.
 - Every jdbc sql property will only be used if ```ebx.databaseType``` value equals to ```sqlserver``` or ```azure.sql```.
   check the [official documentation](https://learn.microsoft.com/en-us/sql/connect/jdbc/setting-the-connection-properties?view=sql-server-ver16)
   for information about to setting the sql connection properties.
 
-TODO pch review 
+TODO pch review
 
 ----------
 
@@ -142,182 +137,36 @@ TODO pch review
 
 
 **Note**:
-- Use the [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/ingress-annotations-values.yaml) 
-file to add annotations for the ```ingress.annotations``` section. Please refer to the 
-[following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
-to best meet your needs.
+- Use the [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/ingress-annotations-values.yaml)
+  file to add annotations for the ```ingress.annotations``` section. Please refer to the
+  [following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)
+  to best meet your needs.
 
 ----------
 
-## Installation examples
+### Postgresql server parameters
 
-Here are some examples of installations commands for deploying ebx with different databases.
+| Name                    | Description                                  | Value        |
+|-------------------------|----------------------------------------------|--------------|
+| `postgresServer.name`   | The master database server name              | `""`         |
+| `postgresServer.user`   | The master database server user              | `"postgres"` |
+| `postgresServer.pwd`    | The master database server database password | `""`         |
 
-**Note**: Some jdbc drivers are not included in the original EBX image, please refer to the following
-[documentation](https://github.com/tibco/ebx-container-edition/blob/main/docs/databases-connectivity.md)
-for more information.
+## EBX-INIT
 
-### Deploy EBX with an embedded H2 database.
+The ebx-init image is made to initialize a postgresql database for an EBX instance. 
+it's mounted in the init-container of the deployment.
 
-```
-helm upgrade production \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
- --set-string global.hostname=ebx.hostname-example.com \
- --set-string ebx.prefix=production \
- --set-string ebx.adminPassword='?Y0urP4ssWord!' \
- --set-string ebx.databaseName=ebxDb \
- --set-string ebx.databaseUser=abxDbUser \
- --set-string ebx.databasePwd='+Jjf6frs7?' \
- --set-string ebx.databasePort=7634 \
- --set-string ebx.databaseType=h2.standalone \
- ./ebx-generic-chart
-```
+This image is based on an ```alpine:3.14.3``` and contains:
+- the postgresql-client
+- bash
+- the set-up-database.sh script
 
-**Note**: 
-No need to enter value ```ebx.databaseHost``` for h2 embedded database.
+A [bundle](https://github.com/tibco/ebx-container-edition/tree/main/helm/examples/ebx-postgresql-internal/ebx-init) 
+is provided to help you to build and push the ebx-init image.
 
-TODO pch review above
-
-### Deploy EBX with a Postgresql database.
-
-```
-helm upgrade production \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
- --set-string global.hostname=ebx.hostname-example.com \
- --set-string ebx.prefix=production \
- --set-string ebx.adminPassword='?Y0urP4ssWord!' \
- --set-string ebx.databaseName=ebxDb \
- --set-string ebx.databaseUser=abxDbUser \
- --set-string ebx.databasePwd='+Jjf6frs7?' \
- --set-string ebx.databaseHost=postgresql.db-host.com \
- --set-string ebx.databasePort=5432 \
- --set-string ebx.databaseType=postgresql \
- ./ebx-generic-chart
-```
-
-
-### Deploy EBX with an sql database.
-
-```
-helm upgrade production \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
- --set-string global.hostname=ebx.hostname-example.com \
- --set-string ebx.prefix=production \
- --set-string ebx.adminPassword='?Y0urP4ssWord!' \
- --set-string ebx.databaseName=ebxDb \
- --set-string ebx.databaseUser=abxDbUser \
- --set-string ebx.databasePwd='+Jjf6frs7?' \
- --set-string ebx.databaseHost=sqlserver.db-host.com \
- --set-string ebx.databasePort=1245 \
- --set-string ebx.databaseType=sqlserver \
- ./ebx-generic-chart
-```
-
-**Note**:
-You can configure the connection settings by overwriting the jdbc sql properties present at the end of the 
-[EBX configuration](#EBX configuration) section.
-
-
-### Deploy EBX on AKS (Azure Kubernetes Service)
-
-This is an example of EBX deployment on AKS with TLS configured.
-It's using TLS with [Let's Encrypt](https://letsencrypt.org/) certificates provide by [cert-manager](https://github.com/cert-manager/cert-manager).
-
-Please see the following Azure documentation to see [how to use TLS with an ingress controller on Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli)
-
-**Note**:
-You must add the following annotations in [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ingress-annotations-values.yaml)
-
-```
-nginx.ingress.kubernetes.io/use-regex: "true"
-cert-manager.io/cluster-issuer: letsencrypt
-```
-helm install command: 
-
-```
-helm upgrade production \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
- --set-string global.hostname=ebx.hostname-example.com \
- --set-string ebx.prefix=production \
- --set-string ebx.adminPassword='?Y0urP4ssWord!' \
- --set-string ebx.databaseName=ebxDb \
- --set-string ebx.databaseUser=abxDbUser \
- --set-string ebx.databasePwd='+Jjf6frs7?' \
- --set-string ebx.databaseHost=sqlserver.db-host.com \
- --set-string ebx.databasePort=1245 \
- --set-string ebx.databaseType=sqlserver \
- --set-string ingress.tlsSecret=letsencrypt-tls-secret \
- ./ebx-generic-chart
-```
-
-### Deploy EBX on EKS (Amazon Elastic Kubernetes Service)
-
-This is an example of EBX deployment on EKS (Elastic Kubernetes Service).
-It's using the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.5/)
-
-Please check see the following AWS documentation to see [how to Install the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
-
-**Note**:
-You must add the following annotations in [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ingress-annotations-values.yaml)
-```
-alb.ingress.kubernetes.io/scheme: internet-facing
-alb.ingress.kubernetes.io/target-type: ip
-```
-helm install command:
-```
-helm upgrade production \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
- --set-string global.hostname=ebx.hostname-example.com \
- --set-string ebx.prefix=production \
- --set-string ebx.adminPassword='?Y0urP4ssWord!' \
- --set-string ebx.databaseName=ebxDb \
- --set-string ebx.databaseUser=abxDbUser \
- --set-string ebx.databasePwd='+Jjf6frs7?' \
- --set-string ebx.databaseHost=sqlserver.db-host.com \
- --set-string ebx.databasePort=1245 \
- --set-string ebx.databaseType=sqlserver \
- --set-string ingress.className=alb \
- --set-string ingress.pathRegex='*' \
- --set-string ingress.pathType=ImplementationSpecific \
- ./ebx-generic-chart
-```
-
-## Init container
-
-The init container is designed to leave enough space for the OS running the application server by defining the values 
-``vm.max_map_count`` and ``ulimit``.
-
-This specificity is 
-[documented in the core product documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/references/performance.html#memory) 
-(Check the ``Memory allocated to the operating system`` part)
-and its [application for kubernetes is documented here](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/running_the_image.html#_host_configuration).
-
-**Note**: If more than one EBX container may run on the same host at the same time, one needs to increase
-these values accordingly.
-
-## Customize and extend the chart
-This chart provide a standard, canonical, typical, or vanilla deployment for the TIBCO EBX® Software on kubernetes. 
-It's suitable for most of the use case scenarios.
-
-You are welcome to use and modify the recipes and adapt them to your specific use case, 
-in compliance with the Apache License 2.0. However, we recommend that you extend this chart, rather than modify it. 
-
-
+**Note**: The script 
+[set-up-database.sh](https://github.com/tibco/ebx-container-edition/blob/main/helm/examples/ebx-postgresql-internal/ebx-init/scripts/set-up-database.sh) need to be updated to be compatible with postgresql 15.
 
 
 

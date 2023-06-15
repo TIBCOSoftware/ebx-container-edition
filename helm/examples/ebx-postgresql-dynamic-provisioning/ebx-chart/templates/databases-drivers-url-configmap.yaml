@@ -1,0 +1,15 @@
+{{/*
+  * Copyright Cloud Software Group, Inc. 2000-2023. All rights reserved.
+  */}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Values.ebx.prefix}}-databases-drivers-url-configmap"
+  namespace: "{{ .Values.global.namespace}}"
+data:
+  postgresql: "jdbc:postgresql://{{ .Values.ebx.databaseHost}}:{{ .Values.ebx.databasePort}}/{{ .Values.ebx.databaseName}}"
+  oracle: "jdbc:oracle:thin:@//{{ .Values.ebx.databaseHost}}:{{ .Values.ebx.databasePort}}/{{ .Values.ebx.databaseName}}"
+  sqlserver: "jdbc:sqlserver://;serverName={{ .Values.ebx.databaseHost}};port={{ .Values.ebx.databasePort}};databaseName={{ .Values.ebx.databaseName}}{{- if .Values.ebx.databaseEncrypt}};encrypt={{ .Values.ebx.databaseEncrypt}}{{- end }}{{- if .Values.ebx.databaseTrustServerCertificate }};trustServerCertificate={{ .Values.ebx.databaseTrustServerCertificate}}{{- end }}{{- if .Values.ebx.databaseHostNameInCertificate }};hostNameInCertificate={{ .Values.ebx.databaseHostNameInCertificate}}{{- end }}{{- if .Values.ebx.databaseLoginTimeout }};loginTimeout={{ .Values.ebx.databaseLoginTimeout}}{{- end }}"
+  azure.sql: "jdbc:sqlserver://;serverName={{ .Values.ebx.databaseHost}};port={{ .Values.ebx.databasePort}};databaseName={{ .Values.ebx.databaseName}}{{- if .Values.ebx.databaseEncrypt}};encrypt={{ .Values.ebx.databaseEncrypt}}{{- end }}{{- if .Values.ebx.databaseTrustServerCertificate }};trustServerCertificate={{ .Values.ebx.databaseTrustServerCertificate}}{{- end }}{{- if .Values.ebx.databaseHostNameInCertificate }};hostNameInCertificate={{ .Values.ebx.databaseHostNameInCertificate}}{{- end }}{{- if .Values.ebx.databaseLoginTimeout }};loginTimeout={{ .Values.ebx.databaseLoginTimeout}}{{- end }}"
+  hana: "jdbc:sap://{{ .Values.ebx.databaseHost}}:{{ .Values.ebx.databasePort}}/{{ .Values.ebx.databaseName}}"
+  h2.standalone: ""
