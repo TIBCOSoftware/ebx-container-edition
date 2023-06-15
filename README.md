@@ -33,7 +33,7 @@ The charts contained in this file have been tested on the following kubernetes c
 
 * [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/) (AKS) v1.25+ 
 * [Amazon Elastic Kubernetes Service](https://aws.amazon.com/fr/eks/) (EKS) v1.27+ 
-* [MicroK8s](https://microk8s.io/) vv1.23+
+* [MicroK8s](https://microk8s.io/) v1.23+
 
 ## Deploying EBX image
 
