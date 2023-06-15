@@ -10,7 +10,8 @@ This repository include quick guides, templates, configuration examples, and scr
 
 This repository does not include TIBCO EBX® software, TIBCO EBX® Container Edition or any other third party software.
 
-**Note**: TIBCO EBX Software and TIBCO EBX® Container Edition are a commercially licensed product and are subject to the payment of license fees.
+**Note**: TIBCO EBX Software and TIBCO EBX® Container Edition are a commercially licensed products and are subject to 
+the payment of license fees.
 You must have a valid license to use them.
 
 ## Prerequisites
