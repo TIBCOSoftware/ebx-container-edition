@@ -57,7 +57,8 @@ ebx:
   # databaseType is the database type (postgresql, sqlserver, oracle etc...  check the ... doc) TODO
   databaseType:
 
-  # SQL databases (the following values will be use only if database.type is eq to sqlserver or azure.sql)
+  ### SQL databases (the following values will be use only if database.type is eq to sqlserver or azure.sql)
+
   # databaseEncrypt is a property for jdbc sql connection (set to true that specify that the SQL Server uses TLS encryption)
   databaseEncrypt: "true" # (Optional)
   #  databaseTrustServerCertificate is a property for jdbc sql connection (set to true that specify that the driver doesn't

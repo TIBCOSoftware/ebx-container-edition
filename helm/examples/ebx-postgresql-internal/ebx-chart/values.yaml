@@ -58,17 +58,18 @@ ebx:
   # databaseType is the database type (postgresql, sqlserver, oracle etc...  check the ... doc) TODO
   databaseType:
 
-  # SQL databases (the following values will be use only if database.type is eq to sqlserver or azure.sql)
+  ### SQL databases (the following values will be use only if database.type is eq to sqlserver or azure.sql)
+
   # databaseEncrypt is a property for jdbc sql connection (set to true that specify that the SQL Server uses TLS encryption)
   databaseEncrypt: "true" # (Optional)
   #  databaseTrustServerCertificate is a property for jdbc sql connection (set to true that specify that the driver doesn't
   # validate the server TLS/SSL certificate.)
-  #databaseTrustServerCertificate: "false"
+  databaseTrustServerCertificate: "false"
   # databaseHostNameInCertificate is the host name to be used to validate the SQL Server TLS/SSL certificate.
-  #databaseHostNameInCertificate: "*.database.windows.net"
+  databaseHostNameInCertificate: "*.database.windows.net"
   # databaseLoginTimeout is the number of seconds the driver should wait before timing out a failed connection
-  #databaseLoginTimeout: 30
-  #TODO above
+  databaseLoginTimeout: 30
+
 
 # Ingress section defines specifics values for traffic routing rules of the Ingress resource
 ingress:
