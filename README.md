@@ -49,8 +49,6 @@ They refer to particular cases, or to configurations proposed for specific Kuber
 
 These examples are only propositions, therefore they are not imperative and can be extended or customized.
 
-TODO disable Issue Tab
-
 ## License
 
 TODO
