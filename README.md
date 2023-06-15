@@ -43,7 +43,7 @@ To deploy an ebx image, check the section relative to the
 
 ## Examples 
 
-The [example section](https://github.com/tibco/ebx-container-edition/blob/main/helm/examples/README.md) contains some 
+The [example section](https://github.com/tibco/ebx-container-edition/tree/main/helm/examples) contains some 
 configuration or chart examples to deploy ebx.
 
 They refer to particular cases, or to configurations proposed for specific Kubernetes implementation.
