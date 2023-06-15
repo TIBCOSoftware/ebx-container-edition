@@ -36,25 +36,9 @@ ingress:
 - These annotations are only examples of structure-based configurations, which means your structure may need other
   annotations. Please check the [Ingress-Nginx Controller annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
 section to best meet your needs.
+- Please check the [ingress configuration section](#Ingress-configuration) for more informations about how to configure
+    the ingress resource.
 
-Then to apply this file you just need to add the following parameter in the helm install command:
-
-```
--f ingress-annotations-values.yaml
-```
-
-**Notes**: 
-- This command is added by default in the next [install command](#install-command) example.
-- Please check the [ingress configuration section](#Ingress-configuration) for more informations about how to configure 
-the ingress resource.
-
-TODO:
-add info on StorageClass (specificity on aws and azure) -> ne pas oublier d'ajouter l'addon Amazon EBS CSI Driver
-also on ingressClass
-- revoir expliquation pour le point de terminaison pour hostname (comme quoi c'est le point d'accès à l'instance)
-  
-- https://aws.amazon.com/fr/blogs/opensource/network-load-balancer-nginx-ingress-controller-eks/ 
-- 
 ### Install command
 
 To install the chart with the release name ```production``` in the namespace ```ebx```:
@@ -126,7 +110,9 @@ helm delete production
 
 **Notes**: 
 - If ```ebx.storageClass``` is not specified, the default storage class will be used for provisioning.
-Check the [storageClass documentation](https://kubernetes.io/blog/2017/03/dynamic-provisioning-and-storage-classes-kubernetes/) for further informations.
+Please see the [storageClass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/) 
+and the [dynamic volume provisioning concept](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) for 
+further informations.
 - For ```ebx.databaseType``` refer to
 [this documentation](https://github.com/tibco/ebx-container-edition/blob/main/docs/databases-connectivity.md)
 to see the compatible databases and their associated values types for the chart.
