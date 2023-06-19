@@ -15,4 +15,3 @@ Open a Shell environment and execute the following script.
 **Note**:
 - You may need to add execution right to be able to execute the script. ```chmod +x build_and_push_image.sh```
 - ```EBX_INIT_IMAGE_NAME``` is made up of the name + the tag. ex: ```ebx-init:1.0```
-  The image name is made up of the name + the tag
