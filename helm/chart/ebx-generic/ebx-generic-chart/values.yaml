@@ -54,7 +54,7 @@ ebx:
   databaseHost:
   # databasePort is the database port
   databasePort:
-  # databaseType is the database type (postgresql, sqlserver, oracle etc...  check the ... doc) TODO
+  # databaseType is the database type (postgresql, sqlserver, oracle etc...)
   databaseType:
 
   ### SQL databases (the following values will be use only if database.type is eq to sqlserver or azure.sql)

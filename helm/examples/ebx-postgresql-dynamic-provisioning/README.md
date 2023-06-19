@@ -16,10 +16,10 @@ cluster and a Postgresql server (11 to 14.x) configured.
 
 ## Prerequisites
 
-* [Kubernetes](https://kubernetes.io/) 1.23+
-* [Helm](https://helm.sh/) 3+
+* [Kubernetes](https://kubernetes.io/) v1.23+
+* [Helm](https://helm.sh/) v3+
 * Both EBX (Container Edition) and [EBX-INIT](#EBX-INIT) images pushed on your docker registry
-* [Docker](https://www.docker.com/) 20.x for building the EBX-INIT container images.
+* [Docker](https://www.docker.com/) v20.x for building the EBX-INIT container images.
 
 ## Installing the Chart
 
@@ -70,6 +70,7 @@ helm delete production-postgres
 | Name                         | Description                                                                                                 | Value        |
 |------------------------------|-------------------------------------------------------------------------------------------------------------|--------------|
 | `global.ebxImage`            | The ebx container edition image URL                                                                         | `""`         |
+| `global.ebxInitImage`        | The ebx-init image URL                                                                                      | `""`         |
 | `global.imageRegistrySecret` | The secret that contains the credentials used to connect to the registry that host the ebx image (Optional) | `""`         |
 | `global.namespace`           | The namespace where EBX will be deployed                                                                    | `"ebx"`      |
 | `global.hostname`            | The hostname of the kubernetes server host                                                                  | `""`         |

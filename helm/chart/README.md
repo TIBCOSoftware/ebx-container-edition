@@ -12,9 +12,9 @@ This chart assumes it is already installed on your cluster.
 
 ## Prerequisites
 
-* Kubernetes 1.23+, a working kubernetes cluster from a [certified K8s distro](https://www.cncf.io/certification/software-conformance/) 
+* Kubernetes v1.23+, a working kubernetes cluster from a [certified K8s distro](https://www.cncf.io/certification/software-conformance/) 
 except some particular version such as [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift).
-* Helm 3+
+* Helm v3+
 * EBX (Container Edition) image pushed on your docker registry
 
 ## Installing the Chart
