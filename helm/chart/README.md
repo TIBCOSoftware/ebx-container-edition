@@ -121,7 +121,7 @@ is by default set to ```true``` and is not configurable from the values.yaml
 file. The reason for this is that if the repo has not yet been initialised, you must set its value to true in order to 
 initialise variables ```ebx.adminLogin``` and ```ebx.adminPassword```. If the repo is already initialised, these  values 
 defined via the Helm command will be ignored and will retain the values set when the repo was initialised.
-- Every jdbc sql property will only be used if ```ebx.databaseType``` value equals to ```sqlserver``` or ```azure.sql```.
+- Every jdbc sql connection property will only be used if ```ebx.databaseType``` value equals to ```sqlserver``` or ```azure.sql```.
   check the [official documentation](https://learn.microsoft.com/en-us/sql/connect/jdbc/setting-the-connection-properties?view=sql-server-ver16)
   for information about to setting the sql connection properties.
 
@@ -181,7 +181,7 @@ No need to enter value ```ebx.databaseHost``` for h2 embedded database.
 
 TODO pch review above
 
-### Deploy EBX with a Postgresql database.
+### Deploy EBX with a PostgreSQL database.
 
 ```
 helm upgrade production \
@@ -202,7 +202,7 @@ helm upgrade production \
 ```
 
 
-### Deploy EBX with an sql database.
+### Deploy EBX with an SQL database.
 
 ```
 helm upgrade production \
@@ -236,6 +236,8 @@ Please see the following Azure documentation to see [how to use TLS with an ingr
 
 **Note**:
 You must add the following annotations in [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ingress-annotations-values.yaml)
+
+#TODO pch review above
 
 ```
 nginx.ingress.kubernetes.io/use-regex: "true"
@@ -309,6 +311,8 @@ and its [application for kubernetes is documented here](https://docs.tibco.com/p
 
 **Note**: If more than one EBX container may run on the same host at the same time, one needs to increase
 these values accordingly.
+
+#TODO pch review
 
 ## Customize and extend the chart
 This chart provide a standard, canonical, typical, or vanilla deployment for the TIBCO EBX® Software on kubernetes. 
