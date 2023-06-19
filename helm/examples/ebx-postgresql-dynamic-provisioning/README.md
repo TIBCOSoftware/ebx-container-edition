@@ -153,12 +153,30 @@ TODO pch review
 | `postgresServer.user`   | The master database server user              | `"postgres"` |
 | `postgresServer.pwd`    | The master database server database password | `""`         |
 
-## EBX-INIT
 
-The ebx-init image is made to initialize a postgresql database for an EBX instance. 
+## Init containers
+
+### Sysctl
+
+The ``sysctl`` init container is designed to leave enough space for the OS running the application server by defining the values
+``vm.max_map_count`` and ``ulimit``.
+
+This specificity is
+[documented in the core product documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/references/performance.html#memory)
+(Check the ``Memory allocated to the operating system`` part)
+and its [application for kubernetes is documented here](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/running_the_image.html#_host_configuration).
+
+**Note**: If more than one EBX container may run on the same host at the same time, one needs to increase
+these values accordingly.
+
+#TODO pch review
+
+### EBX-INIT
+
+The ``ebx-init`` init container is made to initialize a postgresql database for an EBX instance. 
 it's mounted in the init-container of the deployment.
 
-This image is based on an ```alpine:3.14.3``` and contains:
+It's based on an ```alpine:3.14.3``` image and contains:
 - the postgresql-client
 - bash
 - the set-up-database.sh script
@@ -169,10 +187,16 @@ is provided to help you to build and push the ebx-init image.
 **Note**: The script 
 [set-up-database.sh](https://github.com/tibco/ebx-container-edition/blob/main/helm/examples/ebx-postgresql-internal/ebx-init/scripts/set-up-database.sh) need to be updated to be compatible with postgresql 15.
 
+#TODO pch review
 
+## Customize and extend the chart
+This chart provide a standard, canonical, typical, or vanilla deployment for the TIBCO EBX® Software on kubernetes.
+It's suitable for most of the use case scenarios.
 
+You are welcome to use and modify the recipes and adapt them to your specific use case,
+in compliance with the Apache License 2.0. However, we recommend that you extend this chart, rather than modify it. 
 
-
+#TODO pch review
            
 
 

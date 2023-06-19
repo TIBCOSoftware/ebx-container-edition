@@ -301,7 +301,7 @@ helm upgrade production \
 
 ## Init container
 
-The init container is designed to leave enough space for the OS running the application server by defining the values 
+The ``sysctl`` init container is designed to leave enough space for the OS running the application server by defining the values 
 ``vm.max_map_count`` and ``ulimit``.
 
 This specificity is 
@@ -321,7 +321,7 @@ It's suitable for most of the use case scenarios.
 You are welcome to use and modify the recipes and adapt them to your specific use case, 
 in compliance with the Apache License 2.0. However, we recommend that you extend this chart, rather than modify it. 
 
-
+#TODO pch review
 
 
 
