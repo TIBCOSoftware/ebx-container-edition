@@ -26,8 +26,8 @@ spec:
       - http:
     {{ end }}
           paths:
-            - path: "/{{ .Values.ebx.prefix}}/ebx.*"
-              pathType: Prefix
+            - path: "/{{ .Values.ebx.prefix}}/ebx{{ .Values.ingress.pathRegex}}"
+              pathType: "{{ .Values.ingress.pathType}}"
               backend:
                 service:
                   name: "{{ .Values.ebx.prefix}}-service"
