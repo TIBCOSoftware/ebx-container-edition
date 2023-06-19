@@ -1,17 +1,20 @@
 # Supported databases
 
-This table display all the ebx supported database types.
+This table display all the ebx supported databases types.
 
-TODO : mettre seulement ce qu'on supporte
+#TODO pch review 'Compatible databases' section for PostgreSQL 
 
-| Chart value type | Compatible databases | Driver included by default |
-|:-----------------|----------------------|----------------------------|
-| postgresql       | PostgreSQL           | yes                        |  
-| sqlserver        | SQL Server           | yes                        |  
-| h2.standalone    | H2                   | yes                        |  
-| oracle           | Oracle               | no                         |
-| azure.sql        | Azure SQL            | no                         |
-| hana             | Hana                 | no                         |
+| Chart value type | Compatible databases                                                    | Driver included by default |
+|:-----------------|-------------------------------------------------------------------------|----------------------------|
+| postgresql       | PostgreSQL / Amazon Aurora PostgreSQL / Google Cloud SQL for PostgreSQL | yes                        |  
+| sqlserver        | Microsoft SQL Server                                                    | yes                        |  
+| h2.standalone    | H2                                                                      | yes                        |  
+| oracle           | Oracle                                                                  | no                         |
+| azure.sql        | Microsoft Azure SQL                                                     | no                         |
+| hana             | SAP HANA                                                                | no                         |
+
+please see the [documentation](https://docs.tibco.com/pub/ebx/5.9.18/doc/html/en/installation/supported_env.html#databases)
+for further information about the supported databases.
 
 ### Adding new database JDBC driver in the image  
 

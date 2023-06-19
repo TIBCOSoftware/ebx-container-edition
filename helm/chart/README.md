@@ -34,9 +34,9 @@ ingress:
 ```
 **Note**:
 - These annotations are only examples of structure-based configurations, which means your structure may need other
-  annotations. Please check the [Ingress-Nginx Controller annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
+  annotations. Please see the [Ingress-Nginx Controller annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
 section to best meet your needs.
-- Please check the [ingress configuration section](#Ingress-configuration) for more informations about how to configure
+- Please see the [ingress configuration section](#Ingress-configuration) for more informations about how to configure
     the ingress resource.
 
 ### Install command
