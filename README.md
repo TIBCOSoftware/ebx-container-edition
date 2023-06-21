@@ -2,22 +2,21 @@
 
 ## Overview
 
-This repository provides a useful samples for deploying [TIBCO EBX® Software](https://www.tibco.com/products/tibco-ebx-software) 
-on a [Kubernetes cluster](http://kubernetes.io/) using its [container form](https://www.docker.com/resources/what-container) 
-(TIBCO EBX® Container Edition) and the [Helm package manager](https://helm.sh/) .
+This repository provides useful samples for deploying [TIBCO EBX® Software](https://www.tibco.com/products/tibco-ebx-software) 
+on a [Kubernetes cluster](http://kubernetes.io/) using TIBCO EBX® Container Edition and the [Helm package manager](https://helm.sh/) .
 
-This repository include quick guides, templates, configuration examples, and scripts that you can extend or customize.
+This repository includes quick guides, templates, configuration examples, and scripts that you can extend or customize.
 
 This repository does not include TIBCO EBX® software, TIBCO EBX® Container Edition or any other third party software.
 
-**Note**: TIBCO EBX Software and TIBCO EBX® Container Edition are a commercially licensed products and are subject to 
+**Note**: TIBCO EBX Software and TIBCO EBX® Container Edition are commercially licensed products and are subject to 
 the payment of license fees.
 You must have a valid license to use them.
 
 ## Prerequisites
 
 - [TIBCO EBX® Container Edition](https://docs.tibco.com/pub/ebx/6.1.0/doc/pdf/TIB_ebx_6.1.0_container_edition.pdf?id=0) 6.0.15+
-- [Kubernetes](https://kubernetes.io/) v1.23+, a working Kubernetes cluster from a [certified K8s distro](https://www.cncf.io/certification/software-conformance/).
+- [Kubernetes](https://kubernetes.io/) v1.23+, a working Kubernetes cluster from a [certified K8s software](https://www.cncf.io/certification/software-conformance/).
 - [Helm](https://helm.sh/) v3+, for building and deploying the charts.
 
 **Note**:
@@ -30,7 +29,7 @@ For more information on TIBCO EBX® Software and its components, see the [TIBCO 
 
 ## Tested cluster
 
-The charts contained in this file have been tested on the following kubernetes cluster:
+The charts contained in this file have been tested on the following Kubernetes cluster:
 
 * [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/) (AKS) v1.25+ 
 * [Amazon Elastic Kubernetes Service](https://aws.amazon.com/fr/eks/) (EKS) v1.27+ 
@@ -38,15 +37,15 @@ The charts contained in this file have been tested on the following kubernetes c
 
 ## Deploying EBX image
 
-To deploy an ebx image, check the section relative to the 
+For information on deploying an ebx image, see the section relative to the 
 [generic chart](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/README.md).
 
 ## Examples 
 
 The [example section](https://github.com/tibco/ebx-container-edition/tree/main/helm/examples) contains some 
-configuration or chart examples to deploy ebx.
+configuration or chart examples for deploying ebx on a Kubernetes cluster.
 
-They refer to particular cases, or to configurations proposed for specific Kubernetes implementation.
+They refer to particular cases, or to configurations for specific Kubernetes implementation.
 
 These examples are only propositions, therefore they are not imperative and can be extended or customized.
 
