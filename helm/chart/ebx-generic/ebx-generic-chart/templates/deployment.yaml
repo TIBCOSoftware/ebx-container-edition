@@ -25,6 +25,7 @@ spec:
       containers:
         - name: "{{ .Values.ebx.prefix}}-instance-pod"
           image: "{{ .Values.global.ebxImage}}"
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
@@ -49,7 +50,7 @@ spec:
                 secretKeyRef:
                   name: "{{ .Values.ebx.prefix}}-database-secret"
                   key: "PASSWORD"
-            - name: EBX_FLA_DISABLED 
+            - name: EBX_FLA_DISABLED
               value: "{{ .Values.ebx.flaDisabled}}"
             - name: EBX_REST_AUTHENTICATION_BASIC
               value: "{{ .Values.ebx.restAuthenticationBasic}}"

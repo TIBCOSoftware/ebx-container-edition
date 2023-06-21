@@ -2,7 +2,7 @@
 
 This table display all the ebx supported databases types.
 
-#TODO pch review 'Compatible databases' section for PostgreSQL 
+#TODO check 'Compatible databases' section for PostgreSQL with the persistence team
 
 | Chart value type | Compatible databases                                                    | Driver included by default |
 |:-----------------|-------------------------------------------------------------------------|----------------------------|
@@ -18,8 +18,7 @@ for further information about the supported databases.
 
 ### Adding new database JDBC driver in the image  
 
-To add another driver that is not include in the ebx image by default please see the [documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/customizing_the_image.html#_adding_a_new_jdbc_driver).
+To add another driver that is not included in the ebx image by default please see the [documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/customizing_the_image.html#_adding_a_new_jdbc_driver).
 
 
 
- 

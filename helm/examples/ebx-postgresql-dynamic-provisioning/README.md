@@ -73,8 +73,8 @@ helm delete production-postgres
 | `global.ebxInitImage`        | The ebx-init image URL                                                                                      | `""`         |
 | `global.imageRegistrySecret` | The secret that contains the credentials used to connect to the registry that host the ebx image (Optional) | `""`         |
 | `global.namespace`           | The namespace where EBX will be deployed                                                                    | `"ebx"`      |
-| `global.hostname`            | The hostname of the kubernetes server host                                                                  | `""`         |
-| `global.scheme`              | The scheme that define the protocol of the kubernetes server (Optional)                                     | `"https"`    |
+| `global.hostname`            | The hostname of the Kubernetes server host                                                                  | `""`         |
+| `global.scheme`              | The scheme that defines the protocol of the Kubernetes server (Optional)                                    | `"https"`    |
 
 ----------
 
@@ -82,7 +82,7 @@ helm delete production-postgres
 
 | Name                                 | Description                                                                                                                                                                                                                                                         | Value                      |
 |--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
-| `ebx.prefix`                         | The prefix name used for every kubernetes object of the instance (Pod, Service, Ingress...)                                                                                                                                                                         | `""`                       |
+| `ebx.prefix`                         | The prefix name used for every Kubernetes object of the instance (Pod, Service, Ingress...)                                                                                                                                                                         | `""`                       |
 | `ebx.adminLogin`                     | The username used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_LOGIN`). Will be ignored if `ebx.flaDisabled`  value is not true or if repository is already initialized.                                                 | `"admin"`                  |
 | `ebx.adminPassword`                  | The password used to connect to the ebx instance (overrides ece environment variable : `EBX_INSTALL_ADMIN_PASSWORD`) <b><u>must be enclosed in single quotes<u><b>. Will be ignored if `ebx.flaDisabled` value is not true or if repository is already initialized. | `''`                       |
 | `ebx.isSecured`                      | If "true", the protocol "HTTPS" is assumed. If "false", the protocol "HTTP" is assumed (overrides ece environment variable : `EBX_IS_SECURED`)                                                                                                                      | `'true'`                   |
@@ -91,7 +91,7 @@ helm delete production-postgres
 | `ebx.cpu`                            | The cpu number allocate to the ebx container                                                                                                                                                                                                                        | `"2"`                      |
 | `ebx.memory`                         | The ebx container memory limit                                                                                                                                                                                                                                      | `"2Gi"`                    |
 | `ebx.storageClass`                   | storageClass used to claim volumes (will take default storageClass if no value is specified)                                                                                                                                                                        | `""`                       |
-| `ebx.dataVolumeStorageClaim`         | The amount of disk space of the PersistentVolume requested by the ebx instance to store it's data                                                                                                                                                                   | `"10Gi"`                   |
+| `ebx.dataVolumeStorageClaim`         | The amount of disk space of the PersistentVolume requested by the ebx instance to store its data                                                                                                                                                                    | `"10Gi"`                   |
 | `ebx.logsVolumeStorageClaim`         | The amount of disk space requested by the PersistentVolumeClaim for the data of the ebx instance                                                                                                                                                                    | `"2Gi"`                    |
 | `ebx.databaseName`                   | The ebx database server name                                                                                                                                                                                                                                        | `""`                       |
 | `ebx.databaseUser`                   | The ebx database server user                                                                                                                                                                                                                                        | `""`                       |
@@ -102,7 +102,7 @@ helm delete production-postgres
 | `ebx.databaseEncrypt`                | A property for jdbc sql connection (Optional)                                                                                                                                                                                                                       | `"true"`                   |
 | `ebx.databaseTrustServerCertificate` | A property for jdbc sql connection (Optional)                                                                                                                                                                                                                       | `"false"`                  |
 | `ebx.databaseHostNameInCertificate`  | A property for jdbc sql connection (Optional) - The host name to be used to validate the SQL Server TLS/SSL certificate                                                                                                                                             | `"*.database.windows.net"` |
-| `ebx.databaseLoginTimeout`           | A property for jdbc sql connection (Optional) - The number of seconds the driver should wait before timing out a failed connection                                                                                                                                  | `"30"`                     |
+| `ebx.databaseLoginTimeout`           | A property for jdbc sql connection (Optional) - The number of seconds the driver should wait before timing out a failed connection.                                                                                                                                 | `"30"`                     |
 
 **Notes**:
 - If ```ebx.storageClass``` is not specified, the default storage class will be used for provisioning.
@@ -121,7 +121,8 @@ helm delete production-postgres
   check the [official documentation](https://learn.microsoft.com/en-us/sql/connect/jdbc/setting-the-connection-properties?view=sql-server-ver16)
   for information about to setting the sql connection properties.
 
-TODO pch review
+TODO for storage class, indicate that high performance disks,for exemple SSD, are highly recommended. Network file 
+systems may cause issues and therefore should be avoided.
 
 ----------
 
@@ -164,12 +165,7 @@ The ``sysctl`` init container is designed to leave enough space for the OS runni
 This specificity is
 [documented in the core product documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/references/performance.html#memory)
 (Check the ``Memory allocated to the operating system`` part)
-and its [application for kubernetes is documented here](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/running_the_image.html#_host_configuration).
-
-**Note**: If more than one EBX container may run on the same host at the same time, one needs to increase
-these values accordingly.
-
-#TODO pch review
+and its [application for Kubernetes is documented here](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/running_the_image.html#_host_configuration).
 
 ### EBX-INIT
 
@@ -187,16 +183,10 @@ is provided to help you to build and push the ebx-init image.
 **Note**: The script 
 [set-up-database.sh](https://github.com/tibco/ebx-container-edition/blob/main/helm/examples/ebx-postgresql-internal/ebx-init/scripts/set-up-database.sh) need to be updated to be compatible with postgresql 15.
 
-#TODO pch review
-
 ## Customize and extend the chart
-This chart provide a standard, canonical, typical, or vanilla deployment for the TIBCO EBX® Software on kubernetes.
-It's suitable for most of the use case scenarios.
+This chart provide a typical deployment for the TIBCO EBX® Software on Kubernetes.
+It's suitable for most of the use cases.
 
-You are welcome to use and modify the recipes and adapt them to your specific use case,
-in compliance with the Apache License 2.0. However, we recommend that you extend this chart, rather than modify it. 
-
-#TODO pch review
-           
+You are welcome to use and modify the recipes and adapt them to your specific use case.
 
 

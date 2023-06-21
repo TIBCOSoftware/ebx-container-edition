@@ -20,13 +20,12 @@ spec:
   {{- end }}
   rules:
     {{ if eq .Values.ingress.hostRuleDefined "true" }}
-      - host: "{{ .Values.global.hostname}}"
-        http:
+      - http:
     {{ else }}
       - http:
     {{ end }}
           paths:
-            - path: "/{{ .Values.ebx.prefix}}/ebx{{ .Values.ingress.pathRegex}}"
+            - path: "/{{ .Values.ebx.prefix}}/"
               pathType: "{{ .Values.ingress.pathType}}"
               backend:
                 service:

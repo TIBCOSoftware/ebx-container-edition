@@ -13,7 +13,7 @@ global:
   # hostname of the kubernetes server host
   hostname: ""
   # scheme defines the http protocol of the kubernetes server (default value is https, valid values are http and https)
-  scheme: "https" # (Optional) TODO Review this, is it useful ? only seen in NOTES.txt
+  scheme: "https" # (Optional) TODO Please remove. It's redundant with isSecured.
 
 # EBX section defines specifics values for the ebx instance
 ebx:
@@ -21,14 +21,14 @@ ebx:
   # Ingress...)
   prefix: ""
   # adminLogin is the username used to connect to the ebx instance (default value is admin)
-  adminLogin: "admin" # (Optional if the repository is already initialized) TODO pch review
+  adminLogin: "admin" # (Ignored if the repository is already initialized)
   # adminPassword is the password used to connect to the ebx instance
-  adminPassword: "" # (Optional if the repository is already initialized) TODO pch review
+  adminPassword: "334242DQ112122" # (Ignored if the repository is already initialized).
   # isSecured if set to "true", the protocol "HTTPS" is assumed. If "false", the protocol "HTTP" is assumed.
-  isSecured: "true" # TODO pch review
+  isSecured: "true"
   # flaDisabled is made to activate or not the first-launch assistant (For security reasons, one might want to disable
   # the first-launch assistant in all circumstances.)
-  flaDisabled: "true" # (Mandatory on first execution) # TODO pch review
+  flaDisabled: "true" # (Mandatory on first execution and ignored if the repository is already initialized).
   # restAuthenticationBasic if set to true enable Basic authentication for REST services.
   restAuthenticationBasic: "true"
   # cpu number allocate to the container (default value is 2)

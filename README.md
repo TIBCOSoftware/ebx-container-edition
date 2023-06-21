@@ -16,7 +16,7 @@ You must have a valid license to use them.
 ## Prerequisites
 
 - [TIBCO EBX® Container Edition](https://docs.tibco.com/pub/ebx/6.1.0/doc/pdf/TIB_ebx_6.1.0_container_edition.pdf?id=0) 6.0.15+
-- [Kubernetes](https://kubernetes.io/) v1.23+, a working Kubernetes cluster from a [certified K8s software](https://www.cncf.io/certification/software-conformance/).
+- [Kubernetes](https://kubernetes.io/) v1.23+, a working Kubernetes cluster from a [certified Kubernetes software](https://www.cncf.io/certification/software-conformance/).
 - [Helm](https://helm.sh/) v3+, for building and deploying the charts.
 
 **Note**:
