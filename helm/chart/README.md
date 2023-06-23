@@ -6,9 +6,15 @@ This sample is a Helm chart for EBX.
 
 This chart is a generic example, that should work on most Kubernetes cluster. 
 
-This chart was tested with the [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) 
+This chart was tested on most clusters with the [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) 
 maintained by the Kubernetes community. 
 This chart assumes it is already installed on your cluster.
+
+**Note**:
+For specific examples, this chart may have been tested with other Ingress controllers, in which case it will be 
+indicated in this documentation.
+
+TODO pch review above
 
 ## Prerequisites
 
