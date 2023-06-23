@@ -23,6 +23,11 @@ except some particular version such as [Red Hat OpenShift](https://www.redhat.co
 * Helm v3+
 * EBX (Container Edition) image pushed on your docker registry
 
+**Note**:
+The architecture (type of CPU) of the images must match that of the cluster
+
+TODO pch review NOTE
+
 ## Installing the Chart
 
 Before installing the chart, you may need to adjust the required values in the [configuration file](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values.yaml)  
@@ -96,9 +101,11 @@ helm delete ebx-chart
 | `ebx.databaseLoginTimeout`           | A property for jdbc sql connection (Optional) - The number of seconds the driver should wait before timing out a failed connection.                                                                                                                                 | `"30"`                     |
 
 **Notes**: 
-- If ```ebx.storageClass``` is not specified, the default storage class will be used for provisioning.
-Please see the [storageClass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/) 
-and the [dynamic volume provisioning concept](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) for 
+- Selected data disks defined by ```ebx.dataStorageClass``` must be high-performance (preferably SSDs), and network 
+disks should be avoided. For logs disk defined by ```ebx.logsStorageClass``` general-purpose disks (but not too slow) 
+can be used.
+Please see the [storageClass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/)
+and the [dynamic volume provisioning concept](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) for
 further information.
 - For ```ebx.databaseType``` refer to
 [this documentation](https://github.com/tibco/ebx-container-edition/blob/main/docs/databases-connectivity.md)

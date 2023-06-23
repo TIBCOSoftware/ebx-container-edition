@@ -10,7 +10,7 @@ metadata:
     app: "{{ .Values.ebx.prefix}}-app"
 spec:
   {{- if .Values.ebx.storageClass }}
-  storageClassName: "{{ .Values.ebx.storageClass}}"
+  storageClassName: "{{ .Values.ebx.dataStorageClass}}"
   {{- end }}
   accessModes:
     - ReadWriteOnce
@@ -27,7 +27,7 @@ metadata:
     app: "{{ .Values.ebx.prefix}}-app"
 spec:
   {{- if .Values.ebx.storageClass }}
-  storageClassName: "{{ .Values.ebx.storageClass}}"
+  storageClassName: "{{ .Values.ebx.logsStorageClass}}"
   {{- end }}
   accessModes:
     - ReadWriteOnce

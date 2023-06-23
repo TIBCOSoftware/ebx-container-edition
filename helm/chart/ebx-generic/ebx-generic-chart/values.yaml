@@ -33,8 +33,10 @@ ebx:
   cpu: 2
   # memory is the container memory limit allocate to the container (default value is 2Gi)
   memory: "2Gi"
-  # storageClass used to claim volumes (will take default storageClass if no value is specified)
-  storageClass : ""
+  # dataStorageClass used to claim volumes for ebx data
+  dataStorageClass: # (will take default storageClass if no value is specified)
+  # logsStorageClass used to claim volumes for ebx logs
+  logsStorageClass: # (will take default storageClass if no value is specified)
   # dataVolumeStorageClaim is the amount of disk space of the PersistentVolume requested by the ebx
   # instance to store it's data
   dataVolumeStorageClaim: "20Gi"
