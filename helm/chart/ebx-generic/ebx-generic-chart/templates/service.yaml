@@ -4,10 +4,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "{{ .Values.ebx.prefix}}-service"
+  name: "{{ .Values.ebx.prefix}}-ebx"
   namespace: "{{ .Values.global.namespace}}"
   labels:
-    app: "{{ .Values.ebx.prefix}}-service"
+    app: "{{ .Values.ebx.prefix}}-ebx"
 spec:
   type: NodePort
   selector:

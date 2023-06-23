@@ -4,7 +4,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{ .Values.ebx.prefix}}"
+  name: "{{ .Values.ebx.prefix}}-ebx"
   namespace: "{{ .Values.global.namespace}}"
   labels:
     app: "{{ .Values.ebx.prefix}}-app"
@@ -23,7 +23,7 @@ spec:
       nodeSelector:
         kubernetes.io/os: "linux"
       containers:
-        - name: "{{ .Values.ebx.prefix}}-instance-pod"
+        - name: "{{ .Values.ebx.prefix}}-ebx"
           image: "{{ .Values.global.ebxImage}}"
           imagePullPolicy: Always
           ports:
@@ -34,7 +34,7 @@ spec:
             - name: EBX_DB_URL
               valueFrom:
                 configMapKeyRef:
-                  name: "{{ .Values.ebx.prefix}}-databases-drivers-url-configmap"
+                  name: "{{ .Values.ebx.prefix}}-ebx"
                   key: "{{ .Values.ebx.databaseType}}"
             - name: EBX_ROOT_PATH
               value: "/{{ .Values.ebx.prefix}}"
@@ -43,12 +43,12 @@ spec:
             - name: EBX_DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.ebx.prefix}}-database-secret"
+                  name: "{{ .Values.ebx.prefix}}-ebx-db"
                   key: "USER"
             - name: EBX_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.ebx.prefix}}-database-secret"
+                  name: "{{ .Values.ebx.prefix}}-ebx-db"
                   key: "PASSWORD"
             - name: EBX_FLA_DISABLED
               value: "{{ .Values.ebx.flaDisabled}}"
@@ -57,12 +57,12 @@ spec:
             - name: EBX_INSTALL_ADMIN_LOGIN
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.ebx.prefix}}-admin-logon-secret"
+                  name: "{{ .Values.ebx.prefix}}-ebx-logon"
                   key: "LOGIN"
             - name: EBX_INSTALL_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.ebx.prefix}}-admin-logon-secret"
+                  name: "{{ .Values.ebx.prefix}}-ebx-logon"
                   key: "PASSWORD"
           resources:
             limits:
@@ -73,24 +73,25 @@ spec:
               cpu: {{ .Values.ebx.cpu}}
           volumeMounts:
             - mountPath: "/usr/share/ebx/data"
-              name: "{{ .Values.ebx.prefix}}-persistent-storage-data"
+              name: "{{ .Values.ebx.prefix}}-ebx-data"
             - mountPath: "/usr/share/ebx/logs"
-              name: "{{ .Values.ebx.prefix}}-persistent-storage-logs"
+              name: "{{ .Values.ebx.prefix}}-ebx-logs"
       {{- if .Values.global.ebxImageRegistrySecret }}
       imagePullSecrets:
         - name: "{{ .Values.global.ebxImageRegistrySecret}}"
       {{- end }}
       initContainers:
-        - name: sysctl
+        - name: init
           image: busybox
+          imagePullPolicy: Always
           securityContext:
             privileged: true
             runAsUser: 0
-          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144 && ulimit -n 512000'] # TODO review
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144'] # TODO review check if current value is higher
       volumes:
-        - name: "{{ .Values.ebx.prefix}}-persistent-storage-data"
+        - name: "{{ .Values.ebx.prefix}}-ebx-data"
           persistentVolumeClaim:
-            claimName: "{{ .Values.ebx.prefix}}-pv-local-claim-data"
-        - name: "{{ .Values.ebx.prefix}}-persistent-storage-logs"
+            claimName: "{{ .Values.ebx.prefix}}-ebx-data"
+        - name: "{{ .Values.ebx.prefix}}-ebx-logs"
           persistentVolumeClaim:
-            claimName: "{{ .Values.ebx.prefix}}-pv-local-claim-logs"
+            claimName: "{{ .Values.ebx.prefix}}-ebx-logs"

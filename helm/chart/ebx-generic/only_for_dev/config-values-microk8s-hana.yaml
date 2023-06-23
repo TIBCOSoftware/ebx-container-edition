@@ -1,0 +1,21 @@
+
+global:
+  namespace: "ebx"
+  ebxImage: "brm.orchestranetworks.com:5001/internal/ebx:6.1.0-hana-driver"
+  hostname: "k8s.orchestranetworks.com"
+
+ebx:
+  prefix: "hana"
+  adminPassword: "abcde1458"
+  isSecured: "true"
+  databaseName: "ebx"
+  databaseUser: "ebx"
+  databasePwd: 'ebx4Hana'
+  databaseHost: "orchestra-hana.orchestranetworks.com"
+  databasePort: "39041"
+  databaseType: "hana"
+
+ingress:
+  hostRuleDefined : "false"
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"

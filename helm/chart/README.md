@@ -19,46 +19,28 @@ except some particular version such as [Red Hat OpenShift](https://www.redhat.co
 
 ## Installing the Chart
 
-Before installing the chart, you may need to adjust your ingress annotations according to your needs.
-To do so, you first have to add the annotations that suit your needs in the 
-[ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/ingress-annotations-values.yaml) 
-file as explain here:
+Before installing the chart, you may need to adjust the required values in the [configuration file](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values.yaml)  
+according to your needs.
 
-```
-ingress:
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/service-upstream: "true"
-    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "ssl-server-name-test"
-    
-```
 **Note**:
-- These annotations are only examples. For details, please see the [Ingress-Nginx Controller annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
-section.
-- Please see the [ingress configuration section](#Ingress-configuration) for more information about how to configure
-    the ingress resource.
+The values provided in this file are examples only.
+Please see the [Configuration section](#Configuration) for more information.
 
-### Install command
+### Install the chart
 
-To install the chart with the release name `ebx-chart` in the namespace ```ebx```:
+Create the ebx namespace:
 
 ```
-helm upgrade ebx-chart \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=<your.image.location> \
- --set-string global.hostname=<your.hostname.com> \
- --set-string ebx.prefix=s1 \
- --set-string ebx.adminPassword=<'?Y0urP4ssWord!'> \
- --set-string ebx.databaseName=<ebx db name> \
- --set-string ebx.databaseUser=<ebx db user> \
- --set-string ebx.databasePwd=<'ebx db password'> \
- --set-string ebx.databaseHost=<ebx db host> \
- --set-string ebx.databasePort=<ebx db port> \
- --set-string ebx.databaseType=<ebx db type> \
- ./ebx-generic-chart
+kubectl create namespace ebx
 ```
+
+Install the chart with the release name `ebx-chart` in the namespace ```ebx```:
+
+```
+ helm upgrade ebx-chart  --install -f config-values.yaml ./ebx-generic-chart
+```
+**Notes**:
+This command must be run from the ```helm/chart/ebx-generic``` directory.
 
 ## Uninstalling the Chart
 To uninstall the chart with the release name `ebx-chart`:
@@ -128,19 +110,16 @@ defined via the Helm command will be ignored and will retain the values set when
 
 ### Ingress configuration
 
-| Name                      | Description                                                                                                                                                                                                                               | Value      |
-|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| `ingress.className`       | className is the name of the chosen ingress-controller                                                                                                                                                                                    | `"nginx"`  |
-| `ingress.tlsSecret`       | tlsSecret that contains the self-signed certificate and private key (Optional)                                                                                                                                                            | `""`       | 
-| `ingress.hostRuleDefined` | hostRuleDefined modify the syntax of the ingress resource according to this value. If set to true, a host must be defined.                                                                                                                | `"true"`   |
-| `ingress.annotations`     | annotations to configure the ingress resource                                                                                                                                                                                             | `""`       |
-| `ingress.pathRegex`       | pathRegex will complete the path ingress path field. For example with the default value, the final path will be of the form ```/{{ .Values.ebx.prefix}}/ebx.*``` (This value may change depending on the type of the ingress controller.) | `".*"`     |
-| `ingress.pathType`        | pathType is pathType of the ingress                                                                                                                                                                                                       | `"Prefix"` |
-
+| Name                      | Description                                                                                                                                        | Value      |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| `ingress.className`       | className is the name of the chosen ingress-controller                                                                                             | `"nginx"`  |
+| `ingress.tlsSecret`       | tlsSecret that contains the self-signed certificate and private key (Optional)                                                                     | `""`       | 
+| `ingress.hostRuleDefined` | hostRuleDefined modify the syntax of the ingress resource according to this value. If set to true, an host field is added to the ingress resource. | `"true"`   |
+| `ingress.annotations`     | annotations to configure the ingress resource                                                                                                      | `""`       |
+| `ingress.pathType`        | pathType is pathType of the ingress                                                                                                                | `"Prefix"` |
 
 **Note**:
-- Use the [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/ingress-annotations-values.yaml) 
-file to add annotations for the ```ingress.annotations``` section. Please refer to the 
+For annotations (```ingress.annotations``` field) please refer to the 
 [following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
 to best meet your needs.
 
@@ -148,168 +127,89 @@ to best meet your needs.
 
 ## Installation examples
 
-Here are some examples of installations commands for deploying ebx with different databases.
+Examples of configuration files are included in this directory.
+These files provide examples for deploying EBX on different Kubernetes clusters types with different types of databases.
+
+They match the following naming convention:
+```
+config-values-<a Kubernetes cluster type>-<a database type>.yaml
+```
+
+You can deploy them simply by following the installation process explained in section [Install the chart](#Install the chart)
+and by replacing the name of the configuration file you want to use as explained here:
+
+```
+helm upgrade ebx-chart  --install -f config-values-microk8s-sql.yaml ./ebx-generic-chart
+```
+
+Some of these examples have a dedicated section below to clarify some information.
+
+These examples are only propositions, therefore they are not imperative and can be extended or customized.
 
 **Note**: Some jdbc drivers are not included in the original EBX image, please refer to the following
 [documentation](https://github.com/tibco/ebx-container-edition/blob/main/docs/databases-connectivity.md)
 for more information.
 
-### Deploy EBX with an embedded H2 database.
-
-```
-helm upgrade ebx-chart \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
- --set-string global.hostname=ebx.hostname-example.com \
- --set-string ebx.prefix=s1 \
- --set-string ebx.adminPassword='?Y0urP4ssWord!' \
- --set-string ebx.databaseName=ebxDb \
- --set-string ebx.databaseUser=abxDbUser \
- --set-string ebx.databasePwd='+Jjf6frs7?' \
- --set-string ebx.databasePort=7634 \
- --set-string ebx.databaseType=h2.standalone \
- ./ebx-generic-chart
-```
-
-**Note**: 
-No need to enter value ```ebx.databaseHost``` for h2 embedded database.
-
-TODO Please check that for an embedded H2 database,databaseUser, databasePwd and databasePort need to be filled in.
-
-### Deploy EBX with a PostgreSQL database.
-
-```
-helm upgrade ebx-chart \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
- --set-string global.hostname=ebx.hostname-example.com \
- --set-string ebx.prefix=s1 \
- --set-string ebx.adminPassword='?Y0urP4ssWord!' \
- --set-string ebx.databaseName=ebxDb \
- --set-string ebx.databaseUser=abxDbUser \
- --set-string ebx.databasePwd='+Jjf6frs7?' \
- --set-string ebx.databaseHost=postgresql.db-host.com \
- --set-string ebx.databasePort=5432 \
- --set-string ebx.databaseType=postgresql \
- ./ebx-generic-chart
-```
-
-
-### Deploy EBX with an SQL database.
-
-```
-helm upgrade ebx-chart \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
- --set-string global.hostname=ebx.hostname-example.com \
- --set-string ebx.prefix=s1 \
- --set-string ebx.adminPassword='?Y0urP4ssWord!' \
- --set-string ebx.databaseName=ebxDb \
- --set-string ebx.databaseUser=abxDbUser \
- --set-string ebx.databasePwd='+Jjf6frs7?' \
- --set-string ebx.databaseHost=sqlserver.db-host.com \
- --set-string ebx.databasePort=1245 \
- --set-string ebx.databaseType=sqlserver \
- ./ebx-generic-chart
-```
-
-**Note**:
-You can configure the connection settings by overwriting the jdbc sql properties present at the end of the 
-[EBX configuration](#ebx-configuration) section.
-
 
 ### Deploy EBX on AKS (Azure Kubernetes Service)
 
-This is an example of EBX deployment on AKS with TLS configured.
+The [config-values-aks-sql](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values-aks-sql.yaml) 
+configuration file provide an example of an EBX deployment on AKS with an SQL Database and TLS configured.
+
 It's using TLS with [Let's Encrypt](https://letsencrypt.org/) certificates provide by [cert-manager](https://github.com/cert-manager/cert-manager).
+This example assumes that `` cert-manager``  is already installed in your cluster.
 
-Please see the following Azure documentation to see [how to use TLS with an ingress controller on Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli)
-
-**Note**:
-You must add the following annotations in [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ingress-annotations-values.yaml)
-
-```
-nginx.ingress.kubernetes.io/use-regex: "true"
-cert-manager.io/cluster-issuer: letsencrypt
-```
-helm install command: 
-
-```
-helm upgrade ebx-chart \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
- --set-string global.hostname=ebx.hostname-example.com \
- --set-string ebx.prefix=s1 \
- --set-string ebx.adminPassword='?Y0urP4ssWord!' \
- --set-string ebx.databaseName=ebxDb \
- --set-string ebx.databaseUser=abxDbUser \
- --set-string ebx.databasePwd='+Jjf6frs7?' \
- --set-string ebx.databaseHost=sqlserver.db-host.com \
- --set-string ebx.databasePort=1245 \
- --set-string ebx.databaseType=sqlserver \
- --set-string ingress.tlsSecret=letsencrypt-tls-secret \
- ./ebx-generic-chart
-```
+Please see the following Azure documentation know [how to use TLS with an ingress controller on Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli)
 
 ### Deploy EBX on EKS (Amazon Elastic Kubernetes Service)
 
-This is an example of EBX deployment on EKS (Elastic Kubernetes Service).
+The [config-values-eks-sql](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values-eks-sql.yaml)
+configuration file provide an example of EBX deployment on EKS (Elastic Kubernetes Service).
+
 It's using the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.5/)
+This example assumes that the `` AWS Load Balancer Controller``  is already installed in your cluster.
 
-Please check see the following AWS documentation to see [how to Install the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
+Please see the following AWS documentation to know [how to Install the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
 
-**Note**:
-You must add the following annotations in [ingress-annotations-values.yaml](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ingress-annotations-values.yaml)
+#### Reach out the your ebx instance: 
+
+With this implementation, AWS will create an [EC2 Application LoadBalancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) 
+dynamically when EBX ingress resource is created.
+This ALB has a DNS which will be the entry point to reach your EBX instance.
+
+If you do not attach your personal dns to this load balancer you can use his to reach your EBX instance.  
+
+To know the DNS entry point you can run the following command and check the ```ADDRESS``` value of your ingress resource:
 ```
-alb.ingress.kubernetes.io/scheme: internet-facing
-alb.ingress.kubernetes.io/target-type: ip
+kubectl get ingress -n ebx
 ```
-helm install command:
+The url will then be of the following form :
 ```
-helm upgrade ebx-chart \
- --install \
- -f ingress-annotations-values.yaml \
- --set-string global.namespace=ebx \
- --set-string global.ebxImage=docker.registry.com:1234/ebx:6.1.0 \
- --set-string global.hostname=ebx.hostname-example.com \
- --set-string ebx.prefix=s1 \
- --set-string ebx.adminPassword='?Y0urP4ssWord!' \
- --set-string ebx.databaseName=ebxDb \
- --set-string ebx.databaseUser=abxDbUser \
- --set-string ebx.databasePwd='+Jjf6frs7?' \
- --set-string ebx.databaseHost=sqlserver.db-host.com \
- --set-string ebx.databasePort=1245 \
- --set-string ebx.databaseType=sqlserver \
- --set-string ingress.className=alb \
- --set-string ingress.pathRegex='*' \
- --set-string ingress.pathType=ImplementationSpecific \
- ./ebx-generic-chart
+<aws load balancer dns >/<.Values.ebx.prefix>/
 ```
+
+TODO pch review above
 
 ## Init container
 
-The ``sysctl`` init container is designed to leave enough space for the OS running the application server by defining the values 
-``vm.max_map_count`` and ``ulimit``.
+The ``init`` container is designed to leave enough space for the OS running the application server by defining 
+the values ``vm.max_map_count``.
 
 This specificity is 
 [documented in the core product documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/references/performance.html#memory) 
 (Check the ``Memory allocated to the operating system`` part)
 and its [application for Kubernetes is documented here](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/running_the_image.html#_host_configuration).
 
+**Note**:
+max open files set by ``ulimit -n`` must have a fairly high value on the host machine.
+
+TODO pch review above
+
 ## Customize and extend the chart
 This chart provides a standard, canonical, typical, or vanilla deployment for the TIBCO EBX® Software on Kubernetes. 
 It's suitable for most of the use case scenarios.
 
-You are welcome to use and modify the recipes and adapt them to your specific use case, 
-in compliance with the Apache License 2.0. However, we recommend that you extend this chart, rather than modify it. 
+You are welcome to use and modify the recipes and adapt them to your specific use case. 
 
 
 

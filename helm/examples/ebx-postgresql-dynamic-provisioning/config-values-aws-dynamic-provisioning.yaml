@@ -1,0 +1,29 @@
+
+global:
+  namespace: "ebx"
+  ebxImage: "953359651100.dkr.ecr.eu-west-3.amazonaws.com/ebx:6.1.0"
+  ebxInitImage: "953359651100.dkr.ecr.eu-west-3.amazonaws.com/ebx-init:1.0"
+  hostname: "ebx-test-on-eks.com"
+
+ebx:
+  prefix: "postgresql-dyn"
+  adminPassword: "abcde1458"
+  isSecured: "true"
+  databaseName: "ebx"
+  databaseUser: "ebx"
+  databasePwd: "ebx"
+  databaseHost: "postgres-ebx-postgresql"
+  databasePort: "5432"
+  databaseType: "postgresql"
+
+ingress:
+  className: "alb"
+  hostRuleDefined : "false"
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+
+postgresServer:
+  database: "masterdb"
+  user: "postgres"
+  pwd: "ftefg32"

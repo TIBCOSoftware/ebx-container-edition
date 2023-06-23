@@ -1,0 +1,17 @@
+
+global:
+  namespace: "ebx"
+  ebxImage: "brm.orchestranetworks.com:5001/ebx:6.1.0"
+  hostname: "k8s.orchestranetworks.com"
+
+ebx:
+  prefix: "h2"
+  adminPassword: "!gtfr48"
+  isSecured: "false" # TODO pcd review for http example
+  cpu: 1
+  databaseType: "h2.standalone"
+
+ingress:
+  hostRuleDefined : "false"
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"

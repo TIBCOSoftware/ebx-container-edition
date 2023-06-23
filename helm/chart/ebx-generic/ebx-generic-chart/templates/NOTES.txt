@@ -7,7 +7,7 @@ EBX login credentials :
 - Password: {{ .Values.ebx.adminPassword }}
 
 {{ if .Values.global.hostname }}
-EBX is running at the following url : {{ .Values.global.scheme }}://{{ .Values.global.hostname }}/{{ .Values.ebx.prefix }}/ebx
+EBX is running at the following url : {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}{{ .Values.global.hostname }}/{{ .Values.ebx.prefix }}/
 {{ else }}
-EBX is running at the following url : <your dns >/{{ .Values.ebx.prefix }}/ebx
+EBX is running at the following url : {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}<your dns >/{{ .Values.ebx.prefix }}/
 {{ end }}

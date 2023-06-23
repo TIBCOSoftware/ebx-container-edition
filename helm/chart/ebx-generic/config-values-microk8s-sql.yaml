@@ -1,0 +1,25 @@
+
+global:
+  namespace: "ebx"
+  ebxImage: "brm.orchestranetworks.com:5001/ebx:6.1.0"
+  hostname: "k8s.orchestranetworks.com"
+
+ebx:
+  prefix: "sqlserver"
+  adminPassword: "abcde1458"
+  isSecured: "true"
+  databaseName: "<ebx db name>"
+  databaseUser: "<ebx db user>"
+  databasePwd: "<ebx db password>"
+  databaseHost: "<ebx db host>"
+  databasePort: "<ebx db port>"
+  databaseType: "sqlserver"
+  databaseEncrypt: "false" # (Optional)
+  databaseTrustServerCertificate: "false" # (Optional)
+  databaseHostNameInCertificate: "*.database.windows.net" # (Optional)
+  databaseLoginTimeout: 30 # (Optional)
+
+ingress:
+  hostRuleDefined : "false"
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"

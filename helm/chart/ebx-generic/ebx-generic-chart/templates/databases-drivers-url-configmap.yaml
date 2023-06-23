@@ -4,7 +4,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "{{ .Values.ebx.prefix}}-databases-drivers-url-configmap"
+  name: "{{ .Values.ebx.prefix}}-ebx"
   namespace: "{{ .Values.global.namespace}}"
 data:
   postgresql: "jdbc:postgresql://{{ .Values.ebx.databaseHost}}:{{ .Values.ebx.databasePort}}/{{ .Values.ebx.databaseName}}"

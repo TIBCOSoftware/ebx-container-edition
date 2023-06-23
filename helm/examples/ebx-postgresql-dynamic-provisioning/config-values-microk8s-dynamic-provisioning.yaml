@@ -1,0 +1,26 @@
+global:
+  namespace: "ebx"
+  ebxImage: "brm.orchestranetworks.com:5001/ebx:6.1.0"
+  ebxInitImage: "brm.orchestranetworks.com:5001/internal/ebx-init:latest"
+  hostname: "k8s.orchestranetworks.com"
+
+ebx:
+  prefix: "postgresql-dyn"
+  adminPassword: "abcde1458"
+  isSecured: "true"
+  databaseName: "ebx"
+  databaseUser: "ebx"
+  databasePwd: "ebx"
+  databaseHost: "postgres-ebx-postgresql"
+  databasePort: "5432"
+  databaseType: "postgresql"
+
+ingress:
+  hostRuleDefined : "false"
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+postgresServer:
+  database: "masterdb"
+  user: "postgres"
+  pwd: "ftefg32"

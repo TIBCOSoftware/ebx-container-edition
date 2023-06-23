@@ -12,8 +12,6 @@ global:
   namespace: "ebx"
   # hostname of the kubernetes server host
   hostname: ""
-  # scheme defines the http protocol of the kubernetes server (default value is https, valid values are http and https)
-  scheme: "https" # (Optional) TODO Please remove. It's redundant with isSecured.
 
 # EBX section defines specifics values for the ebx instance
 ebx:
@@ -60,14 +58,14 @@ ebx:
   ### SQL databases (the following values will be use only if database.type is eq to sqlserver or azure.sql)
 
   # databaseEncrypt is a property for jdbc sql connection (set to true that specify that the SQL Server uses TLS encryption)
-  databaseEncrypt: "true" # (Optional)
+  databaseEncrypt: "" # (Optional)
   #  databaseTrustServerCertificate is a property for jdbc sql connection (set to true that specify that the driver doesn't
   # validate the server TLS/SSL certificate.)
-  databaseTrustServerCertificate: "false" # (Optional)
+  databaseTrustServerCertificate: "" # (Optional)
   # databaseHostNameInCertificate is the host name to be used to validate the SQL Server TLS/SSL certificate.
-  databaseHostNameInCertificate: "*.database.windows.net" # (Optional)
+  databaseHostNameInCertificate: "" # (Optional)
   # databaseLoginTimeout is the number of seconds the driver should wait before timing out a failed connection
-  databaseLoginTimeout: 30 # (Optional)
+  databaseLoginTimeout: # (Optional)
 
 # Ingress section defines specifics values for traffic routing rules of the Ingress resource
 ingress:
@@ -77,15 +75,15 @@ ingress:
   tlsSecret: "" # (Optional)
   # hostRuleDefied modify the syntax of the ingress according to this value. (default value is true)
   # If set to true, an host must be defined.
-  hostRuleDefined: "true"
+  hostRuleDefined: "false"
   # annotations to configure the ingress resource
   annotations:
   # pathRegex will complete the path ingress path field. For example with the default value, the final path will be of
   # the form "/{{ .Values.ebx.prefix}}/ebx.*" .
   # This value may change depending on the type of the ingress controller.
-  pathRegex: ".*"
+  pathRegex: ".*" # TODO remove ?
   # pathType is pathType of the ingress.
-  pathType:  "Prefix"
+  pathType:  "Prefix" # TODO remove ?
 
 
 
