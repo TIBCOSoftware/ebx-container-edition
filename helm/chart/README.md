@@ -24,7 +24,7 @@ except some particular version such as [Red Hat OpenShift](https://www.redhat.co
 * EBX (Container Edition) image pushed on your docker registry
 
 **Note**:
-The architecture (type of CPU) of the images must match that of the cluster
+The architecture (type of CPU) of the images must match that of the cluster.
 
 TODO pch review NOTE
 
@@ -136,24 +136,46 @@ For annotations (```ingress.annotations``` field) please refer to the
 [following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
 to best meet your needs.
 
+### Examples configuration
+
+| Name                                            | Description                                                                                                                                                                                                                         | Value     |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| `samples.postgresqlDynamicProvisioningEnable`   | If set to true, will add the ebx-init container and create postgresServer secret (to use the [Deploy EBX with dynamic provisioning of postgresql databases](#Deploy EBX with dynamic provisioning of postgresql databases) example) | `"false"` |
+
 ----------
+
+## Init container
+
+The ``init`` container is designed to leave enough space for the OS running the application server by defining 
+the values ``vm.max_map_count``.
+
+This specificity is 
+[documented in the core product documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/references/performance.html#memory) 
+(Check the ``Memory allocated to the operating system`` part)
+and its [application for Kubernetes is documented here](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/running_the_image.html#_host_configuration).
+
+**Note**:
+max open files set by ``ulimit -n`` must have a fairly high value on the host machine.
+
+TODO pch review above
+
+----------
+
 
 ## Installation examples
 
-Examples of configuration files are included in this directory.
+Examples of configuration files are included in the [configurations directory]().
 These files provide examples for deploying EBX on different Kubernetes clusters types with different types of databases.
 
-They match the following naming convention:
-```
-config-values-<a Kubernetes cluster type>-<a database type>.yaml
-```
+Some examples may have a dedicated directory to contain annex files.
 
 You can deploy them simply by following the installation process explained in section [Install the chart](#Install the chart)
 and by replacing the name of the configuration file you want to use as explained here:
 
 ```
-helm upgrade ebx-chart  --install -f config-values-microk8s-sql.yaml ./ebx-generic-chart
+helm upgrade ebx-chart  --install -f configurations/config-values-you-want.yaml ./ebx-generic-chart
 ```
+#TODO test command from directory 
 
 Some of these examples have a dedicated section below to clarify some information.
 
@@ -166,7 +188,7 @@ for more information.
 
 ### Deploy EBX on AKS (Azure Kubernetes Service)
 
-The [config-values-aks-sql](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values-aks-sql.yaml) 
+The [config-values-aks-sql](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values-aks-sql.yaml)
 configuration file provide an example of an EBX deployment on AKS with an SQL Database and TLS configured.
 
 It's using TLS with [Let's Encrypt](https://letsencrypt.org/) certificates provide by [cert-manager](https://github.com/cert-manager/cert-manager).
@@ -184,13 +206,13 @@ This example assumes that the `` AWS Load Balancer Controller``  is already inst
 
 Please see the following AWS documentation to know [how to Install the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
 
-#### Reach out the your ebx instance: 
+#### Reach out the ebx instance:
 
-With this implementation, AWS will create an [EC2 Application LoadBalancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) 
+With this implementation, AWS will create an [EC2 Application LoadBalancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html)
 dynamically when EBX ingress resource is created.
 This ALB has a DNS which will be the entry point to reach your EBX instance.
 
-If you do not attach your personal dns to this load balancer you can use his to reach your EBX instance.  
+If you do not attach your personal dns to this load balancer you can use his to reach your EBX instance.
 
 To know the DNS entry point you can run the following command and check the ```ADDRESS``` value of your ingress resource:
 ```
@@ -203,26 +225,65 @@ The url will then be of the following form :
 
 TODO pch review above
 
-## Init container
+### Deploy EBX with dynamic provisioning of postgresql databases
 
-The ``init`` container is designed to leave enough space for the OS running the application server by defining 
-the values ``vm.max_map_count``.
+The [config-values-aks-postgresql-dynamic-provisioning]() configuration file provide an example of configuration for 
+deploying ebx on a kubernetes cluster and create it's PostgreSQL database dynamically.
+TODO name + link
 
-This specificity is 
-[documented in the core product documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/references/performance.html#memory) 
-(Check the ``Memory allocated to the operating system`` part)
-and its [application for Kubernetes is documented here](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/running_the_image.html#_host_configuration).
+Each time an EBX instance is created, the init container ([EBX-INIT](#EBX-INIT)) will create a database dedicated to
+this instance on the PostgreSQL server.
+
+This example assumes that you have a Postgresql server (11 to 14.x) already configured and the EBX-INIT pushed on your 
+docker registry.
 
 **Note**:
-max open files set by ``ulimit -n`` must have a fairly high value on the host machine.
+You need [Docker](https://www.docker.com/) v20.x for building the EBX-INIT container image.
 
-TODO pch review above
+#### Mandatory values
+
+If you decide to create your own configuration file following this example, be aware that these values are mandatory:
+```
+global:
+  # ebxInitImage is the ebx-init image URL 
+  ebxInitImage: "<your.registry.com/ebx-init:1.0>"
+
+examples:
+  # postgresqlDynamicProvisioningEnable if set to true, will add the ebx-init container and create postgresServer secret.
+  postgresqlDynamicProvisioningEnable: "true"
+
+# postgresServer section defines specifics values for the postgresServer connectivity (Optional)
+# this section Deploy EBX with dynamic provisioning of postgresql databases
+postgresServer:
+  # database is the postgres server master database name
+  database: ""
+  # user is the postgres server master database user
+  user: ""
+  # pwd is the postgres server master database password
+  pwd: ""
+```
+
+#### EBX-INIT
+
+The ``ebx-init`` init container is made to initialize a postgresql database for an EBX instance.
+
+It's based on an ```alpine:3.14.3``` image and contains:
+- the postgresql-client
+- bash
+- the set-up-database.sh script
+
+A [bundle](https://github.com/tibco/ebx-container-edition/tree/main/helm/examples/ebx-postgresql-internal/ebx-init)
+is provided to help you to build and push the ebx-init image. # TODO change URL
+
+**Note**: The script
+[set-up-database.sh](https://github.com/tibco/ebx-container-edition/blob/main/helm/examples/ebx-postgresql-internal/ebx-init/scripts/set-up-database.sh) 
+need to be updated to be compatible with postgresql 15.
 
 ## Customize and extend the chart
 This chart provides a standard, canonical, typical, or vanilla deployment for the TIBCO EBX® Software on Kubernetes. 
 It's suitable for most of the use case scenarios.
 
-You are welcome to use and modify the recipes and adapt them to your specific use case. 
+You are welcome to use and modify the chart and adapt it to your specific use case. 
 
 
 

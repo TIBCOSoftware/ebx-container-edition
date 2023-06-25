@@ -80,12 +80,16 @@ ingress:
   hostRuleDefined: "false"
   # annotations to configure the ingress resource
   annotations:
-  # pathRegex will complete the path ingress path field. For example with the default value, the final path will be of
-  # the form "/{{ .Values.ebx.prefix}}/ebx.*" .
-  # This value may change depending on the type of the ingress controller.
-  pathRegex: ".*" # TODO remove ?
   # pathType is pathType of the ingress.
   pathType:  "Prefix" # TODO remove ?
+
+# Examples section defines values for specifics examples. Please see the example section in the README file.
+examples:
+  # postgresqlDynamicProvisioningEnable if set to true, will add the ebx-init container and create postgresServer secret.
+  # Please see the "EBX with dynamic provisioning of postgresql databases" example in the README file.
+  postgresqlDynamicProvisioningEnable: "false" # if set to true the postgresServer values must be defined.
+
+
 
 
 

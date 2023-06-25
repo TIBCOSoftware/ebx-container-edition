@@ -88,6 +88,46 @@ spec:
             privileged: true
             runAsUser: 0
           command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144'] # TODO review check if current value is higher
+      {{- if eq .Values.examples.postgresqlDynamicProvisioningEnable "true" }}
+        - name: "ebx-init"
+          image: "{{ .Values.global.ebxInitImage}}"
+          resources:
+            limits:
+              memory: "100Mi"
+              cpu: 1
+          env:
+            - name: EBX_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.ebx.prefix}}-ebx-db"
+                  key: "USER"
+            - name: EBX_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.ebx.prefix}}-ebx-db"
+                  key: "PASSWORD"
+            - name: EBX_DB_DATABASE
+              value: "{{ .Values.ebx.databaseName}}"
+            - name: PGPORT
+              value: "{{ .Values.ebx.databasePort}}"
+            - name: PGHOST
+              value: "{{ .Values.ebx.databaseHost}}"
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.ebx.prefix}}-ebx-psql-srv"
+                  key: "DATABASE"
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.ebx.prefix}}-ebx-psql-srv"
+                  key: "USER"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.ebx.prefix}}-ebx-psql-srv"
+                  key: "PASSWORD"
+      {{- end }}
       volumes:
         - name: "{{ .Values.ebx.prefix}}-ebx-data"
           persistentVolumeClaim:
