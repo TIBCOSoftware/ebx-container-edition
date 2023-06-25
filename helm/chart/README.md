@@ -24,7 +24,7 @@ except some particular version such as [Red Hat OpenShift](https://www.redhat.co
 * EBX (Container Edition) image pushed on your docker registry
 
 **Note**:
-The architecture (type of CPU) of the images must match that of the cluster.
+The architecture / type of CPU of the images (EBX and init containers) must match that of the cluster.
 
 TODO pch review NOTE
 
