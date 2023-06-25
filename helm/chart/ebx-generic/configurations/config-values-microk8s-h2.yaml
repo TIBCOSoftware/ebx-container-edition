@@ -10,6 +10,5 @@ ebx:
   databaseType: "h2.standalone" # Note : Only this database parameter is needed for h2 embedded database.
                                 # The rest have default values (user, password, host etc..)
 ingress:
-  hostRuleDefined : "false"
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"

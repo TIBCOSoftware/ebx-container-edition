@@ -20,6 +20,5 @@ ebx:
   databaseLoginTimeout: 30 # (Optional)
 
 ingress:
-  hostRuleDefined : "false"
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"

@@ -33,9 +33,10 @@ TODO pch review NOTE
 Before installing the chart, you may need to adjust the required values in the [configuration file](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values.yaml)  
 according to your needs.
 
-**Note**:
+**Notes**:
 The values provided in this file are examples only.
-Please see the [Configuration section](#Configuration) for more information.
+- Please see the [Configuration section](#Configuration) for more information.
+- All commands provide in this file must be run from the ```helm/chart/ebx-generic``` directory.
 
 ### Install the chart
 
@@ -50,8 +51,6 @@ Install the chart with the release name `ebx-chart` in the namespace ```ebx```:
 ```
  helm upgrade ebx-chart  --install -f config-values.yaml ./ebx-generic-chart
 ```
-**Notes**:
-This command must be run from the ```helm/chart/ebx-generic``` directory.
 
 ## Uninstalling the Chart
 To uninstall the chart with the release name `ebx-chart`:
@@ -161,7 +160,6 @@ TODO pch review above
 
 ----------
 
-
 ## Installation examples
 
 Examples of configuration files are included in the [configurations directory]().
@@ -173,7 +171,7 @@ You can deploy them simply by following the installation process explained in se
 and by replacing the name of the configuration file you want to use as explained here:
 
 ```
-helm upgrade ebx-chart  --install -f configurations/config-values-you-want.yaml ./ebx-generic-chart
+helm upgrade ebx-chart --install -f configurations/config-values-you-want.yaml ./ebx-generic-chart
 ```
 #TODO test command from directory 
 
@@ -238,7 +236,7 @@ This example assumes that you have a Postgresql server (11 to 14.x) already conf
 docker registry.
 
 **Note**:
-You need [Docker](https://www.docker.com/) v20.x for building the EBX-INIT container image.
+You need [Docker](https://www.docker.com/) v20.x+ for building the EBX-INIT container image.
 
 #### Mandatory values
 
@@ -261,6 +259,11 @@ postgresServer:
   user: ""
   # pwd is the postgres server master database password
   pwd: ""
+```
+
+install command:
+```
+helm upgrade ebx-chart  --install -f configurations/postgresql-dynamic-provisioning/config-values-postgresql-dynamic-provisionning.yaml ./ebx-generic-chart
 ```
 
 #### EBX-INIT

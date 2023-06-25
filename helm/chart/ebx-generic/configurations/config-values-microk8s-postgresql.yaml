@@ -16,6 +16,5 @@ ebx:
   databaseType: "postgresql>"
 
 ingress:
-  hostRuleDefined : "false"
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"

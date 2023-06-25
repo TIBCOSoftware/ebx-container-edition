@@ -12,6 +12,5 @@ ebx:
   databaseType: "h2.standalone"
 
 ingress:
-  hostRuleDefined : "false"
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"

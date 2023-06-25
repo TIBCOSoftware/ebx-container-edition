@@ -14,17 +14,16 @@ ebx:
   databasePwd: "<ebx db password>"
   databaseHost: "<ebx db host>"
   databasePort: "<ebx db port>"
-  databaseType: "sqlserver"
-  databaseEncrypt: "false" # (Optional)
-  databaseTrustServerCertificate: "false" # (Optional)
-  databaseHostNameInCertificate: "*.database.windows.net" # (Optional)
-  databaseLoginTimeout: 30 # (Optional)
+  databaseType: "postgresql"
 
 ingress:
-  tlsSecret: "letsencrypt-tls-secret"
-  hostRuleDefined : "true"
   annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    cert-manager.io/cluster-issuer: "<your ClusterIssuer name>"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 
-# TODO
+examples:
+  postgresqlDynamicProvisioningEnable: "true"
+
+postgresServer:
+  database: "postgresql server master database name"
+  user: "postgresql server master user"
+  pwd: "<postgresql server master password>"

@@ -81,7 +81,7 @@ ingress:
   # annotations to configure the ingress resource
   annotations:
   # pathType is pathType of the ingress.
-  pathType:  "Prefix" # TODO remove ?
+  pathType:  "Prefix"
 
 # Examples section defines values for specifics examples. Please see the example section in the README file.
 examples:
