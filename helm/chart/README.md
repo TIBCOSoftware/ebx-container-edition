@@ -227,6 +227,8 @@ TODO pch review above
 
 ### Deploy EBX with dynamic provisioning of postgresql databases
 
+TODO pch review this section
+
 The [config-values-aks-postgresql-dynamic-provisioning]() configuration file provide an example of configuration for 
 deploying ebx on a kubernetes cluster and create it's PostgreSQL database dynamically.
 TODO name + link
