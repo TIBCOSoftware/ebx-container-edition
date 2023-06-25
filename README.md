@@ -40,15 +40,6 @@ The charts contained in this file have been tested on the following Kubernetes c
 For information on deploying an ebx image, see the section relative to the 
 [generic chart](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/README.md).
 
-## Examples 
-
-The [example section](https://github.com/tibco/ebx-container-edition/tree/main/helm/examples) contains some 
-configuration or chart examples for deploying ebx on a Kubernetes cluster.
-
-They refer to particular cases, or to configurations for specific Kubernetes implementation.
-
-These examples are only propositions, therefore they are not imperative and can be extended or customized.
-
 ## License
 
 TODO
