@@ -1,0 +1,29 @@
+
+global:
+  namespace: "ebx"
+  ebxImage: "<your.registry.com/ebx:6.1.0>"
+  ebxInitImage: "<your.registry.com/ebx-init:1.0>"
+  hostname: "<your.dns.azure.com>"
+
+ebx:
+  prefix: "aks-sql"
+  adminPassword: '<?Y0urP4ssWord!>'
+  isSecured: "true"
+  databaseName: "<ebx db name>"
+  databaseUser: "<ebx db user>"
+  databasePwd: "<ebx db password>"
+  databaseHost: "<ebx db host>"
+  databasePort: "<ebx db port>"
+  databaseType: "postgresql"
+
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+examples:
+  postgresqlDynamicProvisioningEnable: "true"
+
+postgresServer:
+  database: "postgresql server master database name"
+  user: "postgresql server master user"
+  pwd: "<postgresql server master password>"

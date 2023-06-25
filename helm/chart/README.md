@@ -33,10 +33,12 @@ TODO pch review NOTE
 Before installing the chart, you may need to adjust the required values in the [configuration file](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values.yaml)  
 according to your needs.
 
-**Notes**:
-The values provided in this file are examples only.
-- Please see the [Configuration section](#Configuration) for more information.
-- All commands provide in this file must be run from the ```helm/chart/ebx-generic``` directory.
+All commands provide in this file must be run from the ```helm/chart/ebx-generic``` directory.
+
+**Note**:
+The values provided in this file are examples only. Please see the [Configuration section](#Configuration) for more 
+information.
+
 
 ### Install the chart
 
