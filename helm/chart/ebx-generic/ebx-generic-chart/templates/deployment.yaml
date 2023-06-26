@@ -87,7 +87,7 @@ spec:
           securityContext:
             privileged: true
             runAsUser: 0
-          command: ['sh', '-c',"set -x; VM_MAX_MAP_COUNT_VALUE=$(cat /proc/sys/vm/max_map_count);if [ $VM_MAX_MAP_COUNT_VALUE -lt 262163 ]; then echo 'VM_MAX_MAP_COUNT_VALUE smaller than 262161'; sysctl -w vm.max_map_count=262163; else echo 'VM_MAX_MAP_COUNT_VAR greater or equals to 262160'; fi;"]
+          command: ['sh', '-c',"sysctl -w vm.max_map_count=$(awk '{ print ( $1 > 262164 ) ? $1 : 262164}' <  /proc/sys/vm/max_map_count)"]
       {{- if eq .Values.examples.postgresqlDynamicProvisioningEnable "true" }}
         - name: "ebx-init"
           image: "{{ .Values.global.ebxInitImage}}"
