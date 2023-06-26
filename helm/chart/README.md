@@ -208,6 +208,10 @@ This example assumes that the `` AWS Load Balancer Controller``  is already inst
 
 Please see the following AWS documentation to know [how to Install the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
 
+**Note**:
+Please see the [ingress annotation documentation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.5/guide/ingress/annotations/) 
+for the AWS Load Balancer Controller to best meet your needs.
+
 #### Reach out the ebx instance:
 
 With this implementation, AWS will create an [EC2 Application LoadBalancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html)
