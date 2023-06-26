@@ -30,7 +30,7 @@ TODO pch review NOTE
 
 ## Installing the Chart
 
-Before installing the chart, you may need to adjust the required values in the [configuration file](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values.yaml)  
+Before installing the chart, you may need to adjust the required values in the [configuration file](https://github.com/tibco/ebx-container-edition/blob/1d0bba574ee6b38f3ac57194ecdc89214c63611d/helm/chart/ebx-generic/config-values.yaml)  
 according to your needs.
 
 All commands provide in this file must be run from the ```helm/chart/ebx-generic``` directory.
@@ -113,12 +113,11 @@ Please see the [storageClass documentation](https://kubernetes.io/docs/concepts/
 and the [dynamic volume provisioning concept](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) for
 further information.
 - For ```ebx.databaseType``` refer to
-[this documentation](https://github.com/tibco/ebx-container-edition/blob/main/docs/databases-connectivity.md)
+[this documentation](https://github.com/tibco/ebx-container-edition/blob/1d0bba574ee6b38f3ac57194ecdc89214c63611d/docs/databases-connectivity.md)
 to see the compatible databases and their associated values types for the chart.
-- The ```EBX_FLA_DISABLED``` ebx image variable (set from the [deployment](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/ebx-generic/ebx-generic-chart/templates/deployment.yaml)) 
-is by default set to ```true``` and is not configurable from the values.yaml 
-file. The reason for this is that if the repo has not yet been initialized, you must set its value to true in order to 
-initialize variables ```ebx.adminLogin``` and ```ebx.adminPassword```. If the repo is already initialised, these  values 
+- TODO pch review : The ```EBX_FLA_DISABLED``` is by default set to ```true```. The reason for this is that if the repo has not yet been 
+initialized, you must set its value to true in order to initialize variables ```ebx.adminLogin``` and 
+```ebx.adminPassword```. If the repo is already initialised, these  values 
 defined via the Helm command will be ignored and will retain the values set when the repo was initialised.
 - Every jdbc sql connection property will only be used if ```ebx.databaseType``` value equals to ```sqlserver``` or ```azure.sql```.
   check the [official documentation](https://learn.microsoft.com/en-us/sql/connect/jdbc/setting-the-connection-properties?view=sql-server-ver16)
