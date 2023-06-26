@@ -109,6 +109,8 @@ reasons.
 - TODO pch review : Selected data disks defined by ```ebx.dataStorageClass``` must be high-performance (preferably SSDs) 
 and network disks should be avoided. For logs disk defined by ```ebx.logsStorageClass``` general-purpose disks 
 (but not too slow) can be used.
+You should also be aware that the volume will be destroyed if the corresponding PVC is deleted or modified. This means that EBX will 
+have to recreate its indexes at the next boot, which may take some time. However, there will be no loss of data.
 Please see the [storageClass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 and the [dynamic volume provisioning concept](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) for
 further information.
