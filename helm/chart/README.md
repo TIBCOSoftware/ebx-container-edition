@@ -102,9 +102,13 @@ helm delete ebx-chart
 | `ebx.databaseLoginTimeout`           | A property for jdbc sql connection (Optional) - The number of seconds the driver should wait before timing out a failed connection.                                                                                                                                 | `"30"`                     |
 
 **Notes**: 
-- Selected data disks defined by ```ebx.dataStorageClass``` must be high-performance (preferably SSDs), and network 
-disks should be avoided. For logs disk defined by ```ebx.logsStorageClass``` general-purpose disks (but not too slow) 
-can be used.
+- TODO pch review : ebx.isSecured defines the protocol assumed by EBX for its internal operation. 
+This means that the protocol used at the entry point must fit with the value of this variable. 
+ex : if ebx.isSecured=true https must be defined. We therefore recommend that you use the https protocol for security 
+reasons.
+- TODO pch review : Selected data disks defined by ```ebx.dataStorageClass``` must be high-performance (preferably SSDs) 
+and network disks should be avoided. For logs disk defined by ```ebx.logsStorageClass``` general-purpose disks 
+(but not too slow) can be used.
 Please see the [storageClass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 and the [dynamic volume provisioning concept](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) for
 further information.
@@ -164,7 +168,7 @@ TODO pch review above
 
 ## Installation examples
 
-Examples of configuration files are included in the [configurations directory]().
+Examples of configuration files are included in the [configurations directory](https://github.com/tibco/ebx-container-edition/tree/7f9fc8b315679e452debba64533106f175249835/helm/chart/ebx-generic/configurations).
 These files provide examples for deploying EBX on different Kubernetes clusters types with different types of databases.
 
 Some examples may have a dedicated directory to contain annex files.
@@ -175,20 +179,19 @@ and by replacing the name of the configuration file you want to use as explained
 ```
 helm upgrade ebx-chart --install -f configurations/config-values-you-want.yaml ./ebx-generic-chart
 ```
-#TODO test command from directory 
 
 Some of these examples have a dedicated section below to clarify some information.
 
 These examples are only propositions, therefore they are not imperative and can be extended or customized.
 
 **Note**: Some jdbc drivers are not included in the original EBX image, please refer to the following
-[documentation](https://github.com/tibco/ebx-container-edition/blob/main/docs/databases-connectivity.md)
+[documentation](https://github.com/tibco/ebx-container-edition/blob/7f9fc8b315679e452debba64533106f175249835/docs/databases-connectivity.md)
 for more information.
 
 
 ### Deploy EBX on AKS (Azure Kubernetes Service)
 
-The [config-values-aks-sql](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values-aks-sql.yaml)
+The [config-values-aks-sql](https://github.com/tibco/ebx-container-edition/blob/7f9fc8b315679e452debba64533106f175249835/helm/chart/ebx-generic/configurations/config-values-aks-sql.yaml)
 configuration file provide an example of an EBX deployment on AKS with an SQL Database and TLS configured.
 
 It's using TLS with [Let's Encrypt](https://letsencrypt.org/) certificates provide by [cert-manager](https://github.com/cert-manager/cert-manager).
@@ -198,7 +201,7 @@ Please see the following Azure documentation know [how to use TLS with an ingres
 
 ### Deploy EBX on EKS (Amazon Elastic Kubernetes Service)
 
-The [config-values-eks-sql](https://github.com/tibco/ebx-container-edition/tree/main/helm/chart/ebx-generic/config-values-eks-sql.yaml)
+The [config-values-eks-sql](https://github.com/tibco/ebx-container-edition/blob/7f9fc8b315679e452debba64533106f175249835/helm/chart/ebx-generic/configurations/config-values-eks-sql.yaml)
 configuration file provide an example of EBX deployment on EKS (Elastic Kubernetes Service).
 
 It's using the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.5/)
@@ -229,9 +232,8 @@ TODO pch review above
 
 TODO pch review this section
 
-The [config-values-aks-postgresql-dynamic-provisioning]() configuration file provide an example of configuration for 
+The [config-values-postgresql-dynamic-provisioning](https://github.com/tibco/ebx-container-edition/blob/7f9fc8b315679e452debba64533106f175249835/helm/chart/ebx-generic/configurations/postgresql-dynamic-provisioning/config-values-postgresql-dynamic-provisioning.yaml) configuration file provide an example of configuration for 
 deploying ebx on a kubernetes cluster and create it's PostgreSQL database dynamically.
-TODO name + link
 
 Each time an EBX instance is created, the init container ([EBX-INIT](#EBX-INIT)) will create a database dedicated to
 this instance on the PostgreSQL server.
@@ -279,11 +281,11 @@ It's based on an ```alpine:3.14.3``` image and contains:
 - bash
 - the set-up-database.sh script
 
-A [bundle](https://github.com/tibco/ebx-container-edition/tree/main/helm/examples/ebx-postgresql-internal/ebx-init)
-is provided to help you to build and push the ebx-init image. # TODO change URL
+A [bundle](https://github.com/tibco/ebx-container-edition/tree/7f9fc8b315679e452debba64533106f175249835/helm/chart/ebx-generic/configurations/postgresql-dynamic-provisioning/ebx-init)
+is provided to help you to build and push the ebx-init image.
 
 **Note**: The script
-[set-up-database.sh](https://github.com/tibco/ebx-container-edition/blob/main/helm/examples/ebx-postgresql-internal/ebx-init/scripts/set-up-database.sh) 
+[set-up-database.sh](https://github.com/tibco/ebx-container-edition/blob/7f9fc8b315679e452debba64533106f175249835/helm/chart/ebx-generic/configurations/postgresql-dynamic-provisioning/ebx-init/scripts/set-up-database.sh) 
 need to be updated to be compatible with postgresql 15.
 
 ## Customize and extend the chart
