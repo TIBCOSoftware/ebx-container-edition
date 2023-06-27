@@ -39,7 +39,7 @@ The charts contained in this file have been tested on the following Kubernetes c
 ## Deploying EBX image
 
 For information on deploying an ebx image, see the section relative to the 
-[generic chart](https://github.com/tibco/ebx-container-edition/blob/main/helm/chart/README.md).
+[generic chart](/helm/chart/README.md).
 
 ## License
 
