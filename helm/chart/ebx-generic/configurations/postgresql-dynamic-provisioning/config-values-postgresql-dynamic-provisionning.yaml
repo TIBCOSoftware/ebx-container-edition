@@ -24,6 +24,6 @@ examples:
   postgresqlDynamicProvisioningEnable: "true"
 
 postgresServer:
-  database: "postgresql server master database name"
-  user: "postgresql server master user"
+  database: "<postgresql server master database name>"
+  user: "<postgresql server master user>"
   pwd: "<postgresql server master password>"

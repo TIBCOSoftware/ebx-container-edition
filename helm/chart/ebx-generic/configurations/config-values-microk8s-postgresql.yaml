@@ -1,8 +1,8 @@
 
 global:
   namespace: "ebx"
-  ebxImage: "brm.orchestranetworks.com:5001/ebx:6.1.0"
-  hostname: "k8s.orchestranetworks.com"
+  ebxImage: "<your.registry.com/ebx:6.1.0>"
+  hostname: "<your.dns.com>"
 
 ebx:
   prefix: "postgresql"

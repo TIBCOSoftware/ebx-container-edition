@@ -1,0 +1,27 @@
+
+global:
+  namespace: "ebx"
+  ebxImage: "953359651100.dkr.ecr.eu-west-3.amazonaws.com/ebx:6.1.0"
+  hostname: "ebx-test-on-eks.com"
+
+ebx:
+  prefix: "aws-sql"
+  adminPassword: "abcde1458"
+  isSecured: "false"
+  databaseName: "eks-ebx-test-db"
+  databaseUser: "admin-cja"
+  databasePwd: '!Wh04reU?'
+  databaseHost: "aks-server-test.database.windows.net"
+  databasePort: "1433"
+  databaseType: "sqlserver"
+  databaseEncrypt: "false" # (Optional)
+  databaseTrustServerCertificate: "false" # (Optional)
+  databaseHostNameInCertificate: "*.database.windows.net" # (Optional)
+  databaseLoginTimeout: 30 # (Optional)
+
+ingress:
+  className: "alb"
+  hostRuleDefined : "false"
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
