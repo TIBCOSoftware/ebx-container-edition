@@ -6,15 +6,10 @@ This sample is a Helm chart for EBX.
 
 This chart is a generic example, that should work on most Kubernetes cluster. 
 
-This chart was tested on most clusters with the [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) 
-maintained by the Kubernetes community. 
-This chart assumes it is already installed on your cluster.
+This chart is usually tested with the [Nginx Ingress Controller](https://github.com/kubernetes/ingress-nginx) 
+maintained by the Kubernetes community. The Nginx Ingress Controller should be installed before deploying this chart.
 
-**Note**:
-For specific examples, this chart may have been tested with other Ingress controllers, in which case it will be 
-indicated in this documentation.
-
-TODO pch review above
+This documentation will indicate when another Ingress controllers are used.
 
 ## Prerequisites
 
@@ -24,9 +19,8 @@ except some particular version such as [Red Hat OpenShift](https://www.redhat.co
 * EBX (Container Edition) image pushed on your docker registry
 
 **Note**:
-The architecture / type of CPU of the images (EBX and init containers) must match that of the cluster.
-
-TODO pch review NOTE
+The architecture (the CPU type) of the EBX and init images must match the one of the cluster. EBX is tested on 
+the amd64 architecture. Other architectures are not officially supported, but may work.
 
 ## Installing the Chart
 
@@ -102,26 +96,22 @@ helm delete ebx-chart
 | `ebx.databaseLoginTimeout`           | A property for jdbc sql connection (Optional) - The number of seconds the driver should wait before timing out a failed connection.                                                                                                                                 | `"30"`                     |
 
 **Notes**: 
-- TODO pch review : ebx.isSecured defines the protocol assumed by EBX for its internal operation. 
-This means that the protocol used at the entry point must fit with the value of this variable. 
-ex : if ebx.isSecured=true https must be defined. We therefore recommend that you use the https protocol for security 
-reasons.
-- TODO pch review : Selected data disks defined by ```ebx.dataStorageClass``` must be high-performance (preferably SSDs) 
-and network disks should be avoided. For logs disk defined by ```ebx.logsStorageClass``` general-purpose disks 
-(but not too slow) can be used.
-You should also be aware that the volume will be destroyed if the corresponding PVC is deleted or modified. This means that EBX will 
-have to recreate its indexes at the next boot, which may take some time. However, there will be no loss of data.
-Please see the [storageClass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/)
-and the [dynamic volume provisioning concept](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) for
-further information.
+- The parameter ```ebx.isSecured``` is used by EBX to compute URLs. It should be set to true if routes from outside the cluster are
+HTTPS.
+- The storage class specified by ```ebx.dataStorageClass``` must map to high-performance (preferably SSDs) persistent 
+volumes. Network disks must be avoided and are not supported.
+- The storage class specified by ```ebx.logsStorageClass``` may be general-purpose disks (but not too slow).
+- By default, a volume created by a Persistent Volume Claim (PVC) will be destroyed if the corresponding PVC is deleted 
+or modified. No data will be lost, but EBX will need to recreate its indexes at the next boot, which may take some 
+time.
 - For ```ebx.databaseType``` refer to
 [this documentation](/docs/databases-connectivity.md)
 to see the compatible databases and their associated values types for the chart.
-- TODO pch review : The ```EBX_FLA_DISABLED``` is by default set to ```true```. The reason for this is that if the repo has not yet been 
-initialized, you must set its value to true in order to initialize variables ```ebx.adminLogin``` and 
-```ebx.adminPassword```. If the repo is already initialised, these  values 
-defined via the Helm command will be ignored and will retain the values set when the repo was initialised.
-- Every jdbc sql connection property will only be used if ```ebx.databaseType``` value equals to ```sqlserver``` or ```azure.sql```.
+- For security reasons, when EBX is directly exposed to the Internet, ```EBX_FLA_DISABLED``` should be set 
+to ```true``` (the default). This requires setting ```ebx.adminLogin``` and  ```ebx.adminPassword``` if the
+container is starting on an empty database. These parameters are ignored if the database is already initialized.
+- TODO cja: Following is not clear. Pershaps remove or reference EBX documentation? Avoid links to Microsoft.
+  Every jdbc sql connection property will only be used if ```ebx.databaseType``` value equals to ```sqlserver``` or ```azure.sql```.
   check the [official documentation](https://learn.microsoft.com/en-us/sql/connect/jdbc/setting-the-connection-properties?view=sql-server-ver16)
   for information about to setting the sql connection properties.
 
@@ -152,18 +142,11 @@ to best meet your needs.
 
 ## Init container
 
-The ``init`` container is designed to leave enough space for the OS running the application server by defining 
-the values ``vm.max_map_count``.
+The init container is not required, but may be useful to set up ```vm.max_map_count``` if its value is less that
+the required one.
 
-This specificity is 
-[documented in the core product documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/references/performance.html#memory) 
-(Check the ``Memory allocated to the operating system`` part)
-and its [application for Kubernetes is documented here](https://docs.tibco.com/pub/ebx/latest/doc/html/en/ece/running_the_image.html#_host_configuration).
-
-**Note**:
-max open files set by ``ulimit -n`` must have a fairly high value on the host machine.
-
-TODO pch review above
+For more information please check EBX documentation [documented in the core product documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/en/references/performance.html#memory) 
+(Check the ``Memory allocated to the operating system`` part).
 
 ----------
 
@@ -220,8 +203,6 @@ With this implementation, AWS will create an [EC2 Application LoadBalancer (ALB)
 dynamically when EBX ingress resource is created.
 This ALB has a DNS which will be the entry point to reach your EBX instance.
 
-If you do not attach your personal dns to this load balancer you can use his to reach your EBX instance.
-
 To know the DNS entry point you can run the following command and check the ```ADDRESS``` value of your ingress resource:
 ```
 kubectl get ingress -n ebx
@@ -231,11 +212,7 @@ The url will then be of the following form :
 <aws load balancer dns >/<.Values.ebx.prefix>/
 ```
 
-TODO pch review above
-
 ### Deploy EBX with dynamic provisioning of postgresql databases
-
-TODO pch review this section
 
 The [config-values-postgresql-dynamic-provisioning](/helm/chart/ebx-generic/configurations/postgresql-dynamic-provisioning/config-values-postgresql-dynamic-provisioning.yaml) 
 configuration file provide an example of configuration for deploying ebx on a kubernetes cluster and create it's 
