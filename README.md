@@ -40,12 +40,3 @@ The charts contained in this file have been tested on the following Kubernetes c
 
 For information on deploying an ebx image, see the section relative to the 
 [generic chart](/helm/chart/README.md).
-
-## License
-
-TODO
-
----
-
-Copyright 2022-2023 Cloud Software Group, Inc.
-... TODO 

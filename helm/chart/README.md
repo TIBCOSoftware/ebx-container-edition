@@ -13,8 +13,8 @@ This documentation will indicate when another Ingress controllers are used.
 
 ## Prerequisites
 
-* Kubernetes v1.23+, a working Kubernetes cluster from a [certified Kubernetes Software](https://www.cncf.io/certification/software-conformance/) 
-except some particular version such as [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift).
+* Kubernetes v1.23+, a working Kubernetes cluster from a ```certified Kubernetes Software``` 
+except some particular version such as ```Red Hat OpenShift```.
 * Helm v3+
 * EBX (Container Edition) image pushed on your docker registry
 
@@ -110,10 +110,6 @@ to see the compatible databases and their associated values types for the chart.
 - For security reasons, when EBX is directly exposed to the Internet, ```EBX_FLA_DISABLED``` should be set 
 to ```true``` (the default). This requires setting ```ebx.adminLogin``` and  ```ebx.adminPassword``` if the
 container is starting on an empty database. These parameters are ignored if the database is already initialized.
-- TODO cja: Following is not clear. Pershaps remove or reference EBX documentation? Avoid links to Microsoft.
-  Every jdbc sql connection property will only be used if ```ebx.databaseType``` value equals to ```sqlserver``` or ```azure.sql```.
-  check the [official documentation](https://learn.microsoft.com/en-us/sql/connect/jdbc/setting-the-connection-properties?view=sql-server-ver16)
-  for information about to setting the sql connection properties.
 
 ----------
 
@@ -128,9 +124,8 @@ container is starting on an empty database. These parameters are ignored if the 
 | `ingress.pathType`        | pathType is pathType of the ingress                                                                                                                | `"Prefix"` |
 
 **Note**:
-For annotations (```ingress.annotations``` field) please refer to the 
-[following documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) 
-to best meet your needs.
+For annotations (```ingress.annotations``` field) please see the Annotations section of the Ingress-Nginx Controller 
+documentation to best meet your needs.
 
 ### Examples configuration
 
@@ -178,28 +173,27 @@ for more information.
 The [config-values-aks-sql](/helm/chart/ebx-generic/configurations/config-values-aks-sql.yaml)
 configuration file provide an example of an EBX deployment on AKS with an SQL Database and TLS configured.
 
-It's using TLS with [Let's Encrypt](https://letsencrypt.org/) certificates provide by [cert-manager](https://github.com/cert-manager/cert-manager).
+It's using TLS with ```Let's Encrypt``` certificates provide by ```cert-manager```.
 This example assumes that `` cert-manager``  is already installed in your cluster.
 
-Please see the following Azure documentation know [how to use TLS with an ingress controller on Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli)
+Please see the Azure AKS documentation for details.
 
 ### Deploy EBX on EKS (Amazon Elastic Kubernetes Service)
 
 The [config-values-eks-sql](/helm/chart/ebx-generic/configurations/config-values-eks-sql.yaml)
 configuration file provide an example of EBX deployment on EKS (Elastic Kubernetes Service).
 
-It's using the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.5/)
+It's using the ```AWS Load Balancer Controller```.
 This example assumes that the `` AWS Load Balancer Controller``  is already installed in your cluster.
 
-Please see the following AWS documentation to know [how to Install the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
+Please see the AWS EKS documentation for details.
 
 **Note**:
-Please see the [ingress annotation documentation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.5/guide/ingress/annotations/) 
-for the AWS Load Balancer Controller to best meet your needs.
+Please see the ```Ingress annotations``` AWS Load Balancer Controller documentation for details.
 
 #### Reach out the ebx instance:
 
-With this implementation, AWS will create an [EC2 Application LoadBalancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html)
+With this implementation, AWS will create an ```EC2 Application LoadBalancer (ALB)```
 dynamically when EBX ingress resource is created.
 This ALB has a DNS which will be the entry point to reach your EBX instance.
 
@@ -225,7 +219,7 @@ This example assumes that you have a Postgresql server (11 to 14.x) already conf
 docker registry.
 
 **Note**:
-You need [Docker](https://www.docker.com/) v20.x+ for building the EBX-INIT container image.
+You need Docker v20.x+ for building the EBX-INIT container image.
 
 #### Mandatory values
 

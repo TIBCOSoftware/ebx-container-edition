@@ -7,7 +7,7 @@ global:
 ebx:
   prefix: "h2"
   adminPassword: '<?Y0urP4ssWord!>'
-  isSecured: "false" # TODO pcd review for http example
+  isSecured: "false"
   cpu: 1
   databaseType: "h2.standalone"
 
