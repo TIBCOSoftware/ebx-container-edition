@@ -3,7 +3,7 @@
 ## Overview
 
 This repository provides useful samples for deploying [TIBCO EBX® Software](https://www.tibco.com/products/tibco-ebx-software) 
-on a [Kubernetes cluster](http://kubernetes.io/) using TIBCO EBX® Container Edition and the [Helm package manager](https://helm.sh/) .
+on a [Kubernetes cluster](http://kubernetes.io/) using TIBCO EBX® Container Edition and the [Helm package manager](https://helm.sh/).
 
 This repository includes quick guides, templates, configuration examples, and scripts that you can extend or customize.
 
