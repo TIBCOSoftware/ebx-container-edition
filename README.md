@@ -11,7 +11,7 @@ This repository does not include TIBCO EBX® software, TIBCO EBX® Container Edi
 
 **Note**: TIBCO EBX Software and TIBCO EBX® Container Edition are commercially licensed products and are subject to 
 the payment of license fees.
-You must have a valid license to use them.
+You must have a valid license to use them. TODO cja remove 
 
 ## Prerequisites
 
