@@ -1,13 +1,13 @@
-** Please be patient while EBX is being deployed **
+** Please be patient while EBX is deployed **
 
 The release is named "{{ .Release.Name }}".
 
-EBX login credentials :
+EBX login credentials:
 - User: "{{ .Values.ebx.adminLogin }}"
 - Password: {{ .Values.ebx.adminPassword }}
 
 {{ if .Values.global.hostname }}
-EBX is running at the following url : {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}{{ .Values.global.hostname }}/{{ .Values.ebx.prefix }}/
+EBX is running at the following URL: {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}{{ .Values.global.hostname }}/{{ .Values.ebx.prefix }}/
 {{ else }}
-EBX is running at the following url : {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}<your dns >/{{ .Values.ebx.prefix }}/
+EBX is running at the following URL: {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}<your dns >/{{ .Values.ebx.prefix }}/
 {{ end }}
