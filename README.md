@@ -1,4 +1,4 @@
-# EBX Container Edition
+# Samples Charts for TIBCO EBX Container Edition® 
 
 ## Overview
 
