@@ -5,28 +5,24 @@
 This repository provides useful samples for deploying [TIBCO EBX® Software](https://www.tibco.com/products/tibco-ebx-software) 
 on a [Kubernetes cluster](http://kubernetes.io/) using TIBCO EBX® Container Edition and the [Helm package manager](https://helm.sh/).
 
-This repository includes quick guides, templates, configuration examples, and scripts that you can extend or customize.
+This repository includes quick start guides, templates, configuration examples, and scripts that you can extend or customize.
 
-This repository does not include TIBCO EBX® software, TIBCO EBX® Container Edition or any other third party software.
+This repository does not include TIBCO EBX® software, TIBCO EBX® Container Edition, or any other third-party software.
 
-**Note**: TIBCO EBX Software and TIBCO EBX® Container Edition are commercially licensed products and are subject to 
-the payment of license fees.
-You must have a valid license to use them. 
+**Note**: TIBCO EBX Software and TIBCO EBX® Container Edition are commercially licensed products that are subject to 
+the payment of license fees. You must have a valid license to use them. 
 
 ## Prerequisites
 
-- [TIBCO EBX® Container Edition](https://docs.tibco.com/pub/ebx/6.1.0/doc/pdf/TIB_ebx_6.1.0_container_edition.pdf?id=0) 
+- [TIBCO EBX® Container Edition](https://docs.tibco.com/pub/ebx/6.1.0/doc/pdf/TIB_ebx_6.1.0_container_edition.pdf?id=0). 
 since 6.1.1
 - [Kubernetes](https://kubernetes.io/) v1.23+, a working Kubernetes cluster from a [certified Kubernetes software](https://www.cncf.io/certification/software-conformance/).
-- [Helm](https://helm.sh/) v3+, for building and deploying the charts.
+- [Helm](https://helm.sh/) v3+ to build and deploy the charts.
 
 **Note**:
-You need to generate the image containing all the addons you need. 
-For generating the image please refer to the [Building the image](https://docs.tibco.com/pub/ebx/6.1.0/doc/html/fr/ece/building_the_image.html#_building_the_image) 
-documentation.
-For details about TIBCO EBX® Software please see the [TIBCO EBX Documentation](https://docs.tibco.com/pub/ebx/latest/doc/html/fr/index.html).
-
-For more information on TIBCO EBX® Software and its components, see the [TIBCO EBX® Documentation](https://docs.tibco.com/products/tibco-ebx).
+You must generate the image containing all the add-ons you need. 
+Refer to [Building the image](https://docs.tibco.com/pub/ebx/6.1.0/doc/html/fr/ece/building_the_image.html#_building_the_image) for more information.
+For details about TIBCO EBX® Software, see the [TIBCO EBX® Documentation](https://docs.tibco.com/products/tibco-ebx.
 
 ## Tested cluster
 
@@ -38,5 +34,5 @@ The charts contained in this file have been tested on the following Kubernetes c
 
 ## Deploying EBX image
 
-For information on deploying an ebx image, see the section relative to the 
+For information on deploying an ebx image, see the 
 [generic chart](/helm/chart/README.md).

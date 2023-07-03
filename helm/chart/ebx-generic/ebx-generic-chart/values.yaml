@@ -2,25 +2,25 @@
 # Copyright Cloud Software Group, Inc. 2000-2023. All rights reserved.
 #
 
-# Global section defines specifics values for an environment (development, qa, production...).
+# Defines specifics values for an environment (development, qa, production...).
 global:
-  # ebxImage is the ebx container edition image URL
+  # ebxImage is the EBX Container Edition image URL
   ebxImage:
-  # ebxImageRegistrySecret that contains the credentials used to connect to the registry that host the ebx image.
+  # ebxImageRegistrySecret that contains the credentials used to connect to the registry that hosts the EBX image.
   ebxImageRegistrySecret: "" # (Optional)
   # namespace where the EBX pod will be deployed
   namespace: "ebx"
   # hostname of the kubernetes server host
   hostname: ""
 
-# EBX section defines specifics values for the ebx instance
+# Defines specific values for the EBX instance
 ebx:
   # prefix is the prefix name used for every kubernetes object of the instance (Pod, Service,
   # Ingress...)
   prefix: ""
-  # adminLogin is the username used to connect to the ebx instance (default value is admin)
+  # adminLogin is the username used to connect to the EBX instance (default value is admin)
   adminLogin: "admin" # (Ignored if the repository is already initialized)
-  # adminPassword is the password used to connect to the ebx instance
+  # adminPassword is the password used to connect to the EBX instance
   adminPassword: "334242DQ112122" # (Ignored if the repository is already initialized).
   # isSecured if set to "true", the protocol "HTTPS" is assumed. If "false", the protocol "HTTP" is assumed.
   isSecured: "true"
@@ -33,15 +33,15 @@ ebx:
   cpu: 2
   # memory is the container memory limit allocate to the container (default value is 2Gi)
   memory: "2Gi"
-  # dataStorageClass used to claim volumes for ebx data
+  # dataStorageClass used to claim volumes for EBX data
   dataStorageClass: # (will take default storageClass if no value is specified)
-  # logsStorageClass used to claim volumes for ebx logs
+  # logsStorageClass used to claim volumes for EBX logs
   logsStorageClass: # (will take default storageClass if no value is specified)
-  # dataVolumeStorageClaim is the amount of disk space of the PersistentVolume requested by the ebx
+  # dataVolumeStorageClaim is the amount of disk space of the PersistentVolume requested by the EBX
   # instance to store it's data
   dataVolumeStorageClaim: "20Gi"
   # logsVolumeStorageClaim is the amount of disk space requested by the PersistentVolumeClaim for
-  # the data of the ebx instance
+  # the data of the EBX instance
   logsVolumeStorageClaim: "2Gi"
 
   # databaseName is the database name
@@ -57,11 +57,11 @@ ebx:
   # databaseType is the database type (postgresql, sqlserver, oracle etc...)
   databaseType:
 
-  ### SQL databases (the following values will be use only if database.type is eq to sqlserver or azure.sql)
+  ### SQL databases (the following values will be use only if database.type is equal to sqlserver or azure.sql)
 
-  # databaseEncrypt is a property for jdbc sql connection (set to true that specify that the SQL Server uses TLS encryption)
+  # databaseEncrypt is a property for JDBC SQL connection (set to true that specify that the SQL Server uses TLS encryption)
   databaseEncrypt: "" # (Optional)
-  #  databaseTrustServerCertificate is a property for jdbc sql connection (set to true that specify that the driver doesn't
+  #  databaseTrustServerCertificate is a property for JDBC SQL connection (set to true that specify that the driver doesn't
   # validate the server TLS/SSL certificate.)
   databaseTrustServerCertificate: "" # (Optional)
   # databaseHostNameInCertificate is the host name to be used to validate the SQL Server TLS/SSL certificate.
@@ -81,18 +81,11 @@ ingress:
   # annotations to configure the ingress resource
   annotations:
   # pathType is pathType of the ingress.
-  pathType:  "Prefix"
+  pathType: "Prefix"
 
 # Examples section defines values for specifics examples. Please see the example section in the README file.
 examples:
   # postgresqlDynamicProvisioningEnable if set to true, will add the ebx-init container and create postgresServer secret.
   # Please see the "EBX with dynamic provisioning of postgresql databases" example in the README file.
   postgresqlDynamicProvisioningEnable: "false" # if set to true the postgresServer values must be defined.
-
-
-
-
-
-
-
 
