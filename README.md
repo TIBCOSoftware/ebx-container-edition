@@ -22,7 +22,7 @@ since 6.1.1
 **Note**:
 You must generate the image containing all the add-ons you need. 
 Refer to [Building the image](https://docs.tibco.com/pub/ebx/6.1.0/doc/html/fr/ece/building_the_image.html#_building_the_image) for more information.
-For details about TIBCO EBX® Software, see the [TIBCO EBX® Documentation](https://docs.tibco.com/products/tibco-ebx.
+For details about TIBCO EBX® Software, see the [TIBCO EBX® Documentation](https://docs.tibco.com/products/tibco-ebx).
 
 ## Tested cluster
 
