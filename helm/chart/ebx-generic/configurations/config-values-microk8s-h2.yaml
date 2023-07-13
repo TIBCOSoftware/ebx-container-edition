@@ -1,0 +1,14 @@
+global:
+  namespace: "ebx"
+  ebxImage: "<your.registry.com/ebx:6.1.0>"
+  hostname: "<your.dns.com>"
+
+ebx:
+  prefix: "h2"
+  adminPassword: '<?Y0urP4ssWord!>'
+  isSecured: "true"
+  databaseType: "h2.standalone" # Note : Only this database parameter is needed for h2 embedded database.
+                                # The rest have default values (user, password, host etc..)
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"

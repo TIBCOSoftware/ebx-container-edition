@@ -1,0 +1,22 @@
+
+global:
+  namespace: "ebx"
+  ebxImage: "<your.image.location>"
+  hostname: "<your.hostname.com>"
+
+ebx:
+  prefix: "s1"
+  adminPassword: '<?Y0urP4ssWord!>'
+  isSecured: "true"
+  databaseName: "<ebx db name>"
+  databaseUser: "<ebx db user>"
+  databasePwd: "<ebx db password>"
+  databaseHost: "<ebx db host>"
+  databasePort: "<ebx db port>"
+  databaseType: "<ebx db type>"
+
+ingress:
+  annotations: # These annotations are examples only. PLease see the Ingress Configuration section.
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "ssl-server-name-test"

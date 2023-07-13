@@ -1,0 +1,26 @@
+
+global:
+  namespace: "ebx"
+  ebxImage: "<your.registry.com/ebx:6.1.0>"
+  hostname: "<your.dns.amazonaws.com>"
+
+ebx:
+  prefix: "eks-sql"
+  adminPassword: '<?Y0urP4ssWord!>'
+  isSecured: "true"
+  databaseName: "<ebx db name>"
+  databaseUser: "<ebx db user>"
+  databasePwd: "<ebx db password>"
+  databaseHost: "<ebx db host>"
+  databasePort: "<ebx db port>"
+  databaseType: "sqlserver"
+  databaseEncrypt: "false" # (Optional)
+  databaseTrustServerCertificate: "false" # (Optional)
+  databaseHostNameInCertificate: "*.database.windows.net" # (Optional)
+  databaseLoginTimeout: 30 # (Optional)
+
+ingress:
+  className: "alb"
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
