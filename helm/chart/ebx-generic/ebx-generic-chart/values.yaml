@@ -84,7 +84,7 @@ ingress:
   pathType: "Prefix"
 
 # Examples section defines values for specifics examples. Please see the example section in the README file.
-examples:
+examples: # (Optional)
   # postgresqlDynamicProvisioningEnable if set to true, will add the ebx-init container and create postgresServer secret.
   # Please see the "EBX with dynamic provisioning of postgresql databases" example in the README file.
   postgresqlDynamicProvisioningEnable: "false" # if set to true the postgresServer values must be defined.
