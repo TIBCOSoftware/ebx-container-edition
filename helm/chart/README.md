@@ -232,7 +232,7 @@ examples:
   # postgresqlDynamicProvisioningEnable if set to `true`, the `ebx-init` container is added and `postgresServer` secret created.
   postgresqlDynamicProvisioningEnable: "true"
 
-# postgresServer section defines specific values for the `postgresServer` connectivity (Optional)
+# postgresServer section defines specific values for the `postgresServer` connectivity
 postgresServer:
   # database is the postgres server master database name
   database: ""
