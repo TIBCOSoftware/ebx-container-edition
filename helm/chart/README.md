@@ -59,13 +59,13 @@ This section describes parameters for the following:
 
 ### Global configuration
 
-| Name                         | Description                                                                                                   | Value     |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------- | --------- |
-| `global.ebxImage`            | The EBX Container Edition image. URL                                                                          | `""`      |
-| `global.imageRegistrySecret` | The secret that contains the credentials used to connect to the registry that hosts the EBX image (Optional). | `""`      |
-| `global.namespace`           | The namespace where EBX will be deployed.                                                                     | `"ebx"`   |
-| `global.hostname`            | The hostname used to connect to EBX.                                                                          | `""`      |
-| `global.scheme`              | The scheme that defines the protocol used to connect to EBX (Optional).                                       | `"https"` |
+| Name                             | Description                                                                                                   | Value     |
+|----------------------------------| ------------------------------------------------------------------------------------------------------------- | --------- |
+| `global.ebxImage`                | The EBX Container Edition image. URL                                                                          | `""`      |
+| `global.ebxImageRegistrySecret`  | The secret that contains the credentials used to connect to the registry that hosts the EBX image (Optional). | `""`      |
+| `global.namespace`               | The namespace where EBX will be deployed.                                                                     | `"ebx"`   |
+| `global.hostname`                | The hostname used to connect to EBX.                                                                          | `""`      |
+| `global.scheme`                  | The scheme that defines the protocol used to connect to EBX (Optional).                                       | `"https"` |
 
 ---
 
