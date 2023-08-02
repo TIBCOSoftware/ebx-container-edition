@@ -24,14 +24,16 @@ You must generate the image containing all the add-ons you need.
 Refer to [Building the image](https://docs.tibco.com/pub/ebx/6.1.2/doc/html/fr/ece/building_the_image.html#_building_the_image) for more information.
 For details about TIBCO EBX® Software, see the [TIBCO EBX® Documentation](https://docs.tibco.com/products/tibco-ebx).
 
-## Tested cluster
+## Tested certified Kubernetes implementation
 
-The charts contained in this file have been tested on the following Kubernetes cluster:
+The charts contained in this file have been tested on the following certified Kubernetes implementations:
 
-* [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/) (AKS) v1.25+
-* [Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/) (EKS) v1.27+ 
-* [MicroK8s](https://microk8s.io/) v1.23+
-* [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift) v4.13.1+
+* [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/)
+* [Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/)
+* [MicroK8s](https://microk8s.io/)
+* [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift)
+
+[Supported versions](https://docs.tibco.com/pub/ebx/6.1.2/doc/html/fr/ece/running_the_image.html#_kubernetes)
 
 ## Deploying EBX image
 
