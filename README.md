@@ -14,23 +14,24 @@ the payment of license fees. You must have a valid license to use them.
 
 ## Prerequisites
 
-- [TIBCO EBX® Container Edition](https://docs.tibco.com/pub/ebx/6.1.0/doc/pdf/TIB_ebx_6.1.0_container_edition.pdf?id=0). 
+- [TIBCO EBX® Container Edition](https://docs.tibco.com/pub/ebx/6.1.2/doc/pdf/TIB_ebx_6.1.2_container_edition.pdf?id=0). 
 since 6.1.2
 - [Kubernetes](https://kubernetes.io/) v1.23+, a working Kubernetes cluster from a [certified Kubernetes software](https://www.cncf.io/certification/software-conformance/).
 - [Helm](https://helm.sh/) v3+ to build and deploy the charts.
 
 **Note**:
 You must generate the image containing all the add-ons you need. 
-Refer to [Building the image](https://docs.tibco.com/pub/ebx/6.1.0/doc/html/fr/ece/building_the_image.html#_building_the_image) for more information.
+Refer to [Building the image](https://docs.tibco.com/pub/ebx/6.1.2/doc/html/fr/ece/building_the_image.html#_building_the_image) for more information.
 For details about TIBCO EBX® Software, see the [TIBCO EBX® Documentation](https://docs.tibco.com/products/tibco-ebx).
 
 ## Tested cluster
 
 The charts contained in this file have been tested on the following Kubernetes cluster:
 
-* [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/) (AKS) v1.25+ 
-* [Amazon Elastic Kubernetes Service](https://aws.amazon.com/fr/eks/) (EKS) v1.27+ 
+* [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/) (AKS) v1.25+
+* [Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/) (EKS) v1.27+ 
 * [MicroK8s](https://microk8s.io/) v1.23+
+* [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift) v4.13.1
 
 ## Deploying EBX image
 
