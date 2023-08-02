@@ -20,7 +20,7 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 
-examples:
+samples:
   postgresqlDynamicProvisioningEnable: "true"
 
 postgresServer:
