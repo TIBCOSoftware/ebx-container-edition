@@ -1,8 +1,8 @@
 
 global:
   namespace: "ebx"
-  ebxImage: "<your.registry.com/ebx:6.1.0>"
-  ebxInitImage: "<your.registry.com/ebx-init:1.0>"
+  ebxImage: "<your.registry.com/ebx:ebx-image-tag>"
+  ebxInitImage: "<your.registry.com/ebx-init:ebx-init-image-tag>"
   hostname: "<your.dns.azure.com>"
 
 ebx:
