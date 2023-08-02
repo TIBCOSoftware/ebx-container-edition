@@ -1,0 +1,24 @@
+
+global:
+  namespace: "<your namespace>"
+  ebxImage: "<your.registry.com/ebx:ebx-image-tag>"
+
+ebx:
+  prefix: "open-shift"
+  adminPassword: '?Y0urP4ssWord!'
+  isSecured: "false"
+  databaseName: "<ebx db name>"
+  databaseUser: "<ebx db user>"
+  databasePwd: "<ebx db password>"
+  databaseHost: "<ebx db host>"
+  databasePort: "<ebx db port>"
+  databaseType: "sqlserver"
+  databaseEncrypt: "false" # (Optional)
+  databaseTrustServerCertificate: "false" # (Optional)
+  databaseHostNameInCertificate: "*.database.windows.net" # (Optional)
+  databaseLoginTimeout: 30 # (Optional)
+  setSecurityContext: "false"
+  setVmMaxMapCount: "false"
+
+samples:
+  isOpenShift: "true"
