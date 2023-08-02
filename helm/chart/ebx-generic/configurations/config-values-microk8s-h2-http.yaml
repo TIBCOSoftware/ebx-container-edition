@@ -5,7 +5,7 @@ global:
   hostname: "<your.dns.com>"
 
 ebx:
-  prefix: "h2"
+  prefix: "h2-http"
   adminPassword: '<?Y0urP4ssWord!>'
   isSecured: "false"
   cpu: 1

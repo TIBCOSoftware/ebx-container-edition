@@ -5,7 +5,7 @@ global:
   hostname: "<your.dns.com>"
 
 ebx:
-  prefix: "sqlserver"
+  prefix: "microk8s-sql"
   adminPassword: "abcde1458"
   isSecured: "true"
   databaseName: "<ebx db name>"

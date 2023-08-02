@@ -5,7 +5,7 @@ global:
   hostname: "<your.dns.com>"
 
 ebx:
-  prefix: "postgresql"
+  prefix: "microk8s-postgresql"
   adminPassword: '<?Y0urP4ssWord!>'
   isSecured: "true"
   databaseName: "<ebx db name>"

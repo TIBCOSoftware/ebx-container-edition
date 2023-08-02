@@ -4,7 +4,7 @@ global:
   ebxImage: "<your.registry.com/ebx:ebx-image-tag>"
 
 ebx:
-  prefix: "open-shift"
+  prefix: "open-shift-sql"
   adminPassword: '?Y0urP4ssWord!'
   isSecured: "false"
   databaseName: "<ebx db name>"
