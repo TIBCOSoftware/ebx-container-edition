@@ -176,7 +176,8 @@ Some examples have a:
 - Dedicated directory to contain annex files.
 - dedicated section below to clarify some information.
 
-You can deploy by following the installation process explained in section [Installing the chart](#installing-the-chart). Just ensure that the configuration file name is replaced as shown below:
+You can deploy by following the installation process explained in section [Installing the chart](#installing-the-chart). 
+Just ensure that the configuration file name is replaced as shown below:
 
 ```
 helm upgrade ebx-chart --install -f configurations/config-values-you-want.yaml ./ebx-generic-chart
@@ -231,7 +232,7 @@ The URL will then be in the following form:
 The [config-values-open-shift-sql](/helm/chart/ebx-generic/configurations/config-values-open-shift-sql.yaml)
 configuration file provide an example of EBX deployment on Red Hat OpenShift Developer Sandbox.
 
-Votre fichier de configurations doit avoir les valeurs ci dessous renseigné :
+Your configuration file must have the values below filled in:
 ```
 ebx:
   setSecurityContext: "false"
@@ -241,12 +242,17 @@ samples:
   isOpenShift: "true"
 ```
 
-Par default le cluster ... 
-C'est pourquoi vous devez désactivé setSecurityContext & setVmMaxMapCount qui utilisent des privilèges.
+#### setSecurityContext & setVmMaxMapCount
+The default cluster configuration does not allow containers to be used with privileges.
+This is why you need to disable the parts of the code that do.
 
-En activant la var isOpenShift vous permettrez au chart de déployer une resource route à la place d'un Ingress.
+See ```setSecurityContext``` & ```setVmMaxMapCount``` values in the [EBX configuration](#ebx-configuration) section for 
+details.
 
-TODO CJA add also
+#### isOpenShift
+By activating the var isOpenShift you will allow the chart to deploy a resource route instead of an Ingress.
+
+Please see the RedHat OpenShift documentation for details.
 
 ### Deploy EBX with dynamic provisioning of postgresql databases
 
