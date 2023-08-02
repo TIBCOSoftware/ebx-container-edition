@@ -31,7 +31,7 @@ The charts contained in this file have been tested on the following Kubernetes c
 * [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/) (AKS) v1.25+
 * [Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/) (EKS) v1.27+ 
 * [MicroK8s](https://microk8s.io/) v1.23+
-* [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift) v4.13.1
+* [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift) v4.13.1+
 
 ## Deploying EBX image
 
