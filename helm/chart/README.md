@@ -232,6 +232,10 @@ The URL will then be in the following form:
 The [config-values-open-shift-sql](/helm/chart/ebx-generic/configurations/config-values-open-shift-sql.yaml)
 configuration file provide an example of EBX deployment on Red Hat OpenShift Developer Sandbox.
 
+You do not need to install an ingress controller for this example because the OpenShift clusters uses a custom solution 
+(called ```route```) for routing applications.
+
+
 Your configuration file must have the values below filled in:
 ```
 ebx:
@@ -252,7 +256,7 @@ details.
 #### isOpenShift
 By activating the var isOpenShift you will allow the chart to deploy a resource route instead of an Ingress.
 
-Please see the RedHat OpenShift documentation for details.
+Please see the RedHat OpenShift documentation for details about ```route``` object.
 
 ### Deploy EBX with dynamic provisioning of postgresql databases
 
