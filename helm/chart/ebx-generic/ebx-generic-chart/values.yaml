@@ -7,17 +7,17 @@ global:
   # ebxImage is the EBX Container Edition image URL
   ebxImage:
   # ebxImageRegistrySecret that contains the credentials used to connect to the registry that hosts the EBX image.
-  ebxImageRegistrySecret: "" # (Optional)
+  ebxImageRegistrySecret:  # (Optional)
   # namespace where the EBX pod will be deployed
   namespace: "ebx"
   # hostname of the kubernetes server host
-  hostname: ""
+  hostname:
 
 # Defines specific values for the EBX instance
 ebx:
   # prefix is the prefix name used for every kubernetes object of the instance (Pod, Service,
   # Ingress...)
-  prefix: ""
+  prefix:
   # adminLogin is the username used to connect to the EBX instance (default value is admin)
   adminLogin: "admin" # (Ignored if the repository is already initialized)
   # adminPassword is the password used to connect to the EBX instance
@@ -60,21 +60,28 @@ ebx:
   ### SQL databases (the following values will be use only if database.type is equal to sqlserver or azure.sql)
 
   # databaseEncrypt is a property for JDBC SQL connection (set to true that specify that the SQL Server uses TLS encryption)
-  databaseEncrypt: "" # (Optional)
+  databaseEncrypt:  # (Optional)
   #  databaseTrustServerCertificate is a property for JDBC SQL connection (set to true that specify that the driver doesn't
   # validate the server TLS/SSL certificate.)
-  databaseTrustServerCertificate: "" # (Optional)
+  databaseTrustServerCertificate:  # (Optional)
   # databaseHostNameInCertificate is the host name to be used to validate the SQL Server TLS/SSL certificate.
-  databaseHostNameInCertificate: "" # (Optional)
+  databaseHostNameInCertificate:  # (Optional)
   # databaseLoginTimeout is the number of seconds the driver should wait before timing out a failed connection
   databaseLoginTimeout: # (Optional)
+
+  # setSecurityContext will define security group ID and change the fsGroupChangePolicy for the EBX container (must be set to true to be activated)
+  setSecurityContext: "false" # TODO CJA nécéssaire pour la config EKS?
+  # setVmMaxMapCount will change the vm.max_map_count if needed (must be set to true to be activated)
+  setVmMaxMapCount: "false" # TODO CJA
+
+
 
 # Ingress section defines specifics values for traffic routing rules of the Ingress resource
 ingress:
   # className is the name of the chosen ingress-controller
   className: "nginx"
   # tlsSecret that contains the self-signed certificate public and private key
-  tlsSecret: "" # (Optional)
+  tlsSecret:  # (Optional)
   # hostRuleDefied modify the syntax of the ingress according to this value. (default value is true)
   # If set to true, an host must be defined.
   hostRuleDefined: "false"
@@ -83,9 +90,12 @@ ingress:
   # pathType is pathType of the ingress.
   pathType: "Prefix"
 
-# Examples section defines values for specifics examples. Please see the example section in the README file.
-examples: # (Optional)
+# Samples section defines values for specifics examples. Please see the samples section in the README file.
+samples: # (Optional)
   # postgresqlDynamicProvisioningEnable if set to true, will add the ebx-init container and create postgresServer secret.
   # Please see the "EBX with dynamic provisioning of postgresql databases" example in the README file.
   postgresqlDynamicProvisioningEnable: "false" # if set to true the postgresServer values must be defined.
+  # isOpenShift if set to true, a route resource will created instead of an ingress resource.
+  # Please see the "Deploy EBX on RedHat OpenShift" example in the README file.
+  isOpenShift: "false"
 
