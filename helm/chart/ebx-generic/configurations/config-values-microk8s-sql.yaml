@@ -1,7 +1,7 @@
 
 global:
   namespace: "ebx"
-  ebxImage: "<your.registry.com/ebx:6.1.0>"
+  ebxImage: "<your.registry.com/ebx:ebx-image-tag>"
   hostname: "<your.dns.com>"
 
 ebx:
