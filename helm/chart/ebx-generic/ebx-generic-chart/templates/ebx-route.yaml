@@ -1,0 +1,17 @@
+{{- if eq .Values.samples.isOpenShift "true" }}
+{{/*
+    * Copyright Cloud Software Group, Inc. 2000-2023. All rights reserved.
+    */}}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: "{{ .Values.ebx.prefix}}-app"
+  name: "{{ .Values.ebx.prefix}}-ebx"
+spec:
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: "{{ .Values.ebx.prefix}}-ebx"
+{{- end }}

@@ -22,9 +22,11 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/os: "linux"
+      {{- if eq .Values.ebx.setSecurityContext "true" }}
       securityContext:
         fsGroup: 1500
         fsGroupChangePolicy: "OnRootMismatch"
+      {{- end }}
       containers:
         - name: "{{ .Values.ebx.prefix}}-ebx"
           image: "{{ .Values.global.ebxImage}}"
@@ -84,6 +86,7 @@ spec:
         - name: "{{ .Values.global.ebxImageRegistrySecret}}"
       {{- end }}
       initContainers:
+      {{- if eq .Values.ebx.setVmMaxMapCount "true" }}
         - name: init
           image: busybox
           imagePullPolicy: Always
@@ -91,7 +94,8 @@ spec:
             privileged: true
             runAsUser: 0
           command: ['sh', '-c',"sysctl -w vm.max_map_count=$(awk '{ print ( $1 > 262164 ) ? $1 : 262164}' <  /proc/sys/vm/max_map_count)"]
-      {{- if eq .Values.examples.postgresqlDynamicProvisioningEnable "true" }}
+      {{- end }}
+      {{- if eq .Values.samples.postgresqlDynamicProvisioningEnable "true" }}
         - name: "ebx-init"
           image: "{{ .Values.global.ebxInitImage}}"
           resources:
