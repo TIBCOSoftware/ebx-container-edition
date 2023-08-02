@@ -72,7 +72,7 @@ This section describes parameters for the following:
 ### EBX configuration
 
 | Name                                 | Description                                                                                                                                                                                                                                                                                  | Value                      |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
 | `ebx.prefix`                         | The prefix name used for the instance's Kubernetes objects (Pod, Service, Ingress...)                                                                                                                                                                                                        | `""`                       |
 | `ebx.adminLogin`                     | The username used to connect to the EBX instance (overrides the `ece` environment variable: `EBX_INSTALL_ADMIN_LOGIN`). This is ignored if the `ebx.flaDisabled` value is not `true`, or if the repository is already initialized.                                                           | `"admin"`                  |
 | `ebx.adminPassword`                  | The password used to connect to the EBX instance (overrides the `ece` environment variable: `EBX_INSTALL_ADMIN_PASSWORD`) <b>Attention:</b> This must be enclosed in single quotes. It is ignored if the `ebx.flaDisabled` value is not `true`, or if the repository is already initialized. | `''`                       |
@@ -94,9 +94,10 @@ This section describes parameters for the following:
 | `ebx.databaseTrustServerCertificate` | A property for JDBC SQL connection (Optional).                                                                                                                                                                                                                                               | `"false"`                  |
 | `ebx.databaseHostNameInCertificate`  | A property for JDBC SQL connection (Optional) - The host name to be used to validate the SQL Server TLS/SSL certificate.                                                                                                                                                                     | `"*.database.windows.net"` |
 | `ebx.databaseLoginTimeout`           | A property for JDBC SQL connection (Optional) - The number of seconds the driver should wait before timing out a failed connection.                                                                                                                                                          | `"30"`                     |
+| `ebx.setSecurityContext`             | TODO CJA                                                                                                                                                                                                                                                                                     | `"false"`                  |
+| `ebx.setVmMaxMapCount`               | TODO CJA                                                                                                                                                                                                                                                                                     | `"false"`                  |
 
 **Notes**:
-
 - The parameter `ebx.isSecured` is used by EBX to compute URLs. It should be set to `true` if routes from outside the cluster are
   HTTPS.
 - The storage class specified by `ebx.dataStorageClass` must map to high-performance (preferably SSDs) persistent
@@ -131,14 +132,35 @@ documentation to best meet your needs.
 ### Samples configuration
 
 | Name                                          | Description                                                                                                                                                                                                                                               | Value     |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --------- |
 | `samples.postgresqlDynamicProvisioningEnable` | If set to `true`, the `ebx-init` container is added and `postgresServer` secret is created. This enable use of the [Deploy EBX with dynamic provisioning of postgresql databases](#deploy-ebx-with-dynamic-provisioning-of-postgresql-databases) example. | `"false"` |
+| `samples.isOpenShift`                         | If set to `true`, a route resource will created instead of an ingress resource.                                                                                                                                                                           | `"false"` |
 
 ---
+
+## Security context
+
+Although it is not necessary on all kubernetes clusters, it can be useful to be able to modify the ```securityContext``` 
+of the ebx container to change it's group ID and it's associate policy.
+
+To activate it you can add the following code in your configuration file:
+```
+ebx:
+  setSecurityContext: "true"
+```
+
+This will result in setting the ```fsGroup``` to ```1500``` and the ```fsGroupChangePolicy``` to ```OnRootMismatch```.
+
 
 ## Init container
 
 While the init container isn't necessary, it can help to adjust `vm.max_map_count` if it's lower than required.
+
+To activate it you can add the following code in your configuration file:
+```
+ebx:
+  setVmMaxMapCount: "true"
+```
 
 For more information, please check the EBX documentation [here](https://docs.tibco.com/pub/ebx/latest/doc/html/en/references/performance.html#memory).
 Please pay particular attention to the _Memory allocated to the operating system_ section.
@@ -147,7 +169,7 @@ Please pay particular attention to the _Memory allocated to the operating system
 
 ## Installation examples
 
-Example configuration files for deploying EBX on different Kubernetes clusters and databases are included in the [configurations directory](/helm/chart/ebx-generic/configurations). These samples are just suggestions. You can modify or expand them as needed.
+Example of configuration files for deploying EBX on different Kubernetes clusters and databases are included in the [configurations directory](/helm/chart/ebx-generic/configurations). These samples are just suggestions. You can modify or expand them as needed.
 
 Some examples have a:
 
@@ -204,6 +226,28 @@ The URL will then be in the following form:
 <aws load balancer dns >/<.Values.ebx.prefix>/
 ```
 
+### Deploy EBX on RedHat OpenShift
+
+The [config-values-open-shift-sql](/helm/chart/ebx-generic/configurations/config-values-open-shift-sql.yaml)
+configuration file provide an example of EBX deployment on Red Hat OpenShift Developer Sandbox.
+
+Votre fichier de configurations doit avoir les valeurs ci dessous renseigné :
+```
+ebx:
+  setSecurityContext: "false"
+  setVmMaxMapCount: "false"
+
+samples:
+  isOpenShift: "true"
+```
+
+Par default le cluster ... 
+C'est pourquoi vous devez désactivé setSecurityContext & setVmMaxMapCount qui utilisent des privilèges.
+
+En activant la var isOpenShift vous permettrez au chart de déployer une resource route à la place d'un Ingress.
+
+TODO CJA add also
+
 ### Deploy EBX with dynamic provisioning of postgresql databases
 
 The [config-values-postgresql-dynamic-provisioning](/helm/chart/ebx-generic/configurations/postgresql-dynamic-provisioning/config-values-postgresql-dynamic-provisioning.yaml)
@@ -228,7 +272,7 @@ global:
   # ebxInitImage is the ebx-init image URL
   ebxInitImage: "<your.registry.com/ebx-init:1.0>"
 
-examples:
+samples:
   # postgresqlDynamicProvisioningEnable if set to `true`, the `ebx-init` container is added and `postgresServer` secret created.
   postgresqlDynamicProvisioningEnable: "true"
 
