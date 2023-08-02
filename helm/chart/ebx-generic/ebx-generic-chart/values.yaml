@@ -70,9 +70,9 @@ ebx:
   databaseLoginTimeout: # (Optional)
 
   # setSecurityContext will define security group ID and change the fsGroupChangePolicy for the EBX container (must be set to true to be activated)
-  setSecurityContext: "false" # TODO CJA nécéssaire pour la config EKS?
-  # setVmMaxMapCount will change the vm.max_map_count if needed (must be set to true to be activated)
-  setVmMaxMapCount: "false" # TODO CJA
+  setSecurityContext: "false"
+  # setVmMaxMapCount will change the vm.max_map_count value if needed (must be set to true to be activated)
+  setVmMaxMapCount: "false"
 
 
 
