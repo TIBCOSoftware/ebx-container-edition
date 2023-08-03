@@ -69,7 +69,7 @@ ebx:
   # databaseLoginTimeout is the number of seconds the driver should wait before timing out a failed connection
   databaseLoginTimeout: # (Optional)
 
-  # setSecurityContext will define security group ID and change the fsGroupChangePolicy for the EBX container (must be set to true to be activated)
+  # setSecurityContext # This option may be required to allow the EBX pod to access mounted volumes.
   setSecurityContext: "false"
   # setVmMaxMapCount will change the vm.max_map_count value if needed (must be set to true to be activated)
   setVmMaxMapCount: "false"

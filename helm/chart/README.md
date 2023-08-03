@@ -59,43 +59,43 @@ This section describes parameters for the following:
 
 ### Global configuration
 
-| Name                             | Description                                                                                                   | Value     |
-|----------------------------------| ------------------------------------------------------------------------------------------------------------- | --------- |
-| `global.ebxImage`                | The EBX Container Edition image. URL                                                                          | `""`      |
-| `global.ebxImageRegistrySecret`  | The secret that contains the credentials used to connect to the registry that hosts the EBX image (Optional). | `""`      |
-| `global.namespace`               | The namespace where EBX will be deployed.                                                                     | `"ebx"`   |
-| `global.hostname`                | The hostname used to connect to EBX.                                                                          | `""`      |
-| `global.scheme`                  | The scheme that defines the protocol used to connect to EBX (Optional).                                       | `"https"` |
+| Name                            | Description                                                                                                   | Value     |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------|-----------|
+| `global.ebxImage`               | The EBX Container Edition image. URL                                                                          | `""`      |
+| `global.ebxImageRegistrySecret` | The secret that contains the credentials used to connect to the registry that hosts the EBX image (Optional). | `""`      |
+| `global.namespace`              | The namespace where EBX will be deployed.                                                                     | `"ebx"`   |
+| `global.hostname`               | The hostname used to connect to EBX.                                                                          | `""`      |
+| `global.scheme`                 | The scheme that defines the protocol used to connect to EBX (Optional).                                       | `"https"` |
 
 ---
 
 ### EBX configuration
 
-| Name                                 | Description                                                                                                                                                                                                                                                                                  | Value                      |
-|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
-| `ebx.prefix`                         | The prefix name used for the instance's Kubernetes objects (Pod, Service, Ingress...)                                                                                                                                                                                                        | `""`                       |
-| `ebx.adminLogin`                     | The username used to connect to the EBX instance (overrides the `ece` environment variable: `EBX_INSTALL_ADMIN_LOGIN`). This is ignored if the `ebx.flaDisabled` value is not `true`, or if the repository is already initialized.                                                           | `"admin"`                  |
+| Name                                 | Description                                                                                                                                                                                                                                                                                 | Value                      |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| `ebx.prefix`                         | The prefix name used for the instance's Kubernetes objects (Pod, Service, Ingress...)                                                                                                                                                                                                       | `""`                       |
+| `ebx.adminLogin`                     | The username used to connect to the EBX instance (overrides the `ece` environment variable: `EBX_INSTALL_ADMIN_LOGIN`). This is ignored if the `ebx.flaDisabled` value is not `true`, or if the repository is already initialized.                                                          | `"admin"`                  |
 | `ebx.adminPassword`                  | The password used to connect to the EBX instance (overrides the `ece` environment variable: `EBX_INSTALL_ADMIN_PASSWORD`) <b>Attention:</b> This must be enclosed in single quotes. It is ignored if the `ebx.flaDisabled` value is not `true`, or if the repository is already initialized. | `''`                       |
-| `ebx.isSecured`                      | If `true`, the HTTPS protocol is assumed. If `false`, the HTTP protocol is assumed (overrides the `ece` environment variable: `EBX_IS_SECURED`)                                                                                                                                              | `'true'`                   |
-| `ebx.flaDisabled`                    | For security reasons, you might want to disable the first-launch assistant in all circumstances by setting `ebx.flaDisabled` value to `true` (overrides the `ece` environment variable: `EBX_FLA_DISABLED`) (Mandatory on first execution)                                                   | `'true'`                   |
-| `ebx.restAuthenticationBasic`        | If set to `true`, Basic authentication for REST services is enabled. (overrides the `ece` environment variable: `EBX_REST_AUTHENTICATION_BASIC`)                                                                                                                                             | `'true'`                   |
-| `ebx.cpu`                            | The CPU number allocated to the EBX container.                                                                                                                                                                                                                                               | `"2"`                      |
-| `ebx.memory`                         | The EBX container memory limit.                                                                                                                                                                                                                                                              | `"2Gi"`                    |
-| `ebx.storageClass`                   | This is used to claim volumes (it takes the default `storageClass` if no value is specified).                                                                                                                                                                                                | `""`                       |
-| `ebx.dataVolumeStorageClaim`         | The amount of disk space of the `PersistentVolume` requested by the EBX instance to store it's data.                                                                                                                                                                                         | `"10Gi"`                   |
-| `ebx.logsVolumeStorageClaim`         | The amount of disk space requested by the `PersistentVolumeClaim` for the EBX instance's data.                                                                                                                                                                                               | `"2Gi"`                    |
-| `ebx.databaseName`                   | The EBX database server name.                                                                                                                                                                                                                                                                | `""`                       |
-| `ebx.databaseUser`                   | The EBX database server user.                                                                                                                                                                                                                                                                | `""`                       |
-| `ebx.databasePwd`                    | The EBX database server password.                                                                                                                                                                                                                                                            | `""`                       |
-| `ebx.databaseHost`                   | The EBX database server host.                                                                                                                                                                                                                                                                | `""`                       |
-| `ebx.databasePort`                   | The EBX database server port.                                                                                                                                                                                                                                                                | `""`                       |
-| `ebx.databaseType`                   | The EBX database server type.                                                                                                                                                                                                                                                                | `""`                       |
-| `ebx.databaseEncrypt`                | A property for JDBC SQL connection (Optional).                                                                                                                                                                                                                                               | `"true"`                   |
-| `ebx.databaseTrustServerCertificate` | A property for JDBC SQL connection (Optional).                                                                                                                                                                                                                                               | `"false"`                  |
-| `ebx.databaseHostNameInCertificate`  | A property for JDBC SQL connection (Optional) - The host name to be used to validate the SQL Server TLS/SSL certificate.                                                                                                                                                                     | `"*.database.windows.net"` |
-| `ebx.databaseLoginTimeout`           | A property for JDBC SQL connection (Optional) - The number of seconds the driver should wait before timing out a failed connection.                                                                                                                                                          | `"30"`                     |
-| `ebx.setSecurityContext`             | Define security group ID and change the fsGroupChangePolicy for the EBX container (must be set to true to be activated)                                                                                                                                                                      | `"false"`                  |
-| `ebx.setVmMaxMapCount`               | Change the vm.max_map_count value if needed (must be set to true to be activated)                                                                                                                                                                                                            | `"false"`                  |
+| `ebx.isSecured`                      | If `true`, the HTTPS protocol is assumed. If `false`, the HTTP protocol is assumed (overrides the `ece` environment variable: `EBX_IS_SECURED`)                                                                                                                                             | `'true'`                   |
+| `ebx.flaDisabled`                    | For security reasons, you might want to disable the first-launch assistant in all circumstances by setting `ebx.flaDisabled` value to `true` (overrides the `ece` environment variable: `EBX_FLA_DISABLED`) (Mandatory on first execution)                                                  | `'true'`                   |
+| `ebx.restAuthenticationBasic`        | If set to `true`, Basic authentication for REST services is enabled. (overrides the `ece` environment variable: `EBX_REST_AUTHENTICATION_BASIC`)                                                                                                                                            | `'true'`                   |
+| `ebx.cpu`                            | The CPU number allocated to the EBX container.                                                                                                                                                                                                                                              | `"2"`                      |
+| `ebx.memory`                         | The EBX container memory limit.                                                                                                                                                                                                                                                             | `"2Gi"`                    |
+| `ebx.storageClass`                   | This is used to claim volumes (it takes the default `storageClass` if no value is specified).                                                                                                                                                                                               | `""`                       |
+| `ebx.dataVolumeStorageClaim`         | The amount of disk space of the `PersistentVolume` requested by the EBX instance to store it's data.                                                                                                                                                                                        | `"10Gi"`                   |
+| `ebx.logsVolumeStorageClaim`         | The amount of disk space requested by the `PersistentVolumeClaim` for the EBX instance's data.                                                                                                                                                                                              | `"2Gi"`                    |
+| `ebx.databaseName`                   | The EBX database server name.                                                                                                                                                                                                                                                               | `""`                       |
+| `ebx.databaseUser`                   | The EBX database server user.                                                                                                                                                                                                                                                               | `""`                       |
+| `ebx.databasePwd`                    | The EBX database server password.                                                                                                                                                                                                                                                           | `""`                       |
+| `ebx.databaseHost`                   | The EBX database server host.                                                                                                                                                                                                                                                               | `""`                       |
+| `ebx.databasePort`                   | The EBX database server port.                                                                                                                                                                                                                                                               | `""`                       |
+| `ebx.databaseType`                   | The EBX database server type.                                                                                                                                                                                                                                                               | `""`                       |
+| `ebx.databaseEncrypt`                | A property for JDBC SQL connection (Optional).                                                                                                                                                                                                                                              | `"true"`                   |
+| `ebx.databaseTrustServerCertificate` | A property for JDBC SQL connection (Optional).                                                                                                                                                                                                                                              | `"false"`                  |
+| `ebx.databaseHostNameInCertificate`  | A property for JDBC SQL connection (Optional) - The host name to be used to validate the SQL Server TLS/SSL certificate.                                                                                                                                                                    | `"*.database.windows.net"` |
+| `ebx.databaseLoginTimeout`           | A property for JDBC SQL connection (Optional) - The number of seconds the driver should wait before timing out a failed connection.                                                                                                                                                         | `"30"`                     |
+| `ebx.setSecurityContext`             | Sets the way that Kubernetes checks and manages ownership and permissions for mounted volumes. This option may be required to allow the EBX pod to access mounted volumes.                                                                                                                  | `"false"`                  |
+| `ebx.setVmMaxMapCount`               | Change the vm.max_map_count value if needed (must be set to true to be activated)                                                                                                                                                                                                           | `"false"`                  |
 
 **Notes**:
 - The parameter `ebx.isSecured` is used by EBX to compute URLs. It should be set to `true` if routes from outside the cluster are
@@ -118,7 +118,7 @@ This section describes parameters for the following:
 ### Ingress configuration
 
 | Name                      | Description                                                                                                                           | Value      |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------|------------|
 | `ingress.className`       | The name of the chosen ingress-controller.                                                                                            | `"nginx"`  |
 | `ingress.tlsSecret`       | The secret that contains the self-signed certificate and private key (Optional).                                                      | `""`       |
 | `ingress.hostRuleDefined` | Modifies the syntax of the ingress resource according to this value. If set to `true`, a host field is added to the ingress resource. | `"true"`   |
@@ -132,7 +132,7 @@ documentation to best meet your needs.
 ### Samples configuration
 
 | Name                                          | Description                                                                                                                                                                                                                                               | Value     |
-|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --------- |
+|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
 | `samples.postgresqlDynamicProvisioningEnable` | If set to `true`, the `ebx-init` container is added and `postgresServer` secret is created. This enable use of the [Deploy EBX with dynamic provisioning of postgresql databases](#deploy-ebx-with-dynamic-provisioning-of-postgresql-databases) example. | `"false"` |
 | `samples.isOpenShift`                         | If set to `true`, a route resource will created instead of an ingress resource.                                                                                                                                                                           | `"false"` |
 
@@ -140,17 +140,14 @@ documentation to best meet your needs.
 
 ## Security context
 
-Although it is not necessary on all kubernetes clusters, it can be useful to be able to modify the ```securityContext``` 
-of the ebx container to change it's group ID and it's associate policy.
+Although it is not necessary on all kubernetes clusters, it might be necessary to set securityContext  to allow 
+the EBX pod to access mounted volumes.
 
-To activate it you can add the following code in your configuration file:
+If the EBX pods fails because it cannot create files on mounted volumes, add the following lines in your configuration file:
 ```
 ebx:
   setSecurityContext: "true"
 ```
-
-This will result in setting the ```fsGroup``` to ```1500``` and the ```fsGroupChangePolicy``` to ```OnRootMismatch```.
-
 
 ## Init container
 
@@ -246,12 +243,11 @@ samples:
   isOpenShift: "true"
 ```
 
-#### setSecurityContext & setVmMaxMapCount
-The default cluster configuration does not allow containers to be used with privileges.
-This is why you need to disable the parts of the code that do.
-
-See ```setSecurityContext``` & ```setVmMaxMapCount``` values in the [EBX configuration](#ebx-configuration) section for 
-details.
+On OpenShift setting, `setVmMaxMapCount` to `true` is usually not necessary. You may check this by running command:
+```
+kubectl -n <ebx-pod-namespace> exec -it <ebx-pod-name> -- sysctl -n vm.max_map_count
+```
+The returned value should be greater or equal to 262144
 
 #### isOpenShift
 By activating the var isOpenShift you will allow the chart to deploy a resource route instead of an Ingress.
@@ -296,7 +292,7 @@ postgresServer:
   pwd: ""
 ```
 
-Use the following install command:
+To install the chart, use the following command:
 
 ```
 helm upgrade ebx-chart  --install -f configurations/postgresql-dynamic-provisioning/config-values-postgresql-dynamic-provisionning.yaml ./ebx-generic-chart
