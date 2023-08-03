@@ -2,19 +2,19 @@
 
 ## Overview
 
-This repository provides useful samples for deploying [TIBCO EBX® Software](https://www.tibco.com/products/tibco-ebx-software) 
+This repository provides useful samples for deploying [TIBCO EBX® software](https://www.tibco.com/products/tibco-ebx-software) 
 on a [Kubernetes cluster](http://kubernetes.io/) using TIBCO EBX® Container Edition and the [Helm package manager](https://helm.sh/).
 
 This repository includes quick start guides, templates, configuration examples, and scripts that you can extend or customize.
 
-This repository does not include TIBCO EBX® software, TIBCO EBX® Container Edition, or any other third-party software.
+This repository does not include TIBCO EBX software, TIBCO EBX Container Edition, or any other third-party software.
 
-**Note**: TIBCO EBX Software and TIBCO EBX® Container Edition are commercially licensed products that are subject to 
+**Note**: TIBCO EBX software and TIBCO EBX Container Edition are commercially licensed products that are subject to 
 the payment of license fees. You must have a valid license to use them. 
 
 ## Prerequisites
 
-- [TIBCO EBX® Container Edition](https://docs.tibco.com/pub/ebx/6.1.2/doc/pdf/TIB_ebx_6.1.2_container_edition.pdf?id=0). 
+- [TIBCO EBX Container Edition](https://docs.tibco.com/pub/ebx/6.1.2/doc/pdf/TIB_ebx_6.1.2_container_edition.pdf?id=0). 
 since 6.1.2
 - [Kubernetes](https://kubernetes.io/) v1.23+, a working Kubernetes cluster from a [certified Kubernetes software](https://www.cncf.io/certification/software-conformance/).
 - [Helm](https://helm.sh/) v3+ to build and deploy the charts.
@@ -22,7 +22,7 @@ since 6.1.2
 **Note**:
 You must generate the image containing all the add-ons you need. 
 Refer to [Building the image](https://docs.tibco.com/pub/ebx/6.1.2/doc/html/fr/ece/building_the_image.html#_building_the_image) for more information.
-For details about TIBCO EBX® Software, see the [TIBCO EBX® Documentation](https://docs.tibco.com/products/tibco-ebx).
+For details about TIBCO EBX® software, see the [TIBCO EBX Documentation](https://docs.tibco.com/products/tibco-ebx).
 
 ## Tested certified Kubernetes implementation
 
@@ -35,7 +35,7 @@ The charts contained in this file have been tested on the following certified Ku
 
 [Supported versions](https://docs.tibco.com/pub/ebx/6.1.2/doc/html/fr/ece/running_the_image.html#_kubernetes)
 
-## Deploying EBX image
+## Deploying the EBX® image
 
-For information on deploying an ebx image, see the 
+For information on deploying an EBX image, see the 
 [generic chart](/helm/chart/README.md).
