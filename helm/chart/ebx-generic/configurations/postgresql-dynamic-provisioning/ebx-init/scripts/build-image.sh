@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 #
-# Copyright Cloud Software Group, Inc. 2000-2023. All rights reserved.
+# Copyright Cloud Software Group, Inc. 2023.
 #
 # This file builds the EBX-INIT image.
 #

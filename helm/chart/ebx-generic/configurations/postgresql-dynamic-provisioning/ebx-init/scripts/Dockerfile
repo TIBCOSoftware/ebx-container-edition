@@ -1,5 +1,5 @@
 #
-# Copyright TIBCO 2000-2021. All rights reserved.
+# Copyright Cloud Software Group, Inc. 2023.
 #
 
 # Use an official linux image.

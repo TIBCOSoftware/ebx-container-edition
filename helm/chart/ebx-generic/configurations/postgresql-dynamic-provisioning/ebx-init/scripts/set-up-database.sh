@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 #
-# Copyright Cloud Software Group, Inc. 2000-2023. All rights reserved.
+# Copyright Cloud Software Group, Inc. 2023.
 #
 # Create PostgreSQL user and database for an EBX instance
 #
