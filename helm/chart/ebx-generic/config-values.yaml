@@ -1,4 +1,6 @@
-
+#
+# Copyright Cloud Software Group, Inc. 2023.
+#
 global:
   namespace: "ebx"
   ebxImage: "<your.image.location>"
