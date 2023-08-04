@@ -46,10 +46,6 @@ The charts contained in this file have been tested on the following certified Ku
 For information on deploying an EBX image, see the 
 [generic chart](/helm/chart/README.md).
 
-## License
-
-This project (Samples Charts for TIBCO EBX Container Edition®) is licensed under the [Apache 2.0 License](LICENSE.txt).
-
 ---
 
 Copyright 2023 Cloud Software Group, Inc.
