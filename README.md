@@ -12,8 +12,6 @@ This repository does not include TIBCO EBX software, TIBCO EBX Container Edition
 These charts are examples only and we do not guarantee that they will be kept up to date or that they will be suitable 
 for your implementation.
 
-The provided samples are "AS IS" and may not be suitable for your needs.
-
 **Note**: TIBCO EBX software and TIBCO EBX Container Edition are commercially licensed products that are subject to 
 the payment of license fees. You must have a valid license to use them. 
 
