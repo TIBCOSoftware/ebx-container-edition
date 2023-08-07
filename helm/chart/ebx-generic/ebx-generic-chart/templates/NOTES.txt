@@ -9,8 +9,8 @@ EBX login credentials:
 {{ if .Values.global.hostname }}
 EBX is running at the following URL: {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}{{ .Values.global.hostname }}/{{ .Values.ebx.prefix }}/
 {{ else }}
-EBX is running at the following URL: {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}<your hostname >/{{ .Values.ebx.prefix }}/
-{{ if .Values.examples.isOpenShift }}
+EBX is running at the following URL: {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}<your hostname or ip address>/{{ .Values.ebx.prefix }}/
+{{ if eq .Values.samples.isOpenShift "true"}}
 To display the hostname of EBX, run command: kubectl get routes
 
 The display should be similar to:
