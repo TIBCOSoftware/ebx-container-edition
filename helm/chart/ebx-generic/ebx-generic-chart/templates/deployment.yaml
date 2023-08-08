@@ -30,7 +30,7 @@ spec:
       containers:
         - name: "{{ .Values.ebx.prefix}}-ebx"
           image: "{{ .Values.global.ebxImage}}"
-          imagePullPolicy: Always
+          imagePullPolicy: "{{ .Values.global.ebxImagePullPolicy}}"
           ports:
             - containerPort: 8080
           env:

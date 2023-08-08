@@ -8,6 +8,8 @@ global:
   ebxImage:
   # ebxImageRegistrySecret that contains the credentials used to connect to the registry that hosts the EBX image.
   ebxImageRegistrySecret:  # (Optional)
+  # ebxImagePullPolicy is the image pull policy for the EBX image
+  ebxImagePullPolicy: "Always"
   # namespace where the EBX pod will be deployed
   namespace: "ebx"
   # hostname of the kubernetes server host
