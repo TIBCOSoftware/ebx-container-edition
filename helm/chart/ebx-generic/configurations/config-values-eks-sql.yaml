@@ -10,6 +10,7 @@ ebx:
   prefix: "eks-sql"
   adminPassword: '<?Y0urP4ssWord!>'
   isSecured: "true"
+  securityContext: "true"
   databaseName: "<ebx db name>"
   databaseUser: "<ebx db user>"
   databasePwd: "<ebx db password>"
