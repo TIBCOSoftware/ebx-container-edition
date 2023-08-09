@@ -8,7 +8,7 @@ global:
   hostname: "<your.dns.azure.com>"
 
 ebx:
-  prefix: "aks-sql"
+  prefix: "postgresql"
   adminPassword: '<?Y0urP4ssWord!>'
   isSecured: "true"
   databaseName: "<ebx db name>"
