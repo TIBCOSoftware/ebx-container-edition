@@ -8,7 +8,7 @@ global:
 
 ebx:
   prefix: "microk8s-sql"
-  adminPassword: "abcde1458"
+  adminPassword: '<?Y0urP4ssWord!>'
   isSecured: "true"
   databaseName: "<ebx db name>"
   databaseUser: "<ebx db user>"
