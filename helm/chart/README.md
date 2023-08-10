@@ -135,7 +135,7 @@ documentation to best meet your needs.
 | Name                                          | Description                                                                                                                                                                                                                                               | Value     |
 |-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
 | `samples.postgresqlDynamicProvisioningEnable` | If set to `true`, the `ebx-init` container is added and `postgresServer` secret is created. This enable use of the [Deploy EBX with dynamic provisioning of postgresql databases](#deploy-ebx-with-dynamic-provisioning-of-postgresql-databases) example. | `"false"` |
-| `samples.isOpenShift`                         | If set to `true`, a route resource will created instead of an ingress resource.                                                                                                                                                                           | `"false"` |
+| `samples.isOpenShift`                         | If set to `true`, a route resource will be created instead of an ingress resource.                                                                                                                                                                        | `"false"` |
 
 ---
 
