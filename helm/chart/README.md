@@ -68,6 +68,10 @@ This section describes parameters for the following:
 | `global.hostname`               | The hostname used to connect to EBX.                                                                          | `""`       |
 | `global.scheme`                 | The scheme that defines the protocol used to connect to EBX (Optional).                                       | `"https"`  |
 
+**Note**:
+If the parameter `global.hostname` is not specified, the startupProbe and livenessProbe will not be configured for the 
+ebx container.
+
 ---
 
 ### EBX configuration
