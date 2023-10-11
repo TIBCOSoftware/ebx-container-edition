@@ -33,6 +33,19 @@ spec:
           imagePullPolicy: "{{ .Values.global.ebxImagePullPolicy}}"
           ports:
             - containerPort: 8080
+          startupProbe:
+            initialDelaySeconds: 120
+            httpGet:
+              path: {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}{{ .Values.global.hostname}}/{{ .Values.ebx.prefix}}/ebx-dataservices/rest/health/v1/started
+              port: 8080
+            failureThreshold: 380
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: {{ if eq .Values.ebx.isSecured "true" }}https://{{ else }}http://{{ end }}{{ .Values.global.hostname}}/{{ .Values.ebx.prefix}}/ebx-dataservices/rest/health/v1/check
+              port: 8080
+            failureThreshold: 1
+            periodSeconds: 10
           env:
             - name: EBX_DB_FACTORY
               value: "{{ .Values.ebx.databaseType}}"
